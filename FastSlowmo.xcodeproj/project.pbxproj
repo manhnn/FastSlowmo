@@ -8,22 +8,30 @@
 
 /* Begin PBXBuildFile section */
 		2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9225CBA60000485CD4 /* AppDelegate.swift */; };
-		2599AE9525CBA60000485CD4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9425CBA60000485CD4 /* SceneDelegate.swift */; };
-		2599AE9725CBA60000485CD4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9625CBA60000485CD4 /* ViewController.swift */; };
-		2599AE9A25CBA60000485CD4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9825CBA60000485CD4 /* Main.storyboard */; };
 		2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9B25CBA60100485CD4 /* Assets.xcassets */; };
 		2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */; };
+		2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEAB25CBA78D00485CD4 /* HomeViewController.swift */; };
+		2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */; };
+		2599AEB325CBA7EF00485CD4 /* VideoEditorTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEB225CBA7EF00485CD4 /* VideoEditorTask.swift */; };
+		2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEB725CBA86100485CD4 /* TrimVideo.swift */; };
+		2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBB25CBA87100485CD4 /* CropVideo.swift */; };
+		2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */; };
+		2599AEC325CBDD2300485CD4 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		2599AE8F25CBA60000485CD4 /* FastSlowmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastSlowmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599AE9225CBA60000485CD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2599AE9425CBA60000485CD4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		2599AE9625CBA60000485CD4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2599AE9925CBA60000485CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2599AE9B25CBA60100485CD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2599AE9E25CBA60100485CD4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2599AEA025CBA60100485CD4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2599AEAB25CBA78D00485CD4 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		2599AEB225CBA7EF00485CD4 /* VideoEditorTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditorTask.swift; sourceTree = "<group>"; };
+		2599AEB725CBA86100485CD4 /* TrimVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimVideo.swift; sourceTree = "<group>"; };
+		2599AEBB25CBA87100485CD4 /* CropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVideo.swift; sourceTree = "<group>"; };
+		2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
+		2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +64,51 @@
 		2599AE9125CBA60000485CD4 /* FastSlowmo */ = {
 			isa = PBXGroup;
 			children = (
+				2599AEC125CBDCDA00485CD4 /* SourceVideo */,
+				2599AEB625CBA84200485CD4 /* VideoEditor */,
+				2599AEB125CBA7D900485CD4 /* VideoEditorTask */,
+				2599AEAA25CBA77300485CD4 /* HomeViewController */,
 				2599AE9225CBA60000485CD4 /* AppDelegate.swift */,
-				2599AE9425CBA60000485CD4 /* SceneDelegate.swift */,
-				2599AE9625CBA60000485CD4 /* ViewController.swift */,
-				2599AE9825CBA60000485CD4 /* Main.storyboard */,
 				2599AE9B25CBA60100485CD4 /* Assets.xcassets */,
 				2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */,
 				2599AEA025CBA60100485CD4 /* Info.plist */,
 			);
 			path = FastSlowmo;
+			sourceTree = "<group>";
+		};
+		2599AEAA25CBA77300485CD4 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2599AEAB25CBA78D00485CD4 /* HomeViewController.swift */,
+				2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */,
+			);
+			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		2599AEB125CBA7D900485CD4 /* VideoEditorTask */ = {
+			isa = PBXGroup;
+			children = (
+				2599AEB225CBA7EF00485CD4 /* VideoEditorTask.swift */,
+				2599AEB725CBA86100485CD4 /* TrimVideo.swift */,
+				2599AEBB25CBA87100485CD4 /* CropVideo.swift */,
+			);
+			path = VideoEditorTask;
+			sourceTree = "<group>";
+		};
+		2599AEB625CBA84200485CD4 /* VideoEditor */ = {
+			isa = PBXGroup;
+			children = (
+				2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */,
+			);
+			path = VideoEditor;
+			sourceTree = "<group>";
+		};
+		2599AEC125CBDCDA00485CD4 /* SourceVideo */ = {
+			isa = PBXGroup;
+			children = (
+				2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */,
+			);
+			path = SourceVideo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -124,9 +168,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2599AEC325CBDD2300485CD4 /* VideoExample1.mp4 in Resources */,
 				2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */,
 				2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */,
-				2599AE9A25CBA60000485CD4 /* Main.storyboard in Resources */,
+				2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,23 +182,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2599AE9725CBA60000485CD4 /* ViewController.swift in Sources */,
+				2599AEB325CBA7EF00485CD4 /* VideoEditorTask.swift in Sources */,
+				2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */,
+				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */,
-				2599AE9525CBA60000485CD4 /* SceneDelegate.swift in Sources */,
+				2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */,
+				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		2599AE9825CBA60000485CD4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				2599AE9925CBA60000485CD4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -295,7 +335,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = manhnn.FastSlowmo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -313,7 +353,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = manhnn.FastSlowmo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
