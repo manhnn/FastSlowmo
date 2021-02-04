@@ -13,6 +13,9 @@ class HomeViewController: UIViewController {
     // MARK: - UI
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var soundSlider: UISlider!
+    
+    @IBOutlet weak var topView: UIView!
     
     // MARK: - Property
     var originAssetVideo: AVAsset!
@@ -80,9 +83,33 @@ class HomeViewController: UIViewController {
     }
     
     
-    // MARK: - Button Actions
-    @IBAction func cutVideo(_ sender: Any) {
+    // MARK: - Cut Video
+    @IBAction func cutVideoPressed(_ sender: Any) {
+        topView.isHidden = true
+    }
+    
+    // MARK: - Speed Video
+    @IBAction func speedVideoPressed(_ sender: Any) {
         
     }
     
+    // MARK: - Sound Video
+    @IBAction func soundVideoPressed(_ sender: Any) {
+        soundSlider.isHidden = !soundSlider.isHidden
+    }
+    
+    @IBAction func soundSliderChangeValue(_ sender: UISlider) {
+        player.volume = sender.value
+    }
+    
+    
+    // MARK: - Music Video
+    @IBAction func musicVideoPressed(_ sender: Any) {
+        
+    }
+    
+    // MARK: - EffectVideo
+    @IBAction func effectVideoPressed(_ sender: Any) {
+        
+    }
 }

@@ -9,7 +9,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="FastSlowmo" customModuleProvider="target">
             <connections>
+                <outlet property="soundSlider" destination="oBr-jV-cOm" id="v6b-Iw-kkz"/>
                 <outlet property="timeLabel" destination="713-EE-Eqw" id="wqi-32-iP3"/>
+                <outlet property="topView" destination="HUH-34-h6l" id="n9c-9g-IDO"/>
                 <outlet property="videoView" destination="EwS-MS-qzk" id="2gK-Jx-zjF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -31,7 +33,7 @@
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
-                                <action selector="cutVideo:" destination="-1" eventType="touchUpInside" id="tzi-DJ-oAv"/>
+                                <action selector="cutVideoPressed:" destination="-1" eventType="touchUpInside" id="tzi-DJ-oAv"/>
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-Jd-zr3">
@@ -41,6 +43,9 @@
                             <state key="normal" title="speed" image="speedometer">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="speedVideoPressed:" destination="-1" eventType="touchUpInside" id="pjf-2t-1Mv"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKo-KI-9cv">
                             <rect key="frame" x="142.66666666666666" y="0.0" width="71.333333333333343" height="74"/>
@@ -49,6 +54,9 @@
                             <state key="normal" title="sound" image="volume">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="soundVideoPressed:" destination="-1" eventType="touchUpInside" id="LfT-Hg-bbd"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-NC-iv8">
                             <rect key="frame" x="214" y="0.0" width="71.333333333333314" height="74"/>
@@ -57,6 +65,9 @@
                             <state key="normal" title="music" image="musical-note">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="musicVideoPressed:" destination="-1" eventType="touchUpInside" id="0am-Yc-L3Y"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fai-AN-QBY">
                             <rect key="frame" x="285.33333333333331" y="0.0" width="71.333333333333314" height="74"/>
@@ -65,6 +76,9 @@
                             <state key="normal" title="effect" image="effect-2">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
+                            <connections>
+                                <action selector="effectVideoPressed:" destination="-1" eventType="touchUpInside" id="Ggn-5L-phz"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-dB-Yi7">
                             <rect key="frame" x="356.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
@@ -167,14 +181,22 @@
                         <constraint firstItem="rvG-sM-ggI" firstAttribute="top" secondItem="Klr-o7-6nq" secondAttribute="top" id="uYl-9P-0KV"/>
                     </constraints>
                 </view>
+                <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oBr-jV-cOm">
+                    <rect key="frame" x="68" y="788" width="218" height="31"/>
+                    <connections>
+                        <action selector="soundSliderChangeValue:" destination="-1" eventType="valueChanged" id="WHT-9h-A8d"/>
+                    </connections>
+                </slider>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="oBr-jV-cOm" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="0Sv-Lb-pum"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Klr-o7-6nq" secondAttribute="trailing" id="112-2z-D83"/>
                 <constraint firstItem="Klr-o7-6nq" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.03" id="1Dd-0T-eGD"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="9GX-yZ-ZeH"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Fuy-5T-glJ"/>
+                <constraint firstItem="GFN-5U-opR" firstAttribute="top" secondItem="oBr-jV-cOm" secondAttribute="bottom" id="MN8-zc-fko"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HUH-34-h6l" secondAttribute="trailing" id="SUS-3Q-Vgm"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Teb-jf-oR3"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="Vye-VZ-GIX"/>
@@ -186,6 +208,7 @@
                 <constraint firstItem="HUH-34-h6l" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="fhY-Ff-6mJ"/>
                 <constraint firstItem="Klr-o7-6nq" firstAttribute="top" secondItem="EwS-MS-qzk" secondAttribute="bottom" id="kMV-VN-KYz"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ltg-Gg-xif"/>
+                <constraint firstItem="oBr-jV-cOm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="sFd-IA-Ecc"/>
             </constraints>
             <point key="canvasLocation" x="137.38317757009344" y="103.67170626349893"/>
         </view>

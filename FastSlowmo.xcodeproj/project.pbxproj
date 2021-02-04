@@ -17,6 +17,7 @@
 		2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBB25CBA87100485CD4 /* CropVideo.swift */; };
 		2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */; };
 		2599AEC325CBDD2300485CD4 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */; };
+		2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEC525CBEB2F00485CD4 /* SoundChange.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		2599AEBB25CBA87100485CD4 /* CropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVideo.swift; sourceTree = "<group>"; };
 		2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
+		2599AEC525CBEB2F00485CD4 /* SoundChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundChange.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +93,7 @@
 				2599AEB225CBA7EF00485CD4 /* VideoEditorTask.swift */,
 				2599AEB725CBA86100485CD4 /* TrimVideo.swift */,
 				2599AEBB25CBA87100485CD4 /* CropVideo.swift */,
+				2599AEC525CBEB2F00485CD4 /* SoundChange.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -185,6 +188,7 @@
 				2599AEB325CBA7EF00485CD4 /* VideoEditorTask.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
+				2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */,
 				2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */,
 				2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */,
 				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
