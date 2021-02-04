@@ -9,12 +9,10 @@ import AVKit
 
 class TrimVideo: VideoEditorTask {
     
-    var startTime: CMTime!
-    var endTime: CMTime!
+    var timeRange: CMTimeRange!
     
-    init(startTime: CMTime, endTime: CMTime) {
-        self.startTime = startTime
-        self.endTime = endTime
+    init(timeRange: CMTimeRange) {
+        self.timeRange = timeRange
     }
     
     func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {

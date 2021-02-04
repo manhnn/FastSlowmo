@@ -15,7 +15,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var soundSlider: UISlider!
     
-    @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var navigationView: UIView!
+    @IBOutlet weak var constraintBottomFunctionView: NSLayoutConstraint!
+    @IBOutlet weak var functionView: UIView!
+    @IBOutlet weak var cutView: UIView!
+    
+    @IBOutlet weak var trimButton: UIButton!
+    @IBOutlet weak var cutoutButton: UIButton!
+    
     
     // MARK: - Property
     var originAssetVideo: AVAsset!
@@ -54,6 +61,7 @@ class HomeViewController: UIViewController {
         let interval = CMTime(seconds: 0.45, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
         _ = player.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { [weak self] time in
             guard let currentItem = self!.player.currentItem else { return }
+            self?.soundSlider.value = Float(self!.player.volume)
             self!.timeLabel.text = "\(self!.getTimeString(from: currentItem.currentTime()))/\(self!.getTimeString(from: self!.player.currentItem!.duration))"
         })
     }
@@ -85,8 +93,33 @@ class HomeViewController: UIViewController {
     
     // MARK: - Cut Video
     @IBAction func cutVideoPressed(_ sender: Any) {
-        topView.isHidden = true
+        navigationView.isHidden = true
+        cutView.isHidden = false
+        UIView.animate(withDuration: 0.4, animations: {
+            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
+            self.view.layoutIfNeeded()
+        })
     }
+    
+    @IBAction func cancelPressed(_ sender: Any) {
+        cutView.isHidden = true
+        navigationView.isHidden = false
+        UIView.animate(withDuration: 0.4, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    @IBAction func aceptedPressed(_ sender: Any) {
+    }
+    @IBAction func trimPressed(_ sender: Any) {
+        trimButton.setTitleColor(.white, for: .normal)
+        cutoutButton.setTitleColor(.darkGray, for: .normal)
+    }
+    @IBAction func cutoutPressed(_ sender: Any) {
+        trimButton.setTitleColor(.darkGray, for: .normal)
+        cutoutButton.setTitleColor(.white, for: .normal)
+    }
+// ===========================================================================================================
     
     // MARK: - Speed Video
     @IBAction func speedVideoPressed(_ sender: Any) {

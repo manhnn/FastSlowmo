@@ -69,7 +69,7 @@
 				2599AEC125CBDCDA00485CD4 /* SourceVideo */,
 				2599AEB625CBA84200485CD4 /* VideoEditor */,
 				2599AEB125CBA7D900485CD4 /* VideoEditorTask */,
-				2599AEAA25CBA77300485CD4 /* HomeViewController */,
+				2599AEAA25CBA77300485CD4 /* ViewController */,
 				2599AE9225CBA60000485CD4 /* AppDelegate.swift */,
 				2599AE9B25CBA60100485CD4 /* Assets.xcassets */,
 				2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */,
@@ -78,13 +78,13 @@
 			path = FastSlowmo;
 			sourceTree = "<group>";
 		};
-		2599AEAA25CBA77300485CD4 /* HomeViewController */ = {
+		2599AEAA25CBA77300485CD4 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				2599AEAB25CBA78D00485CD4 /* HomeViewController.swift */,
 				2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */,
 			);
-			path = HomeViewController;
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 		2599AEB125CBA7D900485CD4 /* VideoEditorTask */ = {
