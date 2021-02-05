@@ -133,12 +133,24 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func aceptedPressed(_ sender: Any) {
+        cutView.isHidden = true
+        navigationView.isHidden = false
+        cutVideoView.isHidden = true
+        UIView.animate(withDuration: 0.4, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
+        
         originAssetVideo.tracks.forEach { track in
             let trackComposition = self.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
             try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
         }
         
-        let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: 5, timescale: 1), end: CMTime(value: 20, timescale: 1)))
+        let startTime = CGFloat(cutVideoView.leftStartTime)
+        let endTime = CGFloat(cutVideoView.rightEndTime)
+        let duration = player.currentItem?.duration.seconds
+        
+        let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * CGFloat(duration!) * 1000), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * CGFloat(duration!) * 1000), timescale: 1000)))
         let editor = VideoEditor()
         editor.pushCommand(task: cmd)
         mutableComposition = editor.executeTask(mutableComposition: mutableComposition)

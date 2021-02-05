@@ -10,14 +10,13 @@ import UIKit
 class ThumbnailCutVideoView: UIView {
     public var leftConstraint: NSLayoutConstraint?
     public var rightConstraint: NSLayoutConstraint?
-    public var bottomConstraint: NSLayoutConstraint?
-    public var topConstraint: NSLayoutConstraint?
     public var fileImage: UIImage!
-    public var leftView: UIView!
-    public var rightView: UIView!
+    public var leftControllView: UIView!
+    public var rightControllView: UIView!
     public var leftLabel: UILabel!
     public var rightLabel: UILabel!
-    public var thumbnailCutVideo: ThumbnailCutVideo!
+    public var thumbnailCutVideoLeft: ThumbnailCutVideo!
+    public var thumbnailCutVideoRight: ThumbnailCutVideo!
     
     public var leftStartTime: Float!
     public var rightEndTime: Float!
@@ -43,96 +42,110 @@ class ThumbnailCutVideoView: UIView {
             imageView.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
             imageView.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         }
-        
-        thumbnailCutVideo = ThumbnailCutVideo(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height))
-        thumbnailCutVideo.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(thumbnailCutVideo)
-        
-        
-        
-        configCropLimiUI()
+        configLeftControllerView()
+        configRightControllerView()
     }
     
-    func configCropLimiUI() {
-        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 9, height: frame.height + 20))
-        //rightView = UIView(frame: self.frame)
-        leftView.backgroundColor = .white
-       // rightView.backgroundColor = .white
-        leftView.translatesAutoresizingMaskIntoConstraints = false
-        //rightView.translatesAutoresizingMaskIntoConstraints = false
+    func configLeftControllerView() {
+        thumbnailCutVideoLeft = ThumbnailCutVideo(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height))
+        thumbnailCutVideoLeft.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(thumbnailCutVideoLeft)
         
-        self.addSubview(leftView)
-        //self.addSubview(rightView)
-        
-        leftView.rightAnchor.constraint(equalTo: thumbnailCutVideo.rightAnchor).isActive = true
-        leftView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
-        leftView.widthAnchor.constraint(equalToConstant: 9).isActive = true
-        leftView.centerYAnchor.constraint(equalTo: thumbnailCutVideo.centerYAnchor).isActive = true
-        
-        leftConstraint = thumbnailCutVideo.leftAnchor.constraint(equalTo: self.leftAnchor)
-        rightConstraint = self.rightAnchor.constraint(equalTo: thumbnailCutVideo.rightAnchor)
-        rightConstraint?.constant = self.frame.width - leftView.frame.width
-        bottomConstraint = self.bottomAnchor.constraint(equalTo: thumbnailCutVideo.bottomAnchor)
-        topConstraint = thumbnailCutVideo.topAnchor.constraint(equalTo: self.topAnchor)
+        leftConstraint = thumbnailCutVideoLeft.rightAnchor.constraint(equalTo: self.leftAnchor)
+        thumbnailCutVideoLeft.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: thumbnailCutVideoLeft.bottomAnchor).isActive = true
+        thumbnailCutVideoLeft.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
 
         leftConstraint?.isActive = true
-        rightConstraint?.isActive = true
-        bottomConstraint?.isActive = true
-        topConstraint?.isActive = true
         
-       // rightView.rightAnchor.constraint(equalTo: thumbnailCutVideo.rightAnchor).isActive = true
-        //rightView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
-        //rightView.widthAnchor.constraint(equalToConstant: 9).isActive = true
-        //rightView.centerYAnchor.constraint(equalTo: thumbnailCutVideo.centerYAnchor).isActive = true
+        leftControllView = UIView(frame: CGRect(x: 0, y: 0, width: 9, height: frame.height + 20))
+        leftControllView.backgroundColor = .white
+        leftControllView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(leftControllView)
+        
+        leftControllView.leftAnchor.constraint(equalTo: thumbnailCutVideoLeft.rightAnchor).isActive = true
+        leftControllView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
+        leftControllView.widthAnchor.constraint(equalToConstant: 9).isActive = true
+        leftControllView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
         let leftPan = UIPanGestureRecognizer(target: self, action: #selector(self.leftPanGesture(_: )))
-        leftView.addGestureRecognizer(leftPan)
-        //let rightPan = UIPanGestureRecognizer(target: self, action: #selector(self.rightPanGesture(_: )))
-        //rightView.addGestureRecognizer(rightPan)
-        
-        // MARK: - add new left right label
+        leftControllView.addGestureRecognizer(leftPan)
+
         leftLabel = UILabel(frame: self.frame)
-        //rightLabel = UILabel(frame: self.frame)
-        
         leftStartTime = Float(leftConstraint!.constant / frame.width)
         leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
-        //rightEndTime = Float(1 - rightConstraint!.constant / frame.width)
-        //rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
         leftLabel.textColor = .white
-        //rightLabel.textColor = .white
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
-        //rightLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        leftView.addSubview(leftLabel)
-        //rightView.addSubview(rightLabel)
+        leftControllView.addSubview(leftLabel)
         
-        leftLabel.topAnchor.constraint(equalTo: leftView.bottomAnchor, constant: 10).isActive = true
-        //rightLabel.topAnchor.constraint(equalTo: rightView.bottomAnchor, constant: 10).isActive = true
+        leftLabel.topAnchor.constraint(equalTo: leftControllView.bottomAnchor, constant: 10).isActive = true
+    }
+    
+    func configRightControllerView() {
+        thumbnailCutVideoRight = ThumbnailCutVideo(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height))
+        thumbnailCutVideoRight.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(thumbnailCutVideoRight)
+        
+        rightConstraint = self.rightAnchor.constraint(equalTo: thumbnailCutVideoRight.leftAnchor)
+        self.rightAnchor.constraint(equalTo: thumbnailCutVideoRight.rightAnchor).isActive = true
+        self.bottomAnchor.constraint(equalTo: thumbnailCutVideoRight.bottomAnchor).isActive = true
+        thumbnailCutVideoRight.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+
+        rightConstraint?.isActive = true
+        
+        rightControllView = UIView(frame: CGRect(x: 0, y: 0, width: 9, height: frame.height + 20))
+        rightControllView.backgroundColor = .white
+        rightControllView.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(rightControllView)
+        
+        rightControllView.rightAnchor.constraint(equalTo: thumbnailCutVideoRight.leftAnchor).isActive = true
+        rightControllView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
+        rightControllView.widthAnchor.constraint(equalToConstant: 9).isActive = true
+        rightControllView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        
+        let rightPan = UIPanGestureRecognizer(target: self, action: #selector(self.rightPanGesture(_: )))
+        rightControllView.addGestureRecognizer(rightPan)
+
+        rightLabel = UILabel(frame: self.frame)
+        rightEndTime = Float(rightConstraint!.constant / frame.width)
+        rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
+        rightLabel.textColor = .white
+        rightLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        rightControllView.addSubview(rightLabel)
+        
+        rightLabel.topAnchor.constraint(equalTo: rightControllView.bottomAnchor, constant: 10).isActive = true
     }
     
     @objc func leftPanGesture(_ sender: Any?) {
-//        let panGesture = sender as! UIPanGestureRecognizer
-//        let point = panGesture.location(in: self)
-//        let distance = point.x
-//        leftConstraint?.constant = (distance >= 0) ? distance : thumbnailCutVideo.frame.minX
-//        leftStartTime = Float(leftConstraint!.constant / frame.width)
-//        leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
-        
         let panGesture = sender as! UIPanGestureRecognizer
         let point = panGesture.location(in: self)
-        let distance = self.frame.width - point.x
-        rightConstraint?.constant = (distance >= 0) ? distance : thumbnailCutVideo.frame.minX
-        leftStartTime = Float(1 - rightConstraint!.constant / frame.width)
-        leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
+        let distance = point.x
         
-        print(point)
+        if distance < 0 {
+            leftConstraint?.constant = 0
+        }
+        else {
+            leftConstraint?.constant = (distance >= 0 && distance + rightConstraint!.constant + 2 * rightControllView.frame.width <= self.frame.width) ? distance : self.frame.width - rightConstraint!.constant - (leftControllView.frame.width + rightControllView.frame.width)
+        }
+        
+        leftStartTime = Float(leftConstraint!.constant / frame.width)
+        leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
     }
     
     @objc func rightPanGesture(_ sender: Any?) {
         let panGesture = sender as! UIPanGestureRecognizer
         let point = panGesture.location(in: self)
         let distance = self.frame.width - point.x
-        rightConstraint?.constant = (distance >= 0) ? distance : 0
+        
+        if distance < 0 {
+            rightConstraint?.constant = 0
+        }
+        else {
+            rightConstraint?.constant = (distance >= 0 && distance + leftConstraint!.constant + 2 * leftControllView.frame.width <= self.frame.width) ? distance : self.frame.width - leftConstraint!.constant - (leftControllView.frame.width + rightControllView.frame.width)
+        }
+        
         rightEndTime = Float(1 - rightConstraint!.constant / frame.width)
         rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
     }
