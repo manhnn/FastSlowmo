@@ -76,13 +76,20 @@
                         <constraint firstAttribute="bottom" secondItem="1SA-FE-hLS" secondAttribute="bottom" id="ysf-Tn-CDL"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mountain" translatesAutoresizingMaskIntoConstraints="NO" id="LHC-PN-39v">
+                    <rect key="frame" x="0.0" y="761.5" width="414" height="134.5"/>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="Xnx-Gj-br3" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.4" id="9LP-dL-fa9"/>
                 <constraint firstItem="8eF-Yh-SPM" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="DFk-if-Lce"/>
+                <constraint firstItem="LHC-PN-39v" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="F3B-bf-fM4"/>
+                <constraint firstItem="LHC-PN-39v" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="UYR-Vo-Xs4"/>
                 <constraint firstItem="8eF-Yh-SPM" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Va8-dO-wnM"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="LHC-PN-39v" secondAttribute="trailing" id="X9a-2M-UjZ"/>
+                <constraint firstItem="LHC-PN-39v" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.15" id="b9e-NC-i9Q"/>
                 <constraint firstItem="8eF-Yh-SPM" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="eEu-A5-wiD"/>
                 <constraint firstItem="Xnx-Gj-br3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="gK4-Ur-1yi"/>
                 <constraint firstItem="8eF-Yh-SPM" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.1" id="mcN-iJ-LqH"/>
@@ -93,5 +100,6 @@
     </objects>
     <resources>
         <image name="RectanglePink" width="335" height="67"/>
+        <image name="mountain" width="375" height="106"/>
     </resources>
 </document>

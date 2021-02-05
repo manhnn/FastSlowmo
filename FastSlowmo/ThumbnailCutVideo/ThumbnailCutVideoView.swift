@@ -108,7 +108,7 @@ class ThumbnailCutVideoView: UIView {
         rightControllView.addGestureRecognizer(rightPan)
 
         rightLabel = UILabel(frame: self.frame)
-        rightEndTime = Float(rightConstraint!.constant / frame.width)
+        rightEndTime = Float(1 - rightConstraint!.constant / frame.width)
         rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
         rightLabel.textColor = .white
         rightLabel.translatesAutoresizingMaskIntoConstraints = false

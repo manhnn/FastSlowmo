@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
+		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
 		2586399825CCFFF7007F9623 /* ThumbnailCutVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* ThumbnailCutVideo.swift */; };
 		2586399C25CD005A007F9623 /* ThumbnailCutVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399B25CD005A007F9623 /* ThumbnailCutVideoView.swift */; };
 		2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9225CBA60000485CD4 /* AppDelegate.swift */; };
@@ -26,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
+		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
 		2586399725CCFFF7007F9623 /* ThumbnailCutVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCutVideo.swift; sourceTree = "<group>"; };
 		2586399B25CD005A007F9623 /* ThumbnailCutVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCutVideoView.swift; sourceTree = "<group>"; };
 		2599AE8F25CBA60000485CD4 /* FastSlowmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastSlowmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -57,6 +61,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		256C3E2825CD9DD600C0ACA4 /* SubView */ = {
+			isa = PBXGroup;
+			children = (
+				256C3E2925CD9E6400C0ACA4 /* CutView.swift */,
+				256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */,
+			);
+			path = SubView;
+			sourceTree = "<group>";
+		};
 		2586399625CCFFE5007F9623 /* ThumbnailCutVideo */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,12 +98,13 @@
 		2599AE9125CBA60000485CD4 /* FastSlowmo */ = {
 			isa = PBXGroup;
 			children = (
-				2586399625CCFFE5007F9623 /* ThumbnailCutVideo */,
 				2599AEC125CBDCDA00485CD4 /* SourceVideo */,
+				2586399625CCFFE5007F9623 /* ThumbnailCutVideo */,
 				2599AEB625CBA84200485CD4 /* VideoEditor */,
 				25C7DA7525CC512000692929 /* Protocol */,
 				2599AEB125CBA7D900485CD4 /* VideoEditorTask */,
 				2599AEAA25CBA77300485CD4 /* ViewController */,
+				256C3E2825CD9DD600C0ACA4 /* SubView */,
 				2599AE9225CBA60000485CD4 /* AppDelegate.swift */,
 				2599AE9B25CBA60100485CD4 /* Assets.xcassets */,
 				2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */,
@@ -205,6 +219,7 @@
 				2599AEC325CBDD2300485CD4 /* VideoExample1.mp4 in Resources */,
 				2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */,
 				2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */,
+				256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */,
 				2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */,
 				25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */,
 			);
@@ -225,6 +240,7 @@
 				2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */,
 				25C7DA7925CC587100692929 /* HelloApplicationViewController.swift in Sources */,
 				2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */,
+				256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */,
 				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
 				2586399825CCFFF7007F9623 /* ThumbnailCutVideo.swift in Sources */,
 				2586399C25CD005A007F9623 /* ThumbnailCutVideoView.swift in Sources */,

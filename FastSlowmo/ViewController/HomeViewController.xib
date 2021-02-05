@@ -10,13 +10,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="FastSlowmo" customModuleProvider="target">
             <connections>
                 <outlet property="constraintBottomFunctionView" destination="9GX-yZ-ZeH" id="Ini-kr-vJr"/>
-                <outlet property="cutView" destination="2YF-kC-w0m" id="IFo-A8-hUS"/>
-                <outlet property="cutoutButton" destination="r62-Jq-rp7" id="3xU-ZE-Z1s"/>
+                <outlet property="cutViewXib" destination="ofw-WN-xsL" id="ohi-UD-riB"/>
                 <outlet property="functionView" destination="GFN-5U-opR" id="etm-tf-BaI"/>
                 <outlet property="navigationView" destination="HUH-34-h6l" id="n9c-9g-IDO"/>
                 <outlet property="soundSlider" destination="oBr-jV-cOm" id="v6b-Iw-kkz"/>
                 <outlet property="timeLabel" destination="713-EE-Eqw" id="wqi-32-iP3"/>
-                <outlet property="trimButton" destination="3CS-qJ-3iA" id="55Z-4x-DeO"/>
                 <outlet property="videoView" destination="EwS-MS-qzk" id="2gK-Jx-zjF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -26,102 +24,6 @@
             <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFN-5U-opR">
-                    <rect key="frame" x="0.0" y="818" width="428" height="74"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-KP-hM4">
-                            <rect key="frame" x="0.0" y="0.0" width="71.333333333333329" height="74"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                            <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="10" minY="15" maxX="10" maxY="35"/>
-                            <state key="normal" title="cut" image="cut">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="cutVideoPressed:" destination="-1" eventType="touchUpInside" id="tzi-DJ-oAv"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-Jd-zr3">
-                            <rect key="frame" x="71.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
-                            <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="15" minY="10" maxX="15" maxY="35"/>
-                            <state key="normal" title="speed" image="speed">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="speedVideoPressed:" destination="-1" eventType="touchUpInside" id="pjf-2t-1Mv"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKo-KI-9cv">
-                            <rect key="frame" x="142.66666666666666" y="0.0" width="71.333333333333343" height="74"/>
-                            <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="sound" image="volume">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="soundVideoPressed:" destination="-1" eventType="touchUpInside" id="LfT-Hg-bbd"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-NC-iv8">
-                            <rect key="frame" x="214" y="0.0" width="71.333333333333314" height="74"/>
-                            <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="music" image="music">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="musicVideoPressed:" destination="-1" eventType="touchUpInside" id="0am-Yc-L3Y"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fai-AN-QBY">
-                            <rect key="frame" x="285.33333333333331" y="0.0" width="71.333333333333314" height="74"/>
-                            <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="effect" image="effect">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="effectVideoPressed:" destination="-1" eventType="touchUpInside" id="Ggn-5L-phz"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-dB-Yi7">
-                            <rect key="frame" x="356.66666666666669" y="0.0" width="71.333333333333314" height="74"/>
-                            <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
-                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="text" image="font">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="Fai-AN-QBY" secondAttribute="bottom" id="19T-BR-diB"/>
-                        <constraint firstItem="tKo-KI-9cv" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="4wQ-tA-Vew"/>
-                        <constraint firstItem="Fai-AN-QBY" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="5D0-m5-DaY"/>
-                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="8bS-Q2-WhZ"/>
-                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/6" id="9ox-QF-xc3"/>
-                        <constraint firstItem="pzF-KP-hM4" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="AOd-Wt-cPK"/>
-                        <constraint firstItem="V5o-NC-iv8" firstAttribute="leading" secondItem="tKo-KI-9cv" secondAttribute="trailing" id="Der-fB-Md5"/>
-                        <constraint firstItem="tKo-KI-9cv" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/6" id="FC9-Nu-BTY"/>
-                        <constraint firstAttribute="bottom" secondItem="8UY-dB-Yi7" secondAttribute="bottom" id="Hne-B5-AN8"/>
-                        <constraint firstItem="pzF-KP-hM4" firstAttribute="leading" secondItem="GFN-5U-opR" secondAttribute="leading" id="Jr4-X9-DOJ"/>
-                        <constraint firstAttribute="bottom" secondItem="ouo-Jd-zr3" secondAttribute="bottom" id="KQH-9z-Z2U"/>
-                        <constraint firstAttribute="bottom" secondItem="pzF-KP-hM4" secondAttribute="bottom" id="Ndr-TE-Rh5"/>
-                        <constraint firstItem="tKo-KI-9cv" firstAttribute="leading" secondItem="ouo-Jd-zr3" secondAttribute="trailing" id="R5q-YT-azQ"/>
-                        <constraint firstAttribute="bottom" secondItem="tKo-KI-9cv" secondAttribute="bottom" id="S6h-zN-xw2"/>
-                        <constraint firstItem="pzF-KP-hM4" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/6" id="Tig-hR-eiG"/>
-                        <constraint firstItem="V5o-NC-iv8" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/6" id="U5Y-pm-YUS"/>
-                        <constraint firstAttribute="bottom" secondItem="V5o-NC-iv8" secondAttribute="bottom" id="W3H-J3-1Ct"/>
-                        <constraint firstItem="8UY-dB-Yi7" firstAttribute="leading" secondItem="Fai-AN-QBY" secondAttribute="trailing" id="a3R-xD-oGg"/>
-                        <constraint firstItem="V5o-NC-iv8" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="fLM-Le-EsX"/>
-                        <constraint firstItem="8UY-dB-Yi7" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="fb1-Sn-72m"/>
-                        <constraint firstAttribute="trailing" secondItem="8UY-dB-Yi7" secondAttribute="trailing" id="mQR-sz-rzx"/>
-                        <constraint firstItem="Fai-AN-QBY" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/6" id="taQ-xj-fSw"/>
-                        <constraint firstItem="Fai-AN-QBY" firstAttribute="leading" secondItem="V5o-NC-iv8" secondAttribute="trailing" id="vZG-X5-y7r"/>
-                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="leading" secondItem="pzF-KP-hM4" secondAttribute="trailing" id="zq4-9d-SFl"/>
-                    </constraints>
-                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HUH-34-h6l">
                     <rect key="frame" x="0.0" y="44" width="428" height="46.333333333333343"/>
                     <subviews>
@@ -133,9 +35,9 @@
                             <state key="normal" backgroundImage="x"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3u-YK-tVJ">
-                            <rect key="frame" x="342.33333333333331" y="9.9999999999999982" width="65.666666666666686" height="26.333333333333329"/>
+                            <rect key="frame" x="329" y="9.9999999999999982" width="79" height="26.333333333333329"/>
                             <constraints>
-                                <constraint firstAttribute="width" secondItem="M3u-YK-tVJ" secondAttribute="height" multiplier="10:4" id="sHX-Sh-tmG"/>
+                                <constraint firstAttribute="width" secondItem="M3u-YK-tVJ" secondAttribute="height" multiplier="3:1" id="sHX-Sh-tmG"/>
                             </constraints>
                             <state key="normal" backgroundImage="export"/>
                         </button>
@@ -186,6 +88,124 @@
                         <constraint firstItem="rvG-sM-ggI" firstAttribute="top" secondItem="Klr-o7-6nq" secondAttribute="top" id="uYl-9P-0KV"/>
                     </constraints>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofw-WN-xsL" customClass="CutView" customModule="FastSlowmo" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="845.66666666666663" width="428" height="46.333333333333371"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFN-5U-opR">
+                    <rect key="frame" x="0.0" y="818" width="428" height="74"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pzF-KP-hM4">
+                            <rect key="frame" x="0.0" y="0.0" width="61" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="30"/>
+                            <state key="normal" title="cut" image="cut">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="cutVideoPressed:" destination="-1" eventType="touchUpInside" id="tzi-DJ-oAv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ouo-Jd-zr3">
+                            <rect key="frame" x="61" y="0.0" width="61.333333333333343" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="speed" image="speed">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="speedVideoPressed:" destination="-1" eventType="touchUpInside" id="pjf-2t-1Mv"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tKo-KI-9cv">
+                            <rect key="frame" x="122.33333333333331" y="0.0" width="61" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="sound" image="volume">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="soundVideoPressed:" destination="-1" eventType="touchUpInside" id="LfT-Hg-bbd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V5o-NC-iv8">
+                            <rect key="frame" x="183.33333333333334" y="0.0" width="61.333333333333343" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="music" image="music">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="musicVideoPressed:" destination="-1" eventType="touchUpInside" id="0am-Yc-L3Y"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fai-AN-QBY">
+                            <rect key="frame" x="244.66666666666663" y="0.0" width="61" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="effect" image="effect">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="effectVideoPressed:" destination="-1" eventType="touchUpInside" id="Ggn-5L-phz"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8UY-dB-Yi7">
+                            <rect key="frame" x="305.66666666666669" y="0.0" width="61.333333333333314" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="rorate" image="rotation">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1g8-OB-iSN">
+                            <rect key="frame" x="367" y="0.0" width="61" height="74"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <inset key="titleEdgeInsets" minX="-30" minY="0.0" maxX="0.0" maxY="-30"/>
+                            <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
+                            <state key="normal" title="crop" image="crop">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Fai-AN-QBY" secondAttribute="bottom" id="19T-BR-diB"/>
+                        <constraint firstItem="tKo-KI-9cv" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="4wQ-tA-Vew"/>
+                        <constraint firstItem="Fai-AN-QBY" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="5D0-m5-DaY"/>
+                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="8bS-Q2-WhZ"/>
+                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="9ox-QF-xc3"/>
+                        <constraint firstItem="pzF-KP-hM4" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="AOd-Wt-cPK"/>
+                        <constraint firstItem="V5o-NC-iv8" firstAttribute="leading" secondItem="tKo-KI-9cv" secondAttribute="trailing" id="Der-fB-Md5"/>
+                        <constraint firstItem="tKo-KI-9cv" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="FC9-Nu-BTY"/>
+                        <constraint firstAttribute="bottom" secondItem="8UY-dB-Yi7" secondAttribute="bottom" id="Hne-B5-AN8"/>
+                        <constraint firstItem="8UY-dB-Yi7" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="Hsx-oP-AJn"/>
+                        <constraint firstItem="pzF-KP-hM4" firstAttribute="leading" secondItem="GFN-5U-opR" secondAttribute="leading" id="Jr4-X9-DOJ"/>
+                        <constraint firstAttribute="bottom" secondItem="ouo-Jd-zr3" secondAttribute="bottom" id="KQH-9z-Z2U"/>
+                        <constraint firstAttribute="bottom" secondItem="pzF-KP-hM4" secondAttribute="bottom" id="Ndr-TE-Rh5"/>
+                        <constraint firstItem="tKo-KI-9cv" firstAttribute="leading" secondItem="ouo-Jd-zr3" secondAttribute="trailing" id="R5q-YT-azQ"/>
+                        <constraint firstAttribute="bottom" secondItem="tKo-KI-9cv" secondAttribute="bottom" id="S6h-zN-xw2"/>
+                        <constraint firstItem="pzF-KP-hM4" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="Tig-hR-eiG"/>
+                        <constraint firstAttribute="bottom" secondItem="1g8-OB-iSN" secondAttribute="bottom" id="TrH-MY-KHZ"/>
+                        <constraint firstItem="V5o-NC-iv8" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="U5Y-pm-YUS"/>
+                        <constraint firstAttribute="bottom" secondItem="V5o-NC-iv8" secondAttribute="bottom" id="W3H-J3-1Ct"/>
+                        <constraint firstItem="8UY-dB-Yi7" firstAttribute="leading" secondItem="Fai-AN-QBY" secondAttribute="trailing" id="a3R-xD-oGg"/>
+                        <constraint firstItem="V5o-NC-iv8" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="fLM-Le-EsX"/>
+                        <constraint firstItem="8UY-dB-Yi7" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="fb1-Sn-72m"/>
+                        <constraint firstItem="1g8-OB-iSN" firstAttribute="leading" secondItem="8UY-dB-Yi7" secondAttribute="trailing" id="hrA-Md-GJm"/>
+                        <constraint firstAttribute="trailing" secondItem="1g8-OB-iSN" secondAttribute="trailing" id="iSo-L3-SVa"/>
+                        <constraint firstItem="Fai-AN-QBY" firstAttribute="width" secondItem="GFN-5U-opR" secondAttribute="width" multiplier="1/7" id="taQ-xj-fSw"/>
+                        <constraint firstItem="Fai-AN-QBY" firstAttribute="leading" secondItem="V5o-NC-iv8" secondAttribute="trailing" id="vZG-X5-y7r"/>
+                        <constraint firstItem="1g8-OB-iSN" firstAttribute="top" secondItem="GFN-5U-opR" secondAttribute="top" id="z8F-qv-G5s"/>
+                        <constraint firstItem="ouo-Jd-zr3" firstAttribute="leading" secondItem="pzF-KP-hM4" secondAttribute="trailing" id="zq4-9d-SFl"/>
+                    </constraints>
+                </view>
                 <slider hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="oBr-jV-cOm">
                     <rect key="frame" x="68" y="788" width="218" height="31"/>
                     <color key="minimumTrackTintColor" red="1" green="0.1725490093" blue="0.47450977560000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -193,64 +213,6 @@
                         <action selector="soundSliderChangeValue:" destination="-1" eventType="valueChanged" id="WHT-9h-A8d"/>
                     </connections>
                 </slider>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YF-kC-w0m">
-                    <rect key="frame" x="0.0" y="845.66666666666663" width="428" height="46.333333333333371"/>
-                    <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oS7-2G-WgJ">
-                            <rect key="frame" x="20" y="14.999999999999998" width="16.333333333333329" height="16.333333333333329"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="oS7-2G-WgJ" secondAttribute="height" multiplier="1:1" id="ixJ-hp-uJr"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="x"/>
-                            <connections>
-                                <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="4As-im-p5L"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ucr-zd-GpV">
-                            <rect key="frame" x="381.66666666666669" y="9.9999999999999982" width="26.333333333333314" height="26.333333333333329"/>
-                            <constraints>
-                                <constraint firstAttribute="width" secondItem="ucr-zd-GpV" secondAttribute="height" multiplier="1:1" id="9gH-wT-Z2T"/>
-                            </constraints>
-                            <state key="normal" backgroundImage="check"/>
-                            <connections>
-                                <action selector="aceptedPressed:" destination="-1" eventType="touchUpInside" id="ztg-gp-LKM"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CS-qJ-3iA">
-                            <rect key="frame" x="140.66666666666666" y="5.3333333333333712" width="47" height="36"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                            <state key="normal" title="TRIM">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="trimPressed:" destination="-1" eventType="touchUpInside" id="q79-Pr-l4w"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r62-Jq-rp7">
-                            <rect key="frame" x="220.66666666666663" y="5.3333333333333712" width="87" height="36"/>
-                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
-                            <state key="normal" title="CUT OUT">
-                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </state>
-                            <connections>
-                                <action selector="cutoutPressed:" destination="-1" eventType="touchUpInside" id="2B5-KH-OUc"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="bottom" secondItem="ucr-zd-GpV" secondAttribute="bottom" constant="10" id="00f-gS-sCc"/>
-                        <constraint firstItem="r62-Jq-rp7" firstAttribute="centerY" secondItem="2YF-kC-w0m" secondAttribute="centerY" id="6Ie-T1-C3P"/>
-                        <constraint firstItem="ucr-zd-GpV" firstAttribute="top" secondItem="2YF-kC-w0m" secondAttribute="top" constant="10" id="7iZ-We-bRL"/>
-                        <constraint firstItem="r62-Jq-rp7" firstAttribute="centerX" secondItem="2YF-kC-w0m" secondAttribute="centerX" constant="50" id="JZG-VF-JjI"/>
-                        <constraint firstItem="3CS-qJ-3iA" firstAttribute="centerX" secondItem="2YF-kC-w0m" secondAttribute="centerX" constant="-50" id="MZn-fZ-vfz"/>
-                        <constraint firstAttribute="trailing" secondItem="ucr-zd-GpV" secondAttribute="trailing" constant="20" id="Qp8-yt-HXX"/>
-                        <constraint firstItem="oS7-2G-WgJ" firstAttribute="top" secondItem="2YF-kC-w0m" secondAttribute="top" constant="15" id="Xwj-qj-01o"/>
-                        <constraint firstItem="3CS-qJ-3iA" firstAttribute="centerY" secondItem="2YF-kC-w0m" secondAttribute="centerY" id="r7P-zu-CeH"/>
-                        <constraint firstAttribute="bottom" secondItem="oS7-2G-WgJ" secondAttribute="bottom" constant="15" id="sof-kF-Tze"/>
-                        <constraint firstItem="oS7-2G-WgJ" firstAttribute="leading" secondItem="2YF-kC-w0m" secondAttribute="leading" constant="20" id="wsh-OP-G2g"/>
-                    </constraints>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -258,12 +220,9 @@
                 <constraint firstItem="oBr-jV-cOm" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.5" id="0Sv-Lb-pum"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Klr-o7-6nq" secondAttribute="trailing" id="112-2z-D83"/>
                 <constraint firstItem="Klr-o7-6nq" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.03" id="1Dd-0T-eGD"/>
-                <constraint firstItem="2YF-kC-w0m" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="9D8-Rd-Hh5"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="9GX-yZ-ZeH"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Fuy-5T-glJ"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="top" secondItem="oBr-jV-cOm" secondAttribute="bottom" id="MN8-zc-fko"/>
-                <constraint firstItem="2YF-kC-w0m" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="PCH-4m-1mB"/>
-                <constraint firstItem="2YF-kC-w0m" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="SNE-f3-GDB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="HUH-34-h6l" secondAttribute="trailing" id="SUS-3Q-Vgm"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Teb-jf-oR3"/>
                 <constraint firstItem="GFN-5U-opR" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.08" id="Vye-VZ-GIX"/>
@@ -271,26 +230,29 @@
                 <constraint firstItem="EwS-MS-qzk" firstAttribute="top" secondItem="HUH-34-h6l" secondAttribute="bottom" constant="15" id="Ydu-de-JT2"/>
                 <constraint firstItem="EwS-MS-qzk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Zpd-Kj-Z0J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GFN-5U-opR" secondAttribute="trailing" id="aFq-o4-3c8"/>
+                <constraint firstItem="ofw-WN-xsL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="bAg-W5-ZAu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EwS-MS-qzk" secondAttribute="trailing" id="fgD-Ph-xqF"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="fhY-Ff-6mJ"/>
                 <constraint firstItem="Klr-o7-6nq" firstAttribute="top" secondItem="EwS-MS-qzk" secondAttribute="bottom" id="kMV-VN-KYz"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ltg-Gg-xif"/>
-                <constraint firstItem="2YF-kC-w0m" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="pKe-Cd-CK2"/>
                 <constraint firstItem="oBr-jV-cOm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="sFd-IA-Ecc"/>
+                <constraint firstItem="ofw-WN-xsL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wxK-u5-nbg"/>
+                <constraint firstItem="ofw-WN-xsL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="xDW-e7-0wv"/>
+                <constraint firstItem="ofw-WN-xsL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yGO-ik-kpv"/>
             </constraints>
             <point key="canvasLocation" x="137.38317757009344" y="103.67170626349893"/>
         </view>
     </objects>
     <resources>
-        <image name="check" width="512" height="512"/>
-        <image name="cut" width="512" height="512"/>
-        <image name="effect" width="512" height="512"/>
-        <image name="export" width="228" height="68"/>
-        <image name="font" width="512" height="512"/>
-        <image name="music" width="512" height="512"/>
+        <image name="crop" width="22" height="22"/>
+        <image name="cut" width="19" height="20"/>
+        <image name="effect" width="19" height="20"/>
+        <image name="export" width="72" height="24"/>
+        <image name="music" width="19" height="20"/>
         <image name="pause" width="15" height="17"/>
-        <image name="speed" width="512" height="512"/>
-        <image name="volume" width="512" height="512"/>
+        <image name="rotation" width="23" height="19"/>
+        <image name="speed" width="39" height="20"/>
+        <image name="volume" width="19" height="20"/>
         <image name="x" width="19" height="19"/>
     </resources>
 </document>
