@@ -34,7 +34,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="titleEdgeInsets" minX="-50" minY="0.0" maxX="0.0" maxY="-40"/>
                             <inset key="imageEdgeInsets" minX="10" minY="15" maxX="10" maxY="35"/>
-                            <state key="normal" title="cut" image="scissors">
+                            <state key="normal" title="cut" image="cut">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -45,7 +45,7 @@
                             <rect key="frame" x="71.333333333333343" y="0.0" width="71.333333333333343" height="74"/>
                             <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
                             <inset key="imageEdgeInsets" minX="15" minY="10" maxX="15" maxY="35"/>
-                            <state key="normal" title="speed" image="speedometer">
+                            <state key="normal" title="speed" image="speed">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -67,7 +67,7 @@
                             <rect key="frame" x="214" y="0.0" width="71.333333333333314" height="74"/>
                             <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
                             <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="music" image="musical-note">
+                            <state key="normal" title="music" image="music">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -78,7 +78,7 @@
                             <rect key="frame" x="285.33333333333331" y="0.0" width="71.333333333333314" height="74"/>
                             <inset key="titleEdgeInsets" minX="-40" minY="0.0" maxX="0.0" maxY="-40"/>
                             <inset key="imageEdgeInsets" minX="15" minY="15" maxX="15" maxY="35"/>
-                            <state key="normal" title="effect" image="effect-2">
+                            <state key="normal" title="effect" image="effect">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </state>
                             <connections>
@@ -130,7 +130,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="TOz-73-UUG" secondAttribute="height" multiplier="1:1" id="pxk-v6-0Ra"/>
                             </constraints>
-                            <state key="normal" backgroundImage="Vector"/>
+                            <state key="normal" backgroundImage="x"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3u-YK-tVJ">
                             <rect key="frame" x="342.33333333333331" y="9.9999999999999982" width="65.666666666666686" height="26.333333333333329"/>
@@ -201,7 +201,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="oS7-2G-WgJ" secondAttribute="height" multiplier="1:1" id="ixJ-hp-uJr"/>
                             </constraints>
-                            <state key="normal" backgroundImage="Vector"/>
+                            <state key="normal" backgroundImage="x"/>
                             <connections>
                                 <action selector="cancelPressed:" destination="-1" eventType="touchUpInside" id="4As-im-p5L"/>
                             </connections>
@@ -282,15 +282,15 @@
         </view>
     </objects>
     <resources>
-        <image name="Vector" width="19" height="19"/>
         <image name="check" width="512" height="512"/>
-        <image name="effect-2" width="512" height="512"/>
+        <image name="cut" width="512" height="512"/>
+        <image name="effect" width="512" height="512"/>
         <image name="export" width="228" height="68"/>
         <image name="font" width="512" height="512"/>
-        <image name="musical-note" width="512" height="512"/>
+        <image name="music" width="512" height="512"/>
         <image name="pause" width="15" height="17"/>
-        <image name="scissors" width="512" height="512"/>
-        <image name="speedometer" width="512" height="512"/>
+        <image name="speed" width="512" height="512"/>
         <image name="volume" width="512" height="512"/>
+        <image name="x" width="19" height="19"/>
     </resources>
 </document>

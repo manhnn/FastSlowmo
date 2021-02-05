@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class SoundChange: VideoEditorTask {
+class SoundChange: Command {
     
     func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {
         return mutableComposition

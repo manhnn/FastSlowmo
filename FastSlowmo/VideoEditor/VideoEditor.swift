@@ -9,23 +9,23 @@ import AVKit
 
 class VideoEditor {
     
-    var listCommand = [VideoEditorTask]()
+    var listCommand = [Command]()
     var currentIndex = 0
     
-    func pushCommand(task: VideoEditorTask) {
+    func pushCommand(task: Command) {
         listCommand.append(task)
         currentIndex += 1
     }
     
-    func popCommand(task: VideoEditorTask) {
+    func popCommand(task: Command) {
         listCommand.removeLast()
     }
     
-    func undoCommand(task: VideoEditorTask) -> VideoEditorTask {
+    func undoCommand(task: Command) -> Command {
         return listCommand[currentIndex - 1]
     }
     
-    func redoCommand(task: VideoEditorTask) -> VideoEditorTask {
+    func redoCommand(task: Command) -> Command {
         return listCommand[currentIndex + 1]
     }
     

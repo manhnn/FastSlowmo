@@ -8,6 +8,6 @@
 import UIKit
 import AVFoundation
 
-protocol VideoEditorTask {
+protocol Command {
     func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition
 }

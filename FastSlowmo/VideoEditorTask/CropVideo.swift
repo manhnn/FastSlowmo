@@ -7,7 +7,7 @@
 
 import AVKit
 
-class CropVideo: VideoEditorTask {
+class CropVideo: Command {
     
     var cropRectangle: CGRect!
     

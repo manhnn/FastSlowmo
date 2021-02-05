@@ -5,10 +5,10 @@
 //  Created by Manh Nguyen Ngoc on 04/02/2021.
 //
 
-import AVKit
+import UIKit
+import AVFoundation
 
-class TrimVideo: VideoEditorTask {
-    
+class TrimVideo: Command {
     var timeRange: CMTimeRange!
     
     init(timeRange: CMTimeRange) {
@@ -16,8 +16,11 @@ class TrimVideo: VideoEditorTask {
     }
     
     func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {
-        print("trim video from start -> endTime")
-        return mutableComposition
+        let newMutableComposition = AVMutableComposition()
+        mutableComposition.tracks.forEach { track in
+            let trackComposition = newMutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+            try? trackComposition?.insertTimeRange(timeRange, of: track, at: .zero)
+        }
+        return newMutableComposition
     }
-    
 }
