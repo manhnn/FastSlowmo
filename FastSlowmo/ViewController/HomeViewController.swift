@@ -19,12 +19,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var constraintBottomFunctionView: NSLayoutConstraint!
     @IBOutlet weak var functionView: UIView!
     @IBOutlet weak var cutViewXib: UIView!
-    @IBOutlet weak var imageView: UIView!
     
     
     // MARK: - Property
-    var trimVideoView: ThumbnailTrimView!
-    var cutoutVideoView: ThumbnailCutOutView!
+    var trimVideoView: TimeLineTrimView!
+    var cutoutVideoView: TimeLineCutOutView!
     var originAssetVideo: AVAsset!
     var player: AVPlayer!
     var playerItem: AVPlayerItem!
@@ -95,43 +94,14 @@ class HomeViewController: UIViewController {
         return String(format: "%02i:%02i", arguments: [minutes, seconds])
     }
     
-    func getThumbnailFrom(path: URL) -> UIImage? {
-        do {
-            let asset = AVURLAsset(url: path , options: nil)
-            let imgGenerator = AVAssetImageGenerator(asset: asset)
-            imgGenerator.appliesPreferredTrackTransform = true
-            let cgImage = try imgGenerator.copyCGImage(at: CMTimeMake(value: 2, timescale: 10), actualTime: nil)
-            let thumbnail = UIImage(cgImage: cgImage)
-
-            return thumbnail
+    func getThumbnailFromComposition(mutableComposition: AVMutableComposition) -> Array<UIImage> {
+        var images: Array<UIImage> = []
+        let generator = AVAssetImageGenerator(asset: mutableComposition)
+        for index in 0 ..< Int(mutableComposition.duration.seconds / 30) {
+            let cgimage = try? generator.copyCGImage(at: CMTime(seconds: Double(index * 30), preferredTimescale: 600), actualTime: nil)
+            images.append(UIImage(cgImage: cgimage!))
         }
-        catch let error {
-            print("*** Error generating thumbnail: \(error.localizedDescription)")
-            return nil
-        }
-    }
-    
-    func getThumbnailImageFromVideoUrl(mutableComposition: AVMutableComposition, completion: @escaping ((_ imageView: UIView?)->Void)) {
-        DispatchQueue.global().async { [self] in //1
-            let avAssetImageGenerator = AVAssetImageGenerator(asset: mutableComposition) //3
-            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
-            let thumnailTime = CMTimeMake(value: 15, timescale: 1) //5
-            do {
-                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
-                let thumbview = UIView(frame: CGRect(x: imageView.frame.width / 2, y: imageView.frame.height / 2, width: imageView.frame.width / 2, height: imageView.frame.height / 2))
-                thumbview.backgroundColor = UIColor(patternImage: UIImage(cgImage: cgThumbImage))
-                imageView.addSubview(thumbview)
-                DispatchQueue.main.async { //8
-                    completion(imageView) //9
-                }
-            }
-            catch {
-                print(error.localizedDescription) //10
-                DispatchQueue.main.async {
-                    completion(nil) //11
-                }
-            }
-        }
+        return images
     }
     
     // MARK: - Video Player Controller
@@ -156,6 +126,13 @@ class HomeViewController: UIViewController {
             self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
             self.view.layoutIfNeeded()
         })
+        
+        if mutableComposition.duration.seconds == 0 {
+            originAssetVideo.tracks.forEach { track in
+                let trackComposition = self.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+                try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
+            }
+        }
     }
    
     // MARK: - Speed Video
@@ -214,13 +191,6 @@ extension HomeViewController: CutVideoDelegate {
             self.view.layoutIfNeeded()
         })
         
-        if mutableComposition.duration.seconds == 0 {
-            originAssetVideo.tracks.forEach { track in
-                let trackComposition = self.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
-                try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
-            }
-        }
-        
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
             let startTime = CGFloat(trimVideoView.leftStartTime)
             let endTime = CGFloat(trimVideoView.rightEndTime)
@@ -250,10 +220,16 @@ extension HomeViewController: CutVideoDelegate {
     }
     
     func cutVideoDidTrimPressed(_ view: CutView) {
+        if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
+            trimVideoView.isHidden = true
+        }
+        else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
+            cutoutVideoView.isHidden = true
+        }
         isSelectTypeOfCutVideo = CutType.trimVideo.rawValue
         
         // Add Thumbnail Trim View
-        trimVideoView = ThumbnailTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), fileImage: getThumbnailFrom(path: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))!)
+        trimVideoView = TimeLineTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
         trimVideoView.backgroundColor = .clear
         trimVideoView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(trimVideoView)
@@ -262,17 +238,19 @@ extension HomeViewController: CutVideoDelegate {
         trimVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
         trimVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
         trimVideoView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-        
-        self.getThumbnailImageFromVideoUrl(mutableComposition: mutableComposition) { (thumbImage) in
-            self.imageView = thumbImage
-        }
     }
     
     func cutVideoDidCutOutPressed(_ view: CutView) {
+        if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
+            trimVideoView.isHidden = true
+        }
+        else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
+            cutoutVideoView.isHidden = true
+        }
         isSelectTypeOfCutVideo = CutType.cutoutVideo.rawValue
         
         // Add Thumbnail CutOut View
-        cutoutVideoView = ThumbnailCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), fileImage: getThumbnailFrom(path: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))!)
+        cutoutVideoView = TimeLineCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
         cutoutVideoView.backgroundColor = .clear
         cutoutVideoView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(cutoutVideoView)
