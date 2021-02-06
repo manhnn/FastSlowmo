@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ThumbnailCutVideoView: UIView {
+class ThumbnailTrimView: UIView {
     public var leftConstraint: NSLayoutConstraint?
     public var rightConstraint: NSLayoutConstraint?
     public var fileImage: UIImage!
@@ -64,7 +64,7 @@ class ThumbnailCutVideoView: UIView {
         self.addSubview(leftControllView)
         
         leftControllView.leftAnchor.constraint(equalTo: thumbnailCutVideoLeft.rightAnchor).isActive = true
-        leftControllView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
+        leftControllView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
         leftControllView.widthAnchor.constraint(equalToConstant: 9).isActive = true
         leftControllView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         
@@ -100,7 +100,7 @@ class ThumbnailCutVideoView: UIView {
         self.addSubview(rightControllView)
         
         rightControllView.rightAnchor.constraint(equalTo: thumbnailCutVideoRight.leftAnchor).isActive = true
-        rightControllView.heightAnchor.constraint(equalToConstant: self.frame.height + 20).isActive = true
+        rightControllView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
         rightControllView.widthAnchor.constraint(equalToConstant: 9).isActive = true
         rightControllView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
         

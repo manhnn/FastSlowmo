@@ -11,7 +11,7 @@ class ThumbnailCutVideo: UIView {
 
     var topStartPoint: CGPoint?
     var bottomStartPoint: CGPoint?
-    var distance = CGPoint(x: 5, y: 0)
+    var distance = CGPoint(x: 3, y: 0)
 
     override init(frame: CGRect) {
         topStartPoint = CGPoint(x: -frame.height, y: 0)

@@ -10,7 +10,7 @@
 		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
 		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
 		2586399825CCFFF7007F9623 /* ThumbnailCutVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* ThumbnailCutVideo.swift */; };
-		2586399C25CD005A007F9623 /* ThumbnailCutVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399B25CD005A007F9623 /* ThumbnailCutVideoView.swift */; };
+		2586399C25CD005A007F9623 /* ThumbnailTrimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399B25CD005A007F9623 /* ThumbnailTrimView.swift */; };
 		2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9225CBA60000485CD4 /* AppDelegate.swift */; };
 		2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9B25CBA60100485CD4 /* Assets.xcassets */; };
 		2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9D25CBA60100485CD4 /* LaunchScreen.storyboard */; };
@@ -22,16 +22,18 @@
 		2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */; };
 		2599AEC325CBDD2300485CD4 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */; };
 		2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEC525CBEB2F00485CD4 /* SoundChange.swift */; };
-		25C7DA7225CC4F6B00692929 /* SoundVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7DA7125CC4F6B00692929 /* SoundVideo.swift */; };
+		25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */; };
 		25C7DA7925CC587100692929 /* HelloApplicationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7DA7725CC587100692929 /* HelloApplicationViewController.swift */; };
 		25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C7DA7825CC587100692929 /* HelloApplicationViewController.xib */; };
+		25DBD8E425CE454100FB219F /* ThumbnailCutOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBD8E325CE454100FB219F /* ThumbnailCutOutView.swift */; };
+		25DBD8E825CE48E700FB219F /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBD8E725CE48E700FB219F /* Enum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
 		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
 		2586399725CCFFF7007F9623 /* ThumbnailCutVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCutVideo.swift; sourceTree = "<group>"; };
-		2586399B25CD005A007F9623 /* ThumbnailCutVideoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCutVideoView.swift; sourceTree = "<group>"; };
+		2586399B25CD005A007F9623 /* ThumbnailTrimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailTrimView.swift; sourceTree = "<group>"; };
 		2599AE8F25CBA60000485CD4 /* FastSlowmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastSlowmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599AE9225CBA60000485CD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2599AE9B25CBA60100485CD4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -45,9 +47,11 @@
 		2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		2599AEC225CBDD2300485CD4 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 		2599AEC525CBEB2F00485CD4 /* SoundChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundChange.swift; sourceTree = "<group>"; };
-		25C7DA7125CC4F6B00692929 /* SoundVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundVideo.swift; sourceTree = "<group>"; };
+		25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutOutVideo.swift; sourceTree = "<group>"; };
 		25C7DA7725CC587100692929 /* HelloApplicationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelloApplicationViewController.swift; sourceTree = "<group>"; };
 		25C7DA7825CC587100692929 /* HelloApplicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelloApplicationViewController.xib; sourceTree = "<group>"; };
+		25DBD8E325CE454100FB219F /* ThumbnailCutOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailCutOutView.swift; sourceTree = "<group>"; };
+		25DBD8E725CE48E700FB219F /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,7 +78,8 @@
 			isa = PBXGroup;
 			children = (
 				2586399725CCFFF7007F9623 /* ThumbnailCutVideo.swift */,
-				2586399B25CD005A007F9623 /* ThumbnailCutVideoView.swift */,
+				2586399B25CD005A007F9623 /* ThumbnailTrimView.swift */,
+				25DBD8E325CE454100FB219F /* ThumbnailCutOutView.swift */,
 			);
 			path = ThumbnailCutVideo;
 			sourceTree = "<group>";
@@ -102,6 +107,7 @@
 				2586399625CCFFE5007F9623 /* ThumbnailCutVideo */,
 				2599AEB625CBA84200485CD4 /* VideoEditor */,
 				25C7DA7525CC512000692929 /* Protocol */,
+				25DBD8E625CE48D600FB219F /* Enum */,
 				2599AEB125CBA7D900485CD4 /* VideoEditorTask */,
 				2599AEAA25CBA77300485CD4 /* ViewController */,
 				256C3E2825CD9DD600C0ACA4 /* SubView */,
@@ -128,9 +134,9 @@
 			isa = PBXGroup;
 			children = (
 				2599AEB725CBA86100485CD4 /* TrimVideo.swift */,
+				25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */,
 				2599AEBB25CBA87100485CD4 /* CropVideo.swift */,
 				2599AEC525CBEB2F00485CD4 /* SoundChange.swift */,
-				25C7DA7125CC4F6B00692929 /* SoundVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -157,6 +163,14 @@
 				2599AEB225CBA7EF00485CD4 /* Command.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		25DBD8E625CE48D600FB219F /* Enum */ = {
+			isa = PBXGroup;
+			children = (
+				25DBD8E725CE48E700FB219F /* Enum.swift */,
+			);
+			path = Enum;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -235,7 +249,8 @@
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
-				25C7DA7225CC4F6B00692929 /* SoundVideo.swift in Sources */,
+				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,
+				25DBD8E825CE48E700FB219F /* Enum.swift in Sources */,
 				2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */,
 				2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */,
 				25C7DA7925CC587100692929 /* HelloApplicationViewController.swift in Sources */,
@@ -243,7 +258,8 @@
 				256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */,
 				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
 				2586399825CCFFF7007F9623 /* ThumbnailCutVideo.swift in Sources */,
-				2586399C25CD005A007F9623 /* ThumbnailCutVideoView.swift in Sources */,
+				25DBD8E425CE454100FB219F /* ThumbnailCutOutView.swift in Sources */,
+				2586399C25CD005A007F9623 /* ThumbnailTrimView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

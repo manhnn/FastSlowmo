@@ -4,6 +4,7 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,6 +13,7 @@
                 <outlet property="constraintBottomFunctionView" destination="9GX-yZ-ZeH" id="Ini-kr-vJr"/>
                 <outlet property="cutViewXib" destination="ofw-WN-xsL" id="ohi-UD-riB"/>
                 <outlet property="functionView" destination="GFN-5U-opR" id="etm-tf-BaI"/>
+                <outlet property="imageView" destination="O2x-or-Taj" id="fhW-Me-sm6"/>
                 <outlet property="navigationView" destination="HUH-34-h6l" id="n9c-9g-IDO"/>
                 <outlet property="soundSlider" destination="oBr-jV-cOm" id="v6b-Iw-kkz"/>
                 <outlet property="timeLabel" destination="713-EE-Eqw" id="wqi-32-iP3"/>
@@ -213,6 +215,11 @@
                         <action selector="soundSliderChangeValue:" destination="-1" eventType="valueChanged" id="WHT-9h-A8d"/>
                     </connections>
                 </slider>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2x-or-Taj">
+                    <rect key="frame" x="0.0" y="590" width="428" height="69"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -254,5 +261,8 @@
         <image name="speed" width="39" height="20"/>
         <image name="volume" width="19" height="20"/>
         <image name="x" width="19" height="19"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

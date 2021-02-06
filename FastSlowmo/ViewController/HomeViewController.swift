@@ -19,9 +19,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var constraintBottomFunctionView: NSLayoutConstraint!
     @IBOutlet weak var functionView: UIView!
     @IBOutlet weak var cutViewXib: UIView!
+    @IBOutlet weak var imageView: UIView!
+    
     
     // MARK: - Property
-    var cutVideoView: ThumbnailCutVideoView!
+    var trimVideoView: ThumbnailTrimView!
+    var cutoutVideoView: ThumbnailCutOutView!
     var originAssetVideo: AVAsset!
     var player: AVPlayer!
     var playerItem: AVPlayerItem!
@@ -29,6 +32,7 @@ class HomeViewController: UIViewController {
     var mutableComposition: AVMutableComposition!
     
     var isPlayingVideo = false
+    var isSelectTypeOfCutVideo = CutType.empty.rawValue
     
     // MARK: - Methods
     override func viewDidLoad() {
@@ -37,6 +41,7 @@ class HomeViewController: UIViewController {
         setupVideoBeforePlay()
         updateTimeForSeconds()
         showSubCutViewXib()
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -106,6 +111,29 @@ class HomeViewController: UIViewController {
         }
     }
     
+    func getThumbnailImageFromVideoUrl(mutableComposition: AVMutableComposition, completion: @escaping ((_ imageView: UIView?)->Void)) {
+        DispatchQueue.global().async { [self] in //1
+            let avAssetImageGenerator = AVAssetImageGenerator(asset: mutableComposition) //3
+            avAssetImageGenerator.appliesPreferredTrackTransform = true //4
+            let thumnailTime = CMTimeMake(value: 15, timescale: 1) //5
+            do {
+                let cgThumbImage = try avAssetImageGenerator.copyCGImage(at: thumnailTime, actualTime: nil) //6
+                let thumbview = UIView(frame: CGRect(x: imageView.frame.width / 2, y: imageView.frame.height / 2, width: imageView.frame.width / 2, height: imageView.frame.height / 2))
+                thumbview.backgroundColor = UIColor(patternImage: UIImage(cgImage: cgThumbImage))
+                imageView.addSubview(thumbview)
+                DispatchQueue.main.async { //8
+                    completion(imageView) //9
+                }
+            }
+            catch {
+                print(error.localizedDescription) //10
+                DispatchQueue.main.async {
+                    completion(nil) //11
+                }
+            }
+        }
+    }
+    
     // MARK: - Video Player Controller
     @IBAction func playVideoPressed(_ sender: UIButton) {
         isPlayingVideo = !isPlayingVideo
@@ -160,7 +188,12 @@ extension HomeViewController: CutVideoDelegate {
     func cutVideoDidCancelPressed(_ view: CutView) {
         cutViewXib.isHidden = true
         navigationView.isHidden = false
-        cutVideoView.isHidden = true
+        if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
+            trimVideoView.isHidden = true
+        }
+        else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
+            cutoutVideoView.isHidden = true
+        }
         UIView.animate(withDuration: 0.75, animations: {
             self.constraintBottomFunctionView.constant = 0
             self.view.layoutIfNeeded()
@@ -170,7 +203,12 @@ extension HomeViewController: CutVideoDelegate {
     func cutVideoDidAceptedPressed(_ view: CutView) {
         cutViewXib.isHidden = true
         navigationView.isHidden = false
-        cutVideoView.isHidden = true
+        if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
+            trimVideoView.isHidden = true
+        }
+        else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
+            cutoutVideoView.isHidden = true
+        }
         UIView.animate(withDuration: 0.75, animations: {
             self.constraintBottomFunctionView.constant = 0
             self.view.layoutIfNeeded()
@@ -183,14 +221,26 @@ extension HomeViewController: CutVideoDelegate {
             }
         }
         
-        let startTime = CGFloat(cutVideoView.leftStartTime)
-        let endTime = CGFloat(cutVideoView.rightEndTime)
-        let duration = player.currentItem?.duration.seconds
-        
-        let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * CGFloat(duration!) * 1000), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * CGFloat(duration!) * 1000), timescale: 1000)))
-        let editor = VideoEditor()
-        editor.pushCommand(task: cmd)
-        mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
+        if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
+            let startTime = CGFloat(trimVideoView.leftStartTime)
+            let endTime = CGFloat(trimVideoView.rightEndTime)
+            let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
+            
+            let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
+            let editor = VideoEditor()
+            editor.pushCommand(task: cmd)
+            mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
+        }
+        else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
+            let startTime = CGFloat(cutoutVideoView.leftStartTime)
+            let endTime = CGFloat(cutoutVideoView.rightEndTime)
+            let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
+            
+            let cmd = CutOutVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
+            let editor = VideoEditor()
+            editor.pushCommand(task: cmd)
+            mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
+        }
         
         playerItem = AVPlayerItem(asset: mutableComposition)
         playerItem.audioTimePitchAlgorithm = .varispeed
@@ -200,21 +250,36 @@ extension HomeViewController: CutVideoDelegate {
     }
     
     func cutVideoDidTrimPressed(_ view: CutView) {
-        // Add Thumbnail Cut Audio View
-        cutVideoView = ThumbnailCutVideoView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 42), fileImage: getThumbnailFrom(path: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))!)
-        cutVideoView.backgroundColor = .clear
-        cutVideoView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(cutVideoView)
+        isSelectTypeOfCutVideo = CutType.trimVideo.rawValue
+        
+        // Add Thumbnail Trim View
+        trimVideoView = ThumbnailTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), fileImage: getThumbnailFrom(path: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))!)
+        trimVideoView.backgroundColor = .clear
+        trimVideoView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(trimVideoView)
 
-        cutVideoView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-        cutVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
-        cutVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
-        cutVideoView.heightAnchor.constraint(equalToConstant: 42).isActive = true
+        trimVideoView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        trimVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        trimVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
+        trimVideoView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        
+        self.getThumbnailImageFromVideoUrl(mutableComposition: mutableComposition) { (thumbImage) in
+            self.imageView = thumbImage
+        }
     }
     
     func cutVideoDidCutOutPressed(_ view: CutView) {
+        isSelectTypeOfCutVideo = CutType.cutoutVideo.rawValue
         
+        // Add Thumbnail CutOut View
+        cutoutVideoView = ThumbnailCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), fileImage: getThumbnailFrom(path: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))!)
+        cutoutVideoView.backgroundColor = .clear
+        cutoutVideoView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(cutoutVideoView)
+
+        cutoutVideoView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        cutoutVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        cutoutVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
+        cutoutVideoView.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
-    
-    
 }
