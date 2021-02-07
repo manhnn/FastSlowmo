@@ -22,8 +22,11 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Property
-    var trimVideoView: TimeLineTrimView!
-    var cutoutVideoView: TimeLineCutOutView!
+    var speedViewXib: SpeedView!
+    
+    var trimTimeLineView: TimeLineTrimView!
+    var cutoutTimeLineView: TimeLineCutOutView!
+    var speedTimeLineView: TimeLineSpeedView!
     var originAssetVideo: AVAsset!
     var player: AVPlayer!
     var playerItem: AVPlayerItem!
@@ -39,8 +42,8 @@ class HomeViewController: UIViewController {
         
         setupVideoBeforePlay()
         updateTimeForSeconds()
+        setupMutableCompositionBeforeEdit()
         showSubCutViewXib()
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -68,6 +71,15 @@ class HomeViewController: UIViewController {
             self?.soundSlider.value = Float(self!.player.volume)
             self!.timeLabel.text = "\(self!.getTimeString(from: currentItem.currentTime()))/\(self!.getTimeString(from: self!.player.currentItem!.duration))"
         })
+    }
+    
+    func setupMutableCompositionBeforeEdit() {
+        if mutableComposition.duration.seconds == 0 {
+            originAssetVideo.tracks.forEach { track in
+                let trackComposition = self.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+                try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
+            }
+        }
     }
     
     func showSubCutViewXib() {
@@ -126,18 +138,37 @@ class HomeViewController: UIViewController {
             self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
             self.view.layoutIfNeeded()
         })
-        
-        if mutableComposition.duration.seconds == 0 {
-            originAssetVideo.tracks.forEach { track in
-                let trackComposition = self.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
-                try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
-            }
-        }
     }
    
     // MARK: - Speed Video
     @IBAction func speedVideoPressed(_ sender: Any) {
+        navigationView.isHidden = true
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
+            self.view.layoutIfNeeded()
+        })
         
+        let nib = UINib(nibName: "SpeedView", bundle: nil)
+        speedViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? SpeedView
+        speedViewXib.frame = self.view.frame
+        self.view.addSubview(speedViewXib)
+        speedViewXib.translatesAutoresizingMaskIntoConstraints = false
+        speedViewXib.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        speedViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        speedViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
+        speedViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30).isActive = true
+        speedViewXib.delegate = self
+        
+        // Add Timeline CutOut View Because it same to Speed Change
+        speedTimeLineView = TimeLineSpeedView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
+        speedTimeLineView.backgroundColor = .clear
+        speedTimeLineView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(speedTimeLineView)
+
+        speedTimeLineView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        speedTimeLineView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        speedTimeLineView.bottomAnchor.constraint(equalTo: self.speedViewXib.topAnchor, constant: -102).isActive = true
+        speedTimeLineView.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
     
     // MARK: - Sound Video
@@ -166,10 +197,10 @@ extension HomeViewController: CutVideoDelegate {
         cutViewXib.isHidden = true
         navigationView.isHidden = false
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
-            trimVideoView.isHidden = true
+            trimTimeLineView.isHidden = true
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
-            cutoutVideoView.isHidden = true
+            cutoutTimeLineView.isHidden = true
         }
         UIView.animate(withDuration: 0.75, animations: {
             self.constraintBottomFunctionView.constant = 0
@@ -181,10 +212,10 @@ extension HomeViewController: CutVideoDelegate {
         cutViewXib.isHidden = true
         navigationView.isHidden = false
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
-            trimVideoView.isHidden = true
+            trimTimeLineView.isHidden = true
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
-            cutoutVideoView.isHidden = true
+            cutoutTimeLineView.isHidden = true
         }
         UIView.animate(withDuration: 0.75, animations: {
             self.constraintBottomFunctionView.constant = 0
@@ -192,8 +223,8 @@ extension HomeViewController: CutVideoDelegate {
         })
         
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
-            let startTime = CGFloat(trimVideoView.leftStartTime)
-            let endTime = CGFloat(trimVideoView.rightEndTime)
+            let startTime = CGFloat(trimTimeLineView.leftStartTime)
+            let endTime = CGFloat(trimTimeLineView.rightEndTime)
             let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
             
             let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
@@ -202,8 +233,8 @@ extension HomeViewController: CutVideoDelegate {
             mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
-            let startTime = CGFloat(cutoutVideoView.leftStartTime)
-            let endTime = CGFloat(cutoutVideoView.rightEndTime)
+            let startTime = CGFloat(cutoutTimeLineView.leftStartTime)
+            let endTime = CGFloat(cutoutTimeLineView.rightEndTime)
             let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
             
             let cmd = CutOutVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
@@ -221,43 +252,64 @@ extension HomeViewController: CutVideoDelegate {
     
     func cutVideoDidTrimPressed(_ view: CutView) {
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
-            trimVideoView.isHidden = true
+            trimTimeLineView.isHidden = true
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
-            cutoutVideoView.isHidden = true
+            cutoutTimeLineView.isHidden = true
         }
         isSelectTypeOfCutVideo = CutType.trimVideo.rawValue
         
         // Add Thumbnail Trim View
-        trimVideoView = TimeLineTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
-        trimVideoView.backgroundColor = .clear
-        trimVideoView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(trimVideoView)
+        trimTimeLineView = TimeLineTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
+        trimTimeLineView.backgroundColor = .clear
+        trimTimeLineView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(trimTimeLineView)
 
-        trimVideoView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-        trimVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
-        trimVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
-        trimVideoView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        trimTimeLineView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        trimTimeLineView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        trimTimeLineView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
+        trimTimeLineView.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
     
     func cutVideoDidCutOutPressed(_ view: CutView) {
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
-            trimVideoView.isHidden = true
+            trimTimeLineView.isHidden = true
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
-            cutoutVideoView.isHidden = true
+            cutoutTimeLineView.isHidden = true
         }
         isSelectTypeOfCutVideo = CutType.cutoutVideo.rawValue
         
         // Add Thumbnail CutOut View
-        cutoutVideoView = TimeLineCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
-        cutoutVideoView.backgroundColor = .clear
-        cutoutVideoView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(cutoutVideoView)
+        cutoutTimeLineView = TimeLineCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: mutableComposition))
+        cutoutTimeLineView.backgroundColor = .clear
+        cutoutTimeLineView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(cutoutTimeLineView)
 
-        cutoutVideoView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
-        cutoutVideoView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
-        cutoutVideoView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
-        cutoutVideoView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+        cutoutTimeLineView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        cutoutTimeLineView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        cutoutTimeLineView.bottomAnchor.constraint(equalTo: self.cutViewXib.topAnchor, constant: -102).isActive = true
+        cutoutTimeLineView.heightAnchor.constraint(equalToConstant: 52).isActive = true
+    }
+}
+
+// MARK: - Extension SpeedVideoDelegate
+extension HomeViewController: SpeedViewDelegate {
+    func speedViewDidTapCloseButton(_ view: SpeedView) {
+        speedViewXib.isHidden = true
+        navigationView.isHidden = false
+        speedTimeLineView.isHidden = true
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func speedViewDidTapAddButton(_ view: SpeedView) {
+        print("add")
+    }
+    
+    func speedViewDidTapRemoveButton(_ view: SpeedView) {
+        speedTimeLineView.resetleftRightPanGesture()
     }
 }

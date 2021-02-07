@@ -14,8 +14,8 @@ class TimeLineTrimView: UIView {
     public var rightControllView: UIView!
     public var leftLabel: UILabel!
     public var rightLabel: UILabel!
-    public var timeLineCutVideoLeft: TimeLineCutVideo!
-    public var timeLineCutVideoRight: TimeLineCutVideo!
+    public var timeLineCutVideoLeft: TimeLineCoreGraphic!
+    public var timeLineCutVideoRight: TimeLineCoreGraphic!
     public var images: Array<UIImage> = []
     
     public var leftStartTime: Float!
@@ -44,7 +44,7 @@ class TimeLineTrimView: UIView {
     }
     
     func setupLeftControllerView() {
-        timeLineCutVideoLeft = TimeLineCutVideo(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
+        timeLineCutVideoLeft = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: self.frame.width / 4, height: self.frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
         timeLineCutVideoLeft.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoLeft)
         
@@ -80,7 +80,7 @@ class TimeLineTrimView: UIView {
     }
     
     func setupRightControllerView() {
-        timeLineCutVideoRight = TimeLineCutVideo(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
+        timeLineCutVideoRight = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
         timeLineCutVideoRight.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoRight)
         

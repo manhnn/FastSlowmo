@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252AFDC525CFFC4B000F452F /* SpeedView.xib */; };
+		252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDCD25CFFC96000F452F /* SpeedView.swift */; };
+		252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */; };
 		2568DBAA25CEE25200A9D072 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */; };
 		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
 		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
-		2586399825CCFFF7007F9623 /* TimeLineCutVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* TimeLineCutVideo.swift */; };
+		2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */; };
 		2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399B25CD005A007F9623 /* TimeLineTrimView.swift */; };
 		2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9225CBA60000485CD4 /* AppDelegate.swift */; };
 		2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2599AE9B25CBA60100485CD4 /* Assets.xcassets */; };
@@ -30,10 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		252AFDC525CFFC4B000F452F /* SpeedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeedView.xib; sourceTree = "<group>"; };
+		252AFDCD25CFFC96000F452F /* SpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedView.swift; sourceTree = "<group>"; };
+		252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineSpeedView.swift; sourceTree = "<group>"; };
 		2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
 		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
-		2586399725CCFFF7007F9623 /* TimeLineCutVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCutVideo.swift; sourceTree = "<group>"; };
+		2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCoreGraphic.swift; sourceTree = "<group>"; };
 		2586399B25CD005A007F9623 /* TimeLineTrimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineTrimView.swift; sourceTree = "<group>"; };
 		2599AE8F25CBA60000485CD4 /* FastSlowmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastSlowmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2599AE9225CBA60000485CD4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -70,18 +76,21 @@
 			children = (
 				256C3E2925CD9E6400C0ACA4 /* CutView.swift */,
 				256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */,
+				252AFDCD25CFFC96000F452F /* SpeedView.swift */,
+				252AFDC525CFFC4B000F452F /* SpeedView.xib */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
 		};
-		2586399625CCFFE5007F9623 /* ThumbnailCutVideo */ = {
+		2586399625CCFFE5007F9623 /* TimeLineEditVideo */ = {
 			isa = PBXGroup;
 			children = (
-				2586399725CCFFF7007F9623 /* TimeLineCutVideo.swift */,
+				2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */,
 				2586399B25CD005A007F9623 /* TimeLineTrimView.swift */,
 				25DBD8E325CE454100FB219F /* TimeLineCutOutView.swift */,
+				252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */,
 			);
-			path = ThumbnailCutVideo;
+			path = TimeLineEditVideo;
 			sourceTree = "<group>";
 		};
 		2599AE8625CBA60000485CD4 = {
@@ -104,7 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2599AEC125CBDCDA00485CD4 /* SourceVideo */,
-				2586399625CCFFE5007F9623 /* ThumbnailCutVideo */,
+				2586399625CCFFE5007F9623 /* TimeLineEditVideo */,
 				2599AEB625CBA84200485CD4 /* VideoEditor */,
 				25C7DA7525CC512000692929 /* Protocol */,
 				25DBD8E625CE48D600FB219F /* Enum */,
@@ -235,6 +244,7 @@
 				2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */,
 				256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */,
 				2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */,
+				252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */,
 				25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -248,6 +258,7 @@
 			files = (
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */,
+				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,
 				25DBD8E825CE48E700FB219F /* Enum.swift in Sources */,
@@ -257,9 +268,10 @@
 				2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */,
 				256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */,
 				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
-				2586399825CCFFF7007F9623 /* TimeLineCutVideo.swift in Sources */,
+				2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */,
 				25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */,
 				2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */,
+				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

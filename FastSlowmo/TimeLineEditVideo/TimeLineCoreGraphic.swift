@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TimeLineCutVideo: UIView {
+class TimeLineCoreGraphic: UIView {
 
     private var topStartPoint: CGPoint?
     private var bottomStartPoint: CGPoint?
@@ -25,6 +25,8 @@ class TimeLineCutVideo: UIView {
         var topPoint = topStartPoint
         var bottomPoint = bottomStartPoint
 
+        UIColor.clear.setStroke()
+        
         while topPoint!.x <= rect.width {
             bezier.move(to: topPoint!)
             bezier.addLine(to: bottomPoint!)
