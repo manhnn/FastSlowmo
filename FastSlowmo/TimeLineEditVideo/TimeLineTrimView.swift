@@ -44,7 +44,7 @@ class TimeLineTrimView: UIView {
     }
     
     func setupLeftControllerView() {
-        timeLineCutVideoLeft = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: self.frame.width / 4, height: self.frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
+        timeLineCutVideoLeft = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: self.frame.width / 4, height: self.frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5), colorStroke: .black)
         timeLineCutVideoLeft.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoLeft)
         
@@ -80,7 +80,7 @@ class TimeLineTrimView: UIView {
     }
     
     func setupRightControllerView() {
-        timeLineCutVideoRight = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
+        timeLineCutVideoRight = TimeLineCoreGraphic(frame: CGRect(x: 0, y: 0, width: frame.width / 4, height: frame.height), backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5), colorStroke: .black)
         timeLineCutVideoRight.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoRight)
         

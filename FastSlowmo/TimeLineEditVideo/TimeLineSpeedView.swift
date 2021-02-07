@@ -46,7 +46,7 @@ class TimeLineSpeedView: UIView {
     }
     
     func setupControlLeftRight() {
-        timeLineSpeedVideo = TimeLineCoreGraphic(frame: self.frame, backGroundColor: UIColor(displayP3Red: 234 / 255, green: 68 / 255, blue: 121 / 255, alpha: 0.4))
+        timeLineSpeedVideo = TimeLineCoreGraphic(frame: self.frame, backGroundColor: UIColor(displayP3Red: 234 / 255, green: 68 / 255, blue: 121 / 255, alpha: 0.4), colorStroke: .clear)
         timeLineSpeedVideo.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineSpeedVideo)
         
@@ -138,7 +138,7 @@ class TimeLineSpeedView: UIView {
         rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
     }
     
-    func resetleftRightPanGesture() {
+    func resetLeftRightPanGesture() {
         leftConstraint?.constant = 0
         rightConstraint?.constant = 0
         leftStartTime = Float(leftConstraint!.constant / frame.width)

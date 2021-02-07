@@ -22,7 +22,7 @@
 		2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */; };
 		2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEB225CBA7EF00485CD4 /* Command.swift */; };
 		2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEB725CBA86100485CD4 /* TrimVideo.swift */; };
-		2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBB25CBA87100485CD4 /* CropVideo.swift */; };
+		2599AEBC25CBA87100485CD4 /* SpeedVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */; };
 		2599AEBF25CBADFD00485CD4 /* VideoEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */; };
 		2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AEC525CBEB2F00485CD4 /* SoundChange.swift */; };
 		25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */; };
@@ -50,7 +50,7 @@
 		2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		2599AEB225CBA7EF00485CD4 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Command.swift; sourceTree = "<group>"; };
 		2599AEB725CBA86100485CD4 /* TrimVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimVideo.swift; sourceTree = "<group>"; };
-		2599AEBB25CBA87100485CD4 /* CropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVideo.swift; sourceTree = "<group>"; };
+		2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedVideo.swift; sourceTree = "<group>"; };
 		2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoEditor.swift; sourceTree = "<group>"; };
 		2599AEC525CBEB2F00485CD4 /* SoundChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundChange.swift; sourceTree = "<group>"; };
 		25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutOutVideo.swift; sourceTree = "<group>"; };
@@ -142,10 +142,10 @@
 		2599AEB125CBA7D900485CD4 /* VideoEditorTask */ = {
 			isa = PBXGroup;
 			children = (
+				2599AEC525CBEB2F00485CD4 /* SoundChange.swift */,
 				2599AEB725CBA86100485CD4 /* TrimVideo.swift */,
 				25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */,
-				2599AEBB25CBA87100485CD4 /* CropVideo.swift */,
-				2599AEC525CBEB2F00485CD4 /* SoundChange.swift */,
+				2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -257,7 +257,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
-				2599AEBC25CBA87100485CD4 /* CropVideo.swift in Sources */,
+				2599AEBC25CBA87100485CD4 /* SpeedVideo.swift in Sources */,
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,

@@ -44,7 +44,7 @@ class TimeLineCutOutView: UIView {
     }
     
     func setupControlLeftRight() {
-        timeLineCutVideo = TimeLineCoreGraphic(frame: self.frame, backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5))
+        timeLineCutVideo = TimeLineCoreGraphic(frame: self.frame, backGroundColor: UIColor(displayP3Red: 1, green: 1, blue: 1, alpha: 0.5), colorStroke: .black)
         timeLineCutVideo.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideo)
         

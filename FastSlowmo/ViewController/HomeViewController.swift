@@ -244,7 +244,7 @@ extension HomeViewController: CutVideoDelegate {
         }
         
         playerItem = AVPlayerItem(asset: mutableComposition)
-        playerItem.audioTimePitchAlgorithm = .varispeed
+        playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
         
         timeLabel.text = "00:00/\(getTimeString(from: playerItem.duration))"
@@ -305,11 +305,31 @@ extension HomeViewController: SpeedViewDelegate {
         })
     }
     
-    func speedViewDidTapAddButton(_ view: SpeedView) {
-        print("add")
+    func speedViewDidTapAddButton(_ view: SpeedView, rate: Double) {
+        speedViewXib.isHidden = true
+        navigationView.isHidden = false
+        speedTimeLineView.isHidden = true
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
+        
+        let startTime = CGFloat(speedTimeLineView.leftStartTime)
+        let endTime = CGFloat(speedTimeLineView.rightEndTime)
+        let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
+        let timeRange = CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000))
+        
+        let cmd = SpeedVideo(rate: rate, timeRange: timeRange)
+        let editor = VideoEditor()
+        editor.pushCommand(task: cmd)
+        mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
+        
+        playerItem = AVPlayerItem(asset: mutableComposition)
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func speedViewDidTapRemoveButton(_ view: SpeedView) {
-        speedTimeLineView.resetleftRightPanGesture()
+        speedTimeLineView.resetLeftRightPanGesture()
     }
 }
