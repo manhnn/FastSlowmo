@@ -18,11 +18,12 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var constraintBottomFunctionView: NSLayoutConstraint!
     @IBOutlet weak var functionView: UIView!
-    @IBOutlet weak var cutViewXib: UIView!
     
     
     // MARK: - Property
+    @IBOutlet weak var cutViewXib: UIView!
     var speedViewXib: SpeedView!
+    var rotateViewXib: RotateView!
     
     var trimTimeLineView: TimeLineTrimView!
     var cutoutTimeLineView: TimeLineCutOutView!
@@ -35,6 +36,7 @@ class HomeViewController: UIViewController {
     
     var isPlayingVideo = false
     var isSelectTypeOfCutVideo = CutType.empty.rawValue
+    var rotationVideoIndex: Int = 0
     
     // MARK: - Methods
     override func viewDidLoad() {
@@ -189,9 +191,34 @@ class HomeViewController: UIViewController {
     @IBAction func effectVideoPressed(_ sender: Any) {
         
     }
+    
+    // MARK: - Rotate Video
+    @IBAction func rotateVideo(_ sender: Any) {
+        navigationView.isHidden = true
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
+            self.view.layoutIfNeeded()
+        })
+        
+        let nib = UINib(nibName: "RotateView", bundle: nil)
+        rotateViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? RotateView
+        rotateViewXib.frame = self.view.frame
+        self.view.addSubview(rotateViewXib)
+        rotateViewXib.translatesAutoresizingMaskIntoConstraints = false
+        rotateViewXib.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        rotateViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        rotateViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        rotateViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        rotateViewXib.delegate = self
+    }
+    
+    // MARK: - Crop Video
+    @IBAction func cropVideo(_ sender: Any) {
+        
+    }
 }
 
-// MARK: - Extension CutVideoDelegate
+// MARK: - Extension CutViewDelegate
 extension HomeViewController: CutVideoDelegate {
     func cutVideoDidCancelPressed(_ view: CutView) {
         cutViewXib.isHidden = true
@@ -293,7 +320,7 @@ extension HomeViewController: CutVideoDelegate {
     }
 }
 
-// MARK: - Extension SpeedVideoDelegate
+// MARK: - Extension SpeedViewDelegate
 extension HomeViewController: SpeedViewDelegate {
     func speedViewDidTapCloseButton(_ view: SpeedView) {
         speedViewXib.isHidden = true
@@ -331,5 +358,52 @@ extension HomeViewController: SpeedViewDelegate {
     
     func speedViewDidTapRemoveButton(_ view: SpeedView) {
         speedTimeLineView.resetLeftRightPanGesture()
+    }
+}
+
+// MARK: - Extension RotateViewDelegate
+extension HomeViewController: RotateViewDelegate {
+    
+    func rotateViewDidTapRotateLeft(_ view: RotateView) {
+        print("left")
+    }
+    
+    func rotateViewDidTapRotateRight(_ view: RotateView) {
+        rotationVideoIndex = (rotationVideoIndex + 1) % 4
+        
+        let cmd = RotateVideo(rotateDirection: 1, rotateType: 1)
+        let editor = VideoEditor()
+        editor.pushCommand(task: cmd)
+        mutableComposition = editor.executeTask(mutableComposition: mutableComposition)
+        
+        playerItem = AVPlayerItem(asset: mutableComposition)
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
+    }
+    
+    func rotateViewDidTapFlipHorizontally(_ view: RotateView) {
+        print("hori")
+    }
+    
+    func rotateViewDidTapFlipVertically(_ view: RotateView) {
+        print("verti")
+    }
+    
+    func rotateViewDidTapCancelPressed(_ view: RotateView) {
+        rotateViewXib.isHidden = true
+        navigationView.isHidden = false
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
+    }
+    
+    func rotateViewDidTapAceptedPressed(_ view: RotateView) {
+        rotateViewXib.isHidden = true
+        navigationView.isHidden = false
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = 0
+            self.view.layoutIfNeeded()
+        })
     }
 }

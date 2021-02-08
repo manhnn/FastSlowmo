@@ -88,7 +88,7 @@ class SpeedView: UIView {
         delegate?.speedViewDidTapRemoveButton(self)
     }
     
-    @IBAction func addPressed(_ sender: Any) {
+    @IBAction func addPressed(_ sender: UIButton) {
         delegate?.speedViewDidTapAddButton(self, rate: rate)
     }
 }
