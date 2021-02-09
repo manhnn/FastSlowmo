@@ -10,11 +10,9 @@ import AVFoundation
 
 class RotateVideo: Command {
     
-    var rotateDirection: Int!
     var rotateType: Int!
     
-    init(rotateDirection: Int, rotateType: Int) {
-        self.rotateDirection = rotateDirection
+    init(rotateType: Int) {
         self.rotateType = rotateType
     }
     
@@ -24,13 +22,13 @@ class RotateVideo: Command {
         let tranformer = AVMutableVideoCompositionLayerInstruction.init(assetTrack: allComposition.mutableComposition.tracks(withMediaType: .video).first!)
         var tranform1 = CGAffineTransform()
         
-        if (rotateDirection == 1 && rotateType == 1) || (rotateDirection == 0 && rotateType == 3) {
+        if rotateType == 1 || rotateType == -3 {
             tranform1 = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -allComposition.mutableComposition.naturalSize.width * ratio)
         }
-        else if (rotateDirection == 1 && rotateType == 2) || (rotateDirection == 0 && rotateType == 2) {
+        else if rotateType == 2 || rotateType == -2 {
             tranform1 = CGAffineTransform(rotationAngle: .pi).translatedBy(x: -allComposition.mutableComposition.naturalSize.width, y: -allComposition.mutableComposition.naturalSize.height)
         }
-        else if (rotateDirection == 1 && rotateType == 3) || (rotateDirection == 0 && rotateType == 1) {
+        else if rotateType == 3 || rotateType == -1 {
             tranform1 = CGAffineTransform(rotationAngle: .pi * 1.5).translatedBy(x: -allComposition.mutableComposition.naturalSize.height / ratio, y: 0)
         }
         else {
@@ -47,10 +45,10 @@ class RotateVideo: Command {
         videoComposition.frameDuration = CMTime(value: 1, timescale: 1000)
         videoComposition.instructions = [layerInstruction]
         
-        if rotateType == 1 || rotateType == 3 {
+        if rotateType == 1 || rotateType == 3  || rotateType == -1 || rotateType == -3 {
             videoComposition.renderSize = CGSize(width: allComposition.mutableComposition.naturalSize.height, height: allComposition.mutableComposition.naturalSize.width)
         }
-        else { // rotationIndex == RotationType.upsideDown.rawValue || rotationIndex == RotationType.portrait.rawValue
+        else { // rotateType == 2 || rotateType == 4
             videoComposition.renderSize = CGSize(width: allComposition.mutableComposition.naturalSize.width, height: allComposition.mutableComposition.naturalSize.height)
         }
         

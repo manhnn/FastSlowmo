@@ -20,7 +20,4 @@ enum RotateVideoType: Int {
     case landscapeLeft = 3
 }
 
-enum RotateDirection: Int {
-    case left = 0
-    case right = 1
-}
+

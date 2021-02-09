@@ -38,7 +38,7 @@ class HomeViewController: UIViewController {
     
     var isPlayingVideo = false
     var isSelectTypeOfCutVideo = CutType.empty.rawValue
-    var rotationVideoIndex: Int = 0
+    var rotationDirectionIndex: Int = 0
     
     // MARK: - Methods
     override func viewDidLoad() {
@@ -370,9 +370,9 @@ extension HomeViewController: SpeedViewDelegate {
 extension HomeViewController: RotateViewDelegate {
     
     func rotateViewDidTapRotateLeft(_ view: RotateView) {
-        rotationVideoIndex = (rotationVideoIndex + 1) % 4
+        rotationDirectionIndex = (rotationDirectionIndex - 1 <= -4) ? 0 : rotationDirectionIndex - 1
         
-        let cmd = RotateVideo(rotateDirection: 0, rotateType: rotationVideoIndex)
+        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
         let editor = VideoEditor()
         editor.pushCommand(task: cmd)
         allComposition = editor.executeTask(allComposition: allComposition)
@@ -383,9 +383,9 @@ extension HomeViewController: RotateViewDelegate {
     }
     
     func rotateViewDidTapRotateRight(_ view: RotateView) {
-        rotationVideoIndex = (rotationVideoIndex + 1) % 4
+        rotationDirectionIndex = (rotationDirectionIndex + 1) % 4
         
-        let cmd = RotateVideo(rotateDirection: 1, rotateType: rotationVideoIndex)
+        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
         let editor = VideoEditor()
         editor.pushCommand(task: cmd)
         allComposition = editor.executeTask(allComposition: allComposition)
@@ -410,6 +410,10 @@ extension HomeViewController: RotateViewDelegate {
             self.constraintBottomFunctionView.constant = 0
             self.view.layoutIfNeeded()
         })
+//        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
+//        let editor = VideoEditor()
+//        editor.popCommand(task: cmd)
+//        allComposition = editor.executeTask(allComposition: allComposition)
     }
     
     func rotateViewDidTapAceptedPressed(_ view: RotateView) {
