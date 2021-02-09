@@ -18,20 +18,20 @@ class RotateVideo: Command {
         self.rotateType = rotateType
     }
     
-    func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {
-        let ratio = mutableComposition.naturalSize.height / mutableComposition.naturalSize.width
+    func execute(allComposition: AllComposition) -> AllComposition {
+        let ratio = allComposition.mutableComposition.naturalSize.height / allComposition.mutableComposition.naturalSize.width
         
-        let tranformer = AVMutableVideoCompositionLayerInstruction.init(assetTrack: mutableComposition.tracks(withMediaType: .video).first!)
+        let tranformer = AVMutableVideoCompositionLayerInstruction.init(assetTrack: allComposition.mutableComposition.tracks(withMediaType: .video).first!)
         var tranform1 = CGAffineTransform()
         
-        if rotateDirection == 1 && rotateType == 1 {
-            tranform1 = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -mutableComposition.naturalSize.width * ratio)
+        if (rotateDirection == 1 && rotateType == 1) || (rotateDirection == 0 && rotateType == 3) {
+            tranform1 = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -allComposition.mutableComposition.naturalSize.width * ratio)
         }
-        else if rotateDirection == 1 && rotateType == 2 {
-            tranform1 = CGAffineTransform(rotationAngle: .pi).translatedBy(x: -mutableComposition.naturalSize.width, y: -mutableComposition.naturalSize.height)
+        else if (rotateDirection == 1 && rotateType == 2) || (rotateDirection == 0 && rotateType == 2) {
+            tranform1 = CGAffineTransform(rotationAngle: .pi).translatedBy(x: -allComposition.mutableComposition.naturalSize.width, y: -allComposition.mutableComposition.naturalSize.height)
         }
-        else if rotateDirection == 1 && rotateType == 3 {
-            tranform1 = CGAffineTransform(rotationAngle: .pi * 1.5).translatedBy(x: -mutableComposition.naturalSize.height / ratio, y: 0)
+        else if (rotateDirection == 1 && rotateType == 3) || (rotateDirection == 0 && rotateType == 1) {
+            tranform1 = CGAffineTransform(rotationAngle: .pi * 1.5).translatedBy(x: -allComposition.mutableComposition.naturalSize.height / ratio, y: 0)
         }
         else {
             tranform1 = CGAffineTransform(translationX: 0, y: 0.001)
@@ -40,21 +40,22 @@ class RotateVideo: Command {
         tranformer.setTransform(tranform1, at: .zero)
         
         let layerInstruction = AVMutableVideoCompositionInstruction.init()
-        layerInstruction.timeRange = CMTimeRangeMake(start: .zero, duration: mutableComposition.duration)
+        layerInstruction.timeRange = CMTimeRangeMake(start: .zero, duration: allComposition.mutableComposition.duration)
         layerInstruction.layerInstructions = [tranformer]
         
         let videoComposition = AVMutableVideoComposition()
         videoComposition.frameDuration = CMTime(value: 1, timescale: 1000)
         videoComposition.instructions = [layerInstruction]
         
-        if rotateDirection == 1 && (rotateType == 1 || rotateType == 3) {
-            videoComposition.renderSize = CGSize(width: mutableComposition.naturalSize.height, height: mutableComposition.naturalSize.width)
+        if rotateType == 1 || rotateType == 3 {
+            videoComposition.renderSize = CGSize(width: allComposition.mutableComposition.naturalSize.height, height: allComposition.mutableComposition.naturalSize.width)
         }
         else { // rotationIndex == RotationType.upsideDown.rawValue || rotationIndex == RotationType.portrait.rawValue
-            videoComposition.renderSize = CGSize(width: mutableComposition.naturalSize.width, height: mutableComposition.naturalSize.height)
+            videoComposition.renderSize = CGSize(width: allComposition.mutableComposition.naturalSize.width, height: allComposition.mutableComposition.naturalSize.height)
         }
         
-        //thieu return videocomposition
-        return mutableComposition
+        allComposition.videoComposition = videoComposition
+        
+        return allComposition
     }
 }

@@ -29,10 +29,10 @@ class VideoEditor {
         return listCommand[currentIndex + 1]
     }
     
-    func executeTask(mutableComposition: AVMutableComposition) -> AVMutableComposition {
-        var newMutableComposition = mutableComposition
+    func executeTask(allComposition: AllComposition) -> AllComposition {
+        var newMutableComposition = allComposition
         for task in listCommand {
-            newMutableComposition = task.execute(mutableComposition: mutableComposition)
+            newMutableComposition = task.execute(allComposition: allComposition)
         }
         return newMutableComposition
     }

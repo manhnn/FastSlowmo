@@ -60,7 +60,7 @@
                     </constraints>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Klr-o7-6nq">
-                    <rect key="frame" x="0.0" y="533.33333333333337" width="428" height="27.666666666666629"/>
+                    <rect key="frame" x="0.0" y="548.33333333333337" width="428" height="27.666666666666629"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rvG-sM-ggI">
                             <rect key="frame" x="25" y="0.0" width="27.666666666666671" height="27.666666666666668"/>
@@ -239,7 +239,7 @@
                 <constraint firstItem="ofw-WN-xsL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="bAg-W5-ZAu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EwS-MS-qzk" secondAttribute="trailing" id="fgD-Ph-xqF"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="fhY-Ff-6mJ"/>
-                <constraint firstItem="Klr-o7-6nq" firstAttribute="top" secondItem="EwS-MS-qzk" secondAttribute="bottom" id="kMV-VN-KYz"/>
+                <constraint firstItem="Klr-o7-6nq" firstAttribute="top" secondItem="EwS-MS-qzk" secondAttribute="bottom" constant="15" id="kMV-VN-KYz"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ltg-Gg-xif"/>
                 <constraint firstItem="oBr-jV-cOm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="sFd-IA-Ecc"/>
                 <constraint firstItem="ofw-WN-xsL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wxK-u5-nbg"/>

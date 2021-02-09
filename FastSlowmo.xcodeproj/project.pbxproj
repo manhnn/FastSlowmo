@@ -33,6 +33,7 @@
 		25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 25C7DA7825CC587100692929 /* HelloApplicationViewController.xib */; };
 		25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBD8E325CE454100FB219F /* TimeLineCutOutView.swift */; };
 		25DBD8E825CE48E700FB219F /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DBD8E725CE48E700FB219F /* Enum.swift */; };
+		25F4F49725D2405800548A76 /* AllComposition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25F4F49625D2405800548A76 /* AllComposition.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +65,7 @@
 		25C7DA7825CC587100692929 /* HelloApplicationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HelloApplicationViewController.xib; sourceTree = "<group>"; };
 		25DBD8E325CE454100FB219F /* TimeLineCutOutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCutOutView.swift; sourceTree = "<group>"; };
 		25DBD8E725CE48E700FB219F /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		25F4F49625D2405800548A76 /* AllComposition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllComposition.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				2599AEBE25CBADFD00485CD4 /* VideoEditor.swift */,
+				25F4F49625D2405800548A76 /* AllComposition.swift */,
 			);
 			path = VideoEditor;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 			files = (
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* SpeedVideo.swift in Sources */,
+				25F4F49725D2405800548A76 /* AllComposition.swift in Sources */,
 				254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */,
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,

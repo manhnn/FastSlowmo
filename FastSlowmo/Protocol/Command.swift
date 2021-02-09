@@ -9,5 +9,5 @@ import UIKit
 import AVFoundation
 
 protocol Command {
-    func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition
+    func execute(allComposition: AllComposition) -> AllComposition
 }

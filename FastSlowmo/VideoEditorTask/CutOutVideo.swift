@@ -16,8 +16,8 @@ class CutOutVideo: Command {
         self.timeRange = timeRange
     }
     
-    func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {
-        mutableComposition.removeTimeRange(timeRange)
-        return mutableComposition
+    func execute(allComposition: AllComposition) -> AllComposition {
+        allComposition.mutableComposition.removeTimeRange(timeRange)
+        return allComposition
     }
 }

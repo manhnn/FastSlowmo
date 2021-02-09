@@ -10,7 +10,7 @@ import AVFoundation
 
 class SoundChange: Command {
     
-    func execute(mutableComposition: AVMutableComposition) -> AVMutableComposition {
-        return mutableComposition
+    func execute(allComposition: AllComposition) -> AllComposition {
+        return allComposition
     }
 }
