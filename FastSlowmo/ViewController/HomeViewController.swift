@@ -21,7 +21,7 @@ class HomeViewController: UIViewController {
     
     
     // MARK: - Property
-    @IBOutlet weak var cutViewXib: UIView!
+    var cutViewXib: CutView!
     var speedViewXib: SpeedView!
     var rotateViewXib: RotateView!
     
@@ -50,7 +50,6 @@ class HomeViewController: UIViewController {
         setupVideoBeforePlay()
         updateTimeForSeconds()
         setupAllCompositionBeforeEdit()
-        showSubCutViewXib()
     }
     
     override func viewDidLayoutSubviews() {
@@ -80,11 +79,10 @@ class HomeViewController: UIViewController {
     }
     
     func setupAllCompositionBeforeEdit() {
-        let mutableComposition1 = AVMutableComposition()
-        let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
         videoComposition = AVMutableVideoComposition()
-        headAllComposition = AllComposition(mutableComposition: mutableComposition1, videoComposition: videoComposition1)
+        videoComposition.frameDuration = CMTime(value: 1, timescale: 1000)
+        headAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
         nowAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
         
         if nowAllComposition.mutableComposition.duration.seconds == 0 {
@@ -99,19 +97,6 @@ class HomeViewController: UIViewController {
                 try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
             }
         }
-    }
-    
-    func showSubCutViewXib() {
-        let nib = UINib(nibName: "CutView", bundle: nil)
-        let view = nib.instantiate(withOwner: self, options: nil)[0] as! CutView
-        view.frame = cutViewXib.bounds
-        cutViewXib.addSubview(view)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.topAnchor.constraint(equalTo: cutViewXib.topAnchor).isActive = true
-        view.bottomAnchor.constraint(equalTo: cutViewXib.bottomAnchor).isActive = true
-        view.leadingAnchor.constraint(equalTo: cutViewXib.leadingAnchor).isActive = true
-        view.trailingAnchor.constraint(equalTo: cutViewXib.trailingAnchor).isActive = true
-        view.delegate = self
     }
     
     func getTimeString(from time: CMTime) -> String {
@@ -152,11 +137,21 @@ class HomeViewController: UIViewController {
     // MARK: - Cut Video
     @IBAction func cutVideoPressed(_ sender: Any) {
         navigationView.isHidden = true
-        cutViewXib.isHidden = false
         UIView.animate(withDuration: 0.75, animations: {
             self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
             self.view.layoutIfNeeded()
         })
+        
+        let nib = UINib(nibName: "CutView", bundle: nil)
+        cutViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? CutView
+        cutViewXib.frame = self.view.frame
+        self.view.addSubview(cutViewXib)
+        cutViewXib.translatesAutoresizingMaskIntoConstraints = false
+        cutViewXib.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        cutViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        cutViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        cutViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        cutViewXib.delegate = self
     }
    
     // MARK: - Speed Video
@@ -366,6 +361,7 @@ extension HomeViewController: SpeedViewDelegate {
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -418,13 +414,17 @@ extension HomeViewController: RotateViewDelegate {
             self.view.layoutIfNeeded()
         })
         
-//        editor.popCommand()
-//        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
-//
-//        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-//        playerItem.videoComposition = nowAllComposition.videoComposition
-//        playerItem.audioTimePitchAlgorithm = .spectral
-//        player.replaceCurrentItem(with: playerItem)
+        editor.undoCommand(countClickRotate: rotateViewXib.countClickRotate)
+        if editor.listCommand.count == 0 {
+            let cmd = RotateVideo(rotateType: 0)
+            editor.pushCommand(task: cmd)
+        }
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func rotateViewDidTapAceptedPressed(_ view: RotateView) {

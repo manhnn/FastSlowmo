@@ -10,23 +10,21 @@ import AVKit
 class VideoEditor {
     
     var listCommand = [Command]()
-    var currentIndex = 0
     
     func pushCommand(task: Command) {
         listCommand.append(task)
-        currentIndex += 1
     }
     
     func popCommand() {
         listCommand.removeLast()
     }
     
-    func undoCommand(task: Command) -> Command {
-        return listCommand[currentIndex - 1]
+    func undoCommand(countClickRotate: Int) {
+        listCommand.removeLast(countClickRotate)
     }
     
     func redoCommand(task: Command) -> Command {
-        return listCommand[currentIndex + 1]
+        return listCommand.first!
     }
     
     func executeTask(allComposition: AllComposition) -> AllComposition {

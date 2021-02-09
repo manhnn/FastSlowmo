@@ -19,13 +19,15 @@ protocol RotateViewDelegate {
 class RotateView: UIView {
 
     var delegate: RotateViewDelegate?
-    
+    var countClickRotate: Int = 0
     
     @IBAction func rotateLeft(_ sender: Any) {
+        countClickRotate += 1
         delegate?.rotateViewDidTapRotateLeft(self)
     }
     
     @IBAction func rotateRight(_ sender: Any) {
+        countClickRotate += 1
         delegate?.rotateViewDidTapRotateRight(self)
     }
     
@@ -39,9 +41,11 @@ class RotateView: UIView {
     
     @IBAction func cancelPressed(_ sender: Any) {
         delegate?.rotateViewDidTapCancelPressed(self)
+        countClickRotate = 0
     }
     
     @IBAction func aceptedPressed(_ sender: Any) {
         delegate?.rotateViewDidTapAceptedPressed(self)
+        countClickRotate = 0
     }
 }

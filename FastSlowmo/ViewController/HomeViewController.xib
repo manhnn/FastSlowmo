@@ -10,7 +10,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="FastSlowmo" customModuleProvider="target">
             <connections>
                 <outlet property="constraintBottomFunctionView" destination="9GX-yZ-ZeH" id="Ini-kr-vJr"/>
-                <outlet property="cutViewXib" destination="ofw-WN-xsL" id="ohi-UD-riB"/>
                 <outlet property="functionView" destination="GFN-5U-opR" id="etm-tf-BaI"/>
                 <outlet property="navigationView" destination="HUH-34-h6l" id="n9c-9g-IDO"/>
                 <outlet property="soundSlider" destination="oBr-jV-cOm" id="v6b-Iw-kkz"/>
@@ -87,10 +86,6 @@
                         <constraint firstAttribute="bottom" secondItem="rvG-sM-ggI" secondAttribute="bottom" id="h7y-w9-PeI"/>
                         <constraint firstItem="rvG-sM-ggI" firstAttribute="top" secondItem="Klr-o7-6nq" secondAttribute="top" id="uYl-9P-0KV"/>
                     </constraints>
-                </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ofw-WN-xsL" customClass="CutView" customModule="FastSlowmo" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="845.66666666666663" width="428" height="46.333333333333371"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GFN-5U-opR">
                     <rect key="frame" x="0.0" y="818" width="428" height="74"/>
@@ -236,15 +231,11 @@
                 <constraint firstItem="EwS-MS-qzk" firstAttribute="top" secondItem="HUH-34-h6l" secondAttribute="bottom" constant="15" id="Ydu-de-JT2"/>
                 <constraint firstItem="EwS-MS-qzk" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Zpd-Kj-Z0J"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GFN-5U-opR" secondAttribute="trailing" id="aFq-o4-3c8"/>
-                <constraint firstItem="ofw-WN-xsL" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="bAg-W5-ZAu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EwS-MS-qzk" secondAttribute="trailing" id="fgD-Ph-xqF"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="fhY-Ff-6mJ"/>
                 <constraint firstItem="Klr-o7-6nq" firstAttribute="top" secondItem="EwS-MS-qzk" secondAttribute="bottom" constant="15" id="kMV-VN-KYz"/>
                 <constraint firstItem="HUH-34-h6l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ltg-Gg-xif"/>
                 <constraint firstItem="oBr-jV-cOm" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="sFd-IA-Ecc"/>
-                <constraint firstItem="ofw-WN-xsL" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="wxK-u5-nbg"/>
-                <constraint firstItem="ofw-WN-xsL" firstAttribute="height" secondItem="i5M-Pr-FkT" secondAttribute="height" multiplier="0.05" id="xDW-e7-0wv"/>
-                <constraint firstItem="ofw-WN-xsL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="yGO-ik-kpv"/>
             </constraints>
             <point key="canvasLocation" x="137.38317757009344" y="103.67170626349893"/>
         </view>
