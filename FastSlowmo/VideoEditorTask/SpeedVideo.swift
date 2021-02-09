@@ -19,9 +19,10 @@ class SpeedVideo: Command {
     }
     
     func execute(allComposition: AllComposition) -> AllComposition {
-        allComposition.mutableComposition.tracks.forEach { track in
+        let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
+        newAllComposition.mutableComposition.tracks.forEach { track in
             track.scaleTimeRange(timeRange, toDuration: CMTime(value: CMTimeValue(timeRange.duration.seconds / rate), timescale: 1))
         }
-        return allComposition
+        return newAllComposition
     }
 }

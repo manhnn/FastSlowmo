@@ -17,12 +17,14 @@ class TrimVideo: Command {
     
     func execute(allComposition: AllComposition) -> AllComposition {
         
-        let newMutableComposition = AVMutableComposition()
+        let newMutableComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
+        newMutableComposition.mutableComposition = AVMutableComposition()
+        
         allComposition.mutableComposition.tracks.forEach { track in
-            let trackComposition = newMutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+            let trackComposition = newMutableComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
             try? trackComposition?.insertTimeRange(timeRange, of: track, at: .zero)
         }
-        allComposition.mutableComposition = newMutableComposition
-        return allComposition
+        
+        return newMutableComposition
     }
 }

@@ -17,7 +17,7 @@ class VideoEditor {
         currentIndex += 1
     }
     
-    func popCommand(task: Command) {
+    func popCommand() {
         listCommand.removeLast()
     }
     
@@ -30,10 +30,10 @@ class VideoEditor {
     }
     
     func executeTask(allComposition: AllComposition) -> AllComposition {
-        var newMutableComposition = allComposition
+        var newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
         for task in listCommand {
-            newMutableComposition = task.execute(allComposition: allComposition)
+            newAllComposition = task.execute(allComposition: newAllComposition)
         }
-        return newMutableComposition
+        return newAllComposition
     }
 }

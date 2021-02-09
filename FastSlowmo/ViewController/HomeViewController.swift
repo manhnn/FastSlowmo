@@ -34,11 +34,14 @@ class HomeViewController: UIViewController {
     var playerLayer: AVPlayerLayer!
     var mutableComposition: AVMutableComposition!
     var videoComposition: AVMutableVideoComposition!
-    var allComposition: AllComposition!
+    var headAllComposition: AllComposition!
+    var nowAllComposition: AllComposition!
     
     var isPlayingVideo = false
     var isSelectTypeOfCutVideo = CutType.empty.rawValue
     var rotationDirectionIndex: Int = 0
+    
+    let editor = VideoEditor()
     
     // MARK: - Methods
     override func viewDidLoad() {
@@ -77,13 +80,22 @@ class HomeViewController: UIViewController {
     }
     
     func setupAllCompositionBeforeEdit() {
+        let mutableComposition1 = AVMutableComposition()
+        let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
         videoComposition = AVMutableVideoComposition()
-        allComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
+        headAllComposition = AllComposition(mutableComposition: mutableComposition1, videoComposition: videoComposition1)
+        nowAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
         
-        if allComposition.mutableComposition.duration.seconds == 0 {
+        if nowAllComposition.mutableComposition.duration.seconds == 0 {
             originAssetVideo.tracks.forEach { track in
-                let trackComposition = self.allComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+                let trackComposition = self.nowAllComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+                try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
+            }
+        }
+        if headAllComposition.mutableComposition.duration.seconds == 0 {
+            originAssetVideo.tracks.forEach { track in
+                let trackComposition = self.headAllComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
                 try? trackComposition?.insertTimeRange(CMTimeRange(start: .zero, duration: originAssetVideo.duration), of: track, at: .zero)
             }
         }
@@ -167,7 +179,7 @@ class HomeViewController: UIViewController {
         speedViewXib.delegate = self
         
         // Add Timeline CutOut View Because it same to Speed Change
-        speedTimeLineView = TimeLineSpeedView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: allComposition.mutableComposition))
+        speedTimeLineView = TimeLineSpeedView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: nowAllComposition.mutableComposition))
         speedTimeLineView.backgroundColor = .clear
         speedTimeLineView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(speedTimeLineView)
@@ -260,9 +272,8 @@ extension HomeViewController: CutVideoDelegate {
             let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
             
             let cmd = TrimVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
-            let editor = VideoEditor()
             editor.pushCommand(task: cmd)
-            allComposition = editor.executeTask(allComposition: allComposition)
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         }
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
             let startTime = CGFloat(cutoutTimeLineView.leftStartTime)
@@ -270,12 +281,11 @@ extension HomeViewController: CutVideoDelegate {
             let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
             
             let cmd = CutOutVideo(timeRange: CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000)))
-            let editor = VideoEditor()
             editor.pushCommand(task: cmd)
-            allComposition = editor.executeTask(allComposition: allComposition)
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         }
         
-        playerItem = AVPlayerItem(asset: allComposition.mutableComposition)
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
         
@@ -292,7 +302,7 @@ extension HomeViewController: CutVideoDelegate {
         isSelectTypeOfCutVideo = CutType.trimVideo.rawValue
         
         // Add Thumbnail Trim View
-        trimTimeLineView = TimeLineTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: allComposition.mutableComposition))
+        trimTimeLineView = TimeLineTrimView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: nowAllComposition.mutableComposition))
         trimTimeLineView.backgroundColor = .clear
         trimTimeLineView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(trimTimeLineView)
@@ -313,7 +323,7 @@ extension HomeViewController: CutVideoDelegate {
         isSelectTypeOfCutVideo = CutType.cutoutVideo.rawValue
         
         // Add Thumbnail CutOut View
-        cutoutTimeLineView = TimeLineCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: allComposition.mutableComposition))
+        cutoutTimeLineView = TimeLineCutOutView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: nowAllComposition.mutableComposition))
         cutoutTimeLineView.backgroundColor = .clear
         cutoutTimeLineView.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(cutoutTimeLineView)
@@ -352,11 +362,10 @@ extension HomeViewController: SpeedViewDelegate {
         let timeRange = CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000))
         
         let cmd = SpeedVideo(rate: rate, timeRange: timeRange)
-        let editor = VideoEditor()
         editor.pushCommand(task: cmd)
-        allComposition = editor.executeTask(allComposition: allComposition)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
-        playerItem = AVPlayerItem(asset: allComposition.mutableComposition)
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -373,11 +382,10 @@ extension HomeViewController: RotateViewDelegate {
         rotationDirectionIndex = (rotationDirectionIndex - 1 <= -4) ? 0 : rotationDirectionIndex - 1
         
         let cmd = RotateVideo(rotateType: rotationDirectionIndex)
-        let editor = VideoEditor()
         editor.pushCommand(task: cmd)
-        allComposition = editor.executeTask(allComposition: allComposition)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
-        playerItem.videoComposition = allComposition.videoComposition
+        playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -386,11 +394,10 @@ extension HomeViewController: RotateViewDelegate {
         rotationDirectionIndex = (rotationDirectionIndex + 1) % 4
         
         let cmd = RotateVideo(rotateType: rotationDirectionIndex)
-        let editor = VideoEditor()
         editor.pushCommand(task: cmd)
-        allComposition = editor.executeTask(allComposition: allComposition)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
-        playerItem.videoComposition = allComposition.videoComposition
+        playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -410,10 +417,14 @@ extension HomeViewController: RotateViewDelegate {
             self.constraintBottomFunctionView.constant = 0
             self.view.layoutIfNeeded()
         })
-//        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
-//        let editor = VideoEditor()
-//        editor.popCommand(task: cmd)
-//        allComposition = editor.executeTask(allComposition: allComposition)
+        
+//        editor.popCommand()
+//        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+//
+//        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+//        playerItem.videoComposition = nowAllComposition.videoComposition
+//        playerItem.audioTimePitchAlgorithm = .spectral
+//        player.replaceCurrentItem(with: playerItem)
     }
     
     func rotateViewDidTapAceptedPressed(_ view: RotateView) {
