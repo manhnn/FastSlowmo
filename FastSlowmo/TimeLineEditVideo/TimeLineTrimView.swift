@@ -35,7 +35,7 @@ class TimeLineTrimView: UIView {
     
     func setupImagesTimeLine() {
         var tempX: CGFloat = 0
-        for image in images {
+        images.forEach { image in
             let imageView = UIImageView.init(frame: CGRect(x: tempX, y: 0, width: self.frame.width / CGFloat(images.count), height: self.frame.height))
             imageView.image = image
             self.addSubview(imageView)
@@ -48,9 +48,9 @@ class TimeLineTrimView: UIView {
         timeLineCutVideoLeft.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoLeft)
         
-        leftConstraint = timeLineCutVideoLeft.rightAnchor.constraint(equalTo: self.leftAnchor)
+        leftConstraint = timeLineCutVideoLeft.rightAnchor.constraint(equalTo: self.leftAnchor, constant: 100)
         timeLineCutVideoLeft.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        self.bottomAnchor.constraint(equalTo: timeLineCutVideoLeft.bottomAnchor).isActive = true
+        timeLineCutVideoLeft.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         timeLineCutVideoLeft.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
 
         leftConstraint?.isActive = true
@@ -59,12 +59,12 @@ class TimeLineTrimView: UIView {
         leftControllView.backgroundColor = UIColor(patternImage: UIImage(named: "control")!)
         leftControllView.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(leftControllView)
-        
+
         leftControllView.leftAnchor.constraint(equalTo: timeLineCutVideoLeft.rightAnchor).isActive = true
         leftControllView.heightAnchor.constraint(equalToConstant: self.frame.height).isActive = true
         leftControllView.widthAnchor.constraint(equalToConstant: 9).isActive = true
         leftControllView.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        
+
         let leftPan = UIPanGestureRecognizer(target: self, action: #selector(self.leftPanGesture(_: )))
         leftControllView.addGestureRecognizer(leftPan)
 
@@ -73,9 +73,9 @@ class TimeLineTrimView: UIView {
         leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
         leftLabel.textColor = .white
         leftLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+
         leftControllView.addSubview(leftLabel)
-        
+
         leftLabel.topAnchor.constraint(equalTo: leftControllView.bottomAnchor, constant: 10).isActive = true
     }
     
@@ -84,7 +84,7 @@ class TimeLineTrimView: UIView {
         timeLineCutVideoRight.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoRight)
         
-        rightConstraint = self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.leftAnchor)
+        rightConstraint = self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.leftAnchor, constant: 100)
         self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.rightAnchor).isActive = true
         self.bottomAnchor.constraint(equalTo: timeLineCutVideoRight.bottomAnchor).isActive = true
         timeLineCutVideoRight.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -119,11 +119,12 @@ class TimeLineTrimView: UIView {
         let panGesture = sender as! UIPanGestureRecognizer
         let point = panGesture.location(in: self)
         let distance = point.x
-        
+        print(distance)
         if distance < 0 {
             leftConstraint?.constant = 0
         }
         else {
+            //leftConstraint?.constant = distance
             leftConstraint?.constant = (distance >= 0 && distance + rightConstraint!.constant + 2 * rightControllView.frame.width <= self.frame.width) ? distance : self.frame.width - rightConstraint!.constant - (leftControllView.frame.width + rightControllView.frame.width)
         }
         

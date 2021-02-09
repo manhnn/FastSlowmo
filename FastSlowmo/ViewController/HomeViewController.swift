@@ -79,10 +79,11 @@ class HomeViewController: UIViewController {
     }
     
     func setupAllCompositionBeforeEdit() {
+        let mutableComposition1 = AVMutableComposition()
+        let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
         videoComposition = AVMutableVideoComposition()
-        videoComposition.frameDuration = CMTime(value: 1, timescale: 1000)
-        headAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
+        headAllComposition = AllComposition(mutableComposition: mutableComposition1, videoComposition: videoComposition1)
         nowAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
         
         if nowAllComposition.mutableComposition.duration.seconds == 0 {
@@ -113,8 +114,8 @@ class HomeViewController: UIViewController {
     func getThumbnailFromComposition(mutableComposition: AVMutableComposition) -> Array<UIImage> {
         var images: Array<UIImage> = []
         let generator = AVAssetImageGenerator(asset: mutableComposition)
-        for index in 0 ..< Int(mutableComposition.duration.seconds / 30) {
-            let cgimage = try? generator.copyCGImage(at: CMTime(seconds: Double(index * 30), preferredTimescale: 600), actualTime: nil)
+        for index in 0 ..< Int(mutableComposition.duration.seconds / 15) {
+            let cgimage = try? generator.copyCGImage(at: CMTime(seconds: Double(index * 15), preferredTimescale: 1000), actualTime: nil)
             images.append(UIImage(cgImage: cgimage!))
         }
         return images
@@ -361,7 +362,9 @@ extension HomeViewController: SpeedViewDelegate {
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        playerItem.videoComposition = nowAllComposition.videoComposition
+        if editor.listCommand.count > 1 {
+            playerItem.videoComposition = nowAllComposition.videoComposition
+        }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
