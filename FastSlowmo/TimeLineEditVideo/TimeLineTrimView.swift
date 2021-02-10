@@ -34,12 +34,12 @@ class TimeLineTrimView: UIView {
     }
     
     func setupImagesTimeLine() {
-        var tempX: CGFloat = 0
+        var tempX: CGFloat = 14
         images.forEach { image in
-            let imageView = UIImageView.init(frame: CGRect(x: tempX, y: 0, width: self.frame.width / CGFloat(images.count), height: self.frame.height))
+            let imageView = UIImageView.init(frame: CGRect(x: tempX, y: 0, width: (self.frame.width + 18) / CGFloat(images.count), height: self.frame.height))
             imageView.image = image
             self.addSubview(imageView)
-            tempX += self.frame.width / CGFloat(images.count)
+            tempX += (self.frame.width + 18) / CGFloat(images.count)
         }
     }
     

@@ -35,13 +35,13 @@ class TimeLineSpeedView: UIView {
     }
     
     func setupImagesTimeLine() {
-        var tempX: CGFloat = 0
-        for image in images {
-            let imageView = UIImageView.init(frame: CGRect(x: tempX, y: 0, width: self.frame.width / CGFloat(images.count), height: self.frame.height))
+        var tempX: CGFloat = 14
+        images.forEach { image in
+            let imageView = UIImageView.init(frame: CGRect(x: tempX, y: 0, width: (self.frame.width + 18) / CGFloat(images.count), height: self.frame.height))
             imageView.image = image
             imageView.alpha = 0.35
             self.addSubview(imageView)
-            tempX += self.frame.width / CGFloat(images.count)
+            tempX += (self.frame.width + 18) / CGFloat(images.count)
         }
     }
     

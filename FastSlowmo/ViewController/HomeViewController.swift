@@ -191,6 +191,7 @@ class HomeViewController: UIViewController {
     // MARK: - Sound Video
     @IBAction func soundVideoPressed(_ sender: Any) {
         soundSlider.isHidden = !soundSlider.isHidden
+        navigationView.isHidden = !navigationView.isHidden
     }
     
     @IBAction func soundSliderChangeValue(_ sender: UISlider) {
@@ -444,7 +445,13 @@ extension HomeViewController: EffectViewDelegate {
     }
     
     func effectViewDidTapHue1(_ view: EffectView) {
-        print("ori1")
+        let cmd = EffectVideo(originAssetVideo: originAssetVideo)
+        editor.pushCommand(task: cmd)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func effectViewDidTapHue2(_ view: EffectView) {
