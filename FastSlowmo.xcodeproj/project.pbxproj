@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2526401125D3B60A0066D442 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401025D3B60A0066D442 /* EffectView.swift */; };
+		2526401425D3B61E0066D442 /* EffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2526401325D3B61E0066D442 /* EffectView.xib */; };
+		2526401725D3CE300066D442 /* EffectVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectVideo.swift */; };
 		252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252AFDC525CFFC4B000F452F /* SpeedView.xib */; };
 		252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDCD25CFFC96000F452F /* SpeedView.swift */; };
 		252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */; };
@@ -37,6 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2526401025D3B60A0066D442 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
+		2526401325D3B61E0066D442 /* EffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EffectView.xib; sourceTree = "<group>"; };
+		2526401625D3CE300066D442 /* EffectVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectVideo.swift; sourceTree = "<group>"; };
 		252AFDC525CFFC4B000F452F /* SpeedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeedView.xib; sourceTree = "<group>"; };
 		252AFDCD25CFFC96000F452F /* SpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedView.swift; sourceTree = "<group>"; };
 		252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineSpeedView.swift; sourceTree = "<group>"; };
@@ -88,6 +94,8 @@
 				252AFDC525CFFC4B000F452F /* SpeedView.xib */,
 				254507A325D173D000DEB796 /* RotateView.swift */,
 				254507A625D173DE00DEB796 /* RotateView.xib */,
+				2526401025D3B60A0066D442 /* EffectView.swift */,
+				2526401325D3B61E0066D442 /* EffectView.xib */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -157,6 +165,7 @@
 				25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */,
 				2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */,
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
+				2526401625D3CE300066D442 /* EffectVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -256,6 +265,7 @@
 				2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */,
 				2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */,
 				256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */,
+				2526401425D3B61E0066D442 /* EffectView.xib in Resources */,
 				2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */,
 				252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */,
 				25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */,
@@ -276,6 +286,7 @@
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,
+				2526401125D3B60A0066D442 /* EffectView.swift in Sources */,
 				25DBD8E825CE48E700FB219F /* Enum.swift in Sources */,
 				2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */,
 				2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */,
@@ -288,6 +299,7 @@
 				25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */,
 				2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */,
 				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
+				2526401725D3CE300066D442 /* EffectVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

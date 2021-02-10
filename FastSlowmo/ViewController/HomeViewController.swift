@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     var cutViewXib: CutView!
     var speedViewXib: SpeedView!
     var rotateViewXib: RotateView!
+    var effectViewXib: EffectView!
     
     var trimTimeLineView: TimeLineTrimView!
     var cutoutTimeLineView: TimeLineCutOutView!
@@ -121,6 +122,13 @@ class HomeViewController: UIViewController {
         return images
     }
     
+    func updateConstraintOfFunctionViewUpDown(constant: CGFloat) {
+        UIView.animate(withDuration: 0.75, animations: {
+            self.constraintBottomFunctionView.constant = constant
+            self.view.layoutIfNeeded()
+        })
+    }
+    
     // MARK: - Video Player Controller
     @IBAction func playVideoPressed(_ sender: UIButton) {
         isPlayingVideo = !isPlayingVideo
@@ -138,10 +146,7 @@ class HomeViewController: UIViewController {
     // MARK: - Cut Video
     @IBAction func cutVideoPressed(_ sender: Any) {
         navigationView.isHidden = true
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
         let nib = UINib(nibName: "CutView", bundle: nil)
         cutViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? CutView
@@ -158,10 +163,7 @@ class HomeViewController: UIViewController {
     // MARK: - Speed Video
     @IBAction func speedVideoPressed(_ sender: Any) {
         navigationView.isHidden = true
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
         let nib = UINib(nibName: "SpeedView", bundle: nil)
         speedViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? SpeedView
@@ -202,16 +204,25 @@ class HomeViewController: UIViewController {
     
     // MARK: - EffectVideo
     @IBAction func effectVideoPressed(_ sender: Any) {
+        navigationView.isHidden = true
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
+        let nib = UINib(nibName: "EffectView", bundle: nil)
+        effectViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? EffectView
+        effectViewXib.frame = self.view.frame
+        self.view.addSubview(effectViewXib)
+        effectViewXib.translatesAutoresizingMaskIntoConstraints = false
+        effectViewXib.heightAnchor.constraint(equalToConstant: 250).isActive = true
+        effectViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        effectViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        effectViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        effectViewXib.delegate = self
     }
     
     // MARK: - Rotate Video
     @IBAction func rotateVideo(_ sender: Any) {
         navigationView.isHidden = true
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = self.functionView.frame.height * 2
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
         let nib = UINib(nibName: "RotateView", bundle: nil)
         rotateViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? RotateView
@@ -242,10 +253,7 @@ extension HomeViewController: CutVideoDelegate {
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
             cutoutTimeLineView.isHidden = true
         }
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: 0)
     }
     
     func cutVideoDidAceptedPressed(_ view: CutView) {
@@ -257,10 +265,7 @@ extension HomeViewController: CutVideoDelegate {
         else if isSelectTypeOfCutVideo == CutType.cutoutVideo.rawValue {
             cutoutTimeLineView.isHidden = true
         }
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: 0)
         
         if isSelectTypeOfCutVideo == CutType.trimVideo.rawValue {
             let startTime = CGFloat(trimTimeLineView.leftStartTime)
@@ -282,6 +287,9 @@ extension HomeViewController: CutVideoDelegate {
         }
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        if editor.listCommand.count > 1 { // dieu kien chua dung lam phai co it nhat 1 thang type Rotate trong do
+            playerItem.videoComposition = nowAllComposition.videoComposition
+        }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
         
@@ -337,20 +345,14 @@ extension HomeViewController: SpeedViewDelegate {
         speedViewXib.isHidden = true
         navigationView.isHidden = false
         speedTimeLineView.isHidden = true
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: 0)
     }
     
     func speedViewDidTapAddButton(_ view: SpeedView, rate: Double) {
         speedViewXib.isHidden = true
         navigationView.isHidden = false
         speedTimeLineView.isHidden = true
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: 0)
         
         let startTime = CGFloat(speedTimeLineView.leftStartTime)
         let endTime = CGFloat(speedTimeLineView.rightEndTime)
@@ -362,7 +364,7 @@ extension HomeViewController: SpeedViewDelegate {
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        if editor.listCommand.count > 1 {
+        if editor.listCommand.count > 1 { // dieu kien chua dung lam phai co it nhat 1 thang type Rotate trong do
             playerItem.videoComposition = nowAllComposition.videoComposition
         }
         playerItem.audioTimePitchAlgorithm = .spectral
@@ -402,20 +404,18 @@ extension HomeViewController: RotateViewDelegate {
     }
     
     func rotateViewDidTapFlipHorizontally(_ view: RotateView) {
-        print("hori")
+        print("horizontally")
     }
     
     func rotateViewDidTapFlipVertically(_ view: RotateView) {
-        print("verti")
+        print("vertically")
     }
     
     func rotateViewDidTapCancelPressed(_ view: RotateView) {
         rotateViewXib.isHidden = true
         navigationView.isHidden = false
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        rotationDirectionIndex = 0
+        updateConstraintOfFunctionViewUpDown(constant: 0)
         
         editor.undoCommand(countClickRotate: rotateViewXib.countClickRotate)
         if editor.listCommand.count == 0 {
@@ -424,7 +424,7 @@ extension HomeViewController: RotateViewDelegate {
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
 
-        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        //playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
@@ -433,9 +433,43 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapAceptedPressed(_ view: RotateView) {
         rotateViewXib.isHidden = true
         navigationView.isHidden = false
-        UIView.animate(withDuration: 0.75, animations: {
-            self.constraintBottomFunctionView.constant = 0
-            self.view.layoutIfNeeded()
-        })
+        updateConstraintOfFunctionViewUpDown(constant: 0)
+    }
+}
+
+// MARK: - Extension EffectViewDelegate
+extension HomeViewController: EffectViewDelegate {
+    func effectViewDidTapOriginal(_ view: EffectView) {
+        print("ori")
+    }
+    
+    func effectViewDidTapHue1(_ view: EffectView) {
+        print("ori1")
+    }
+    
+    func effectViewDidTapHue2(_ view: EffectView) {
+        print("ori2")
+    }
+    
+    func effectViewDidTapHue3(_ view: EffectView) {
+        print("ori3")
+    }
+    
+    func effectViewDidTapHue4(_ view: EffectView) {
+        print("ori4")
+    }
+    
+    func effectViewDidTapCancel(_ view: EffectView) {
+        effectViewXib.isHidden = true
+        navigationView.isHidden = false
+        updateConstraintOfFunctionViewUpDown(constant: 0)
+        
+        // pop command
+    }
+    
+    func effectViewDidTapAccepted(_ view: EffectView) {
+        effectViewXib.isHidden = true
+        navigationView.isHidden = false
+        updateConstraintOfFunctionViewUpDown(constant: 0)
     }
 }
