@@ -418,14 +418,13 @@ extension HomeViewController: RotateViewDelegate {
         rotationDirectionIndex = 0
         updateConstraintOfFunctionViewUpDown(constant: 0)
         
-        editor.undoCommand(countClickRotate: rotateViewXib.countClickRotate)
+        editor.undoCommand(countClick: rotateViewXib.countClickRotate)
         if editor.listCommand.count == 0 {
             let cmd = RotateVideo(rotateType: 0)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
 
-        //playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
@@ -440,12 +439,8 @@ extension HomeViewController: RotateViewDelegate {
 
 // MARK: - Extension EffectViewDelegate
 extension HomeViewController: EffectViewDelegate {
-    func effectViewDidTapOriginal(_ view: EffectView) {
-        print("ori")
-    }
-    
-    func effectViewDidTapHue1(_ view: EffectView) {
-        let cmd = EffectVideo(originAssetVideo: originAssetVideo)
+    fileprivate func setFilterByHue(hue: Int) {
+        let cmd = EffectVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hue: hue)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -454,24 +449,31 @@ extension HomeViewController: EffectViewDelegate {
         player.replaceCurrentItem(with: playerItem)
     }
     
+    func effectViewDidTapOriginal(_ view: EffectView) {
+        print("back")
+    }
+    
+    func effectViewDidTapHue1(_ view: EffectView) {
+        setFilterByHue(hue: 1)
+    }
+    
     func effectViewDidTapHue2(_ view: EffectView) {
-        print("ori2")
+        setFilterByHue(hue: 2)
     }
     
     func effectViewDidTapHue3(_ view: EffectView) {
-        print("ori3")
+        setFilterByHue(hue: 3)
     }
     
     func effectViewDidTapHue4(_ view: EffectView) {
-        print("ori4")
+        setFilterByHue(hue: 4)
     }
     
     func effectViewDidTapCancel(_ view: EffectView) {
         effectViewXib.isHidden = true
         navigationView.isHidden = false
         updateConstraintOfFunctionViewUpDown(constant: 0)
-        
-        // pop command
+        print("back")
     }
     
     func effectViewDidTapAccepted(_ view: EffectView) {

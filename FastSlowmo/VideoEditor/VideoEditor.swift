@@ -19,8 +19,8 @@ class VideoEditor {
         listCommand.removeLast()
     }
     
-    func undoCommand(countClickRotate: Int) {
-        listCommand.removeLast(countClickRotate)
+    func undoCommand(countClick: Int) {
+        listCommand.removeLast(countClick)
     }
     
     func redoCommand(task: Command) -> Command {

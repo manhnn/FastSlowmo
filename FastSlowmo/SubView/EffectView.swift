@@ -26,6 +26,7 @@ class EffectView: UIView {
     @IBOutlet weak var hue4: UILabel!
     
     var delegate: EffectViewDelegate?
+    var countClickEffect: Int = 0
     
     func changeColorImage() {
         original.backgroundColor = .clear
@@ -38,38 +39,45 @@ class EffectView: UIView {
     @IBAction func originalPressed(_ sender: UIButton) {
         changeColorImage()
         original.backgroundColor = .systemPink
+        countClickEffect += 1
         delegate?.effectViewDidTapOriginal(self)
     }
     
     @IBAction func hue1Pressed(_ sender: UIButton) {
         changeColorImage()
         hue1.backgroundColor = .systemPink
+        countClickEffect += 1
         delegate?.effectViewDidTapHue1(self)
     }
     
     @IBAction func hue2Pressed(_ sender: UIButton) {
         changeColorImage()
         hue2.backgroundColor = .systemPink
+        countClickEffect += 1
         delegate?.effectViewDidTapHue2(self)
     }
     
     @IBAction func hue3Pressed(_ sender: UIButton) {
         changeColorImage()
         hue3.backgroundColor = .systemPink
+        countClickEffect += 1
         delegate?.effectViewDidTapHue3(self)
     }
     
     @IBAction func hue4Pressed(_ sender: UIButton) {
         changeColorImage()
         hue4.backgroundColor = .systemPink
+        countClickEffect += 1
         delegate?.effectViewDidTapHue4(self)
     }
     
     @IBAction func cancelPressed(_ sender: UIButton) {
         delegate?.effectViewDidTapCancel(self)
+        countClickEffect = 0
     }
     
     @IBAction func acceptedPressed(_ sender: UIButton) {
         delegate?.effectViewDidTapAccepted(self)
+        countClickEffect = 0
     }
 }

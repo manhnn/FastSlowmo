@@ -48,7 +48,7 @@ class TimeLineTrimView: UIView {
         timeLineCutVideoLeft.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoLeft)
         
-        leftConstraint = timeLineCutVideoLeft.rightAnchor.constraint(equalTo: self.leftAnchor, constant: 100)
+        leftConstraint = timeLineCutVideoLeft.rightAnchor.constraint(equalTo: self.leftAnchor, constant: 1)
         timeLineCutVideoLeft.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
         timeLineCutVideoLeft.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
         timeLineCutVideoLeft.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
@@ -84,7 +84,7 @@ class TimeLineTrimView: UIView {
         timeLineCutVideoRight.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(timeLineCutVideoRight)
         
-        rightConstraint = self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.leftAnchor, constant: 100)
+        rightConstraint = self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.leftAnchor, constant: 1)
         self.rightAnchor.constraint(equalTo: timeLineCutVideoRight.rightAnchor).isActive = true
         self.bottomAnchor.constraint(equalTo: timeLineCutVideoRight.bottomAnchor).isActive = true
         timeLineCutVideoRight.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
