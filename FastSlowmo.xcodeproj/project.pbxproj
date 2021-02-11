@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		2526401125D3B60A0066D442 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401025D3B60A0066D442 /* EffectView.swift */; };
 		2526401425D3B61E0066D442 /* EffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2526401325D3B61E0066D442 /* EffectView.xib */; };
-		2526401725D3CE300066D442 /* EffectVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectVideo.swift */; };
+		2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */; };
 		252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252AFDC525CFFC4B000F452F /* SpeedView.xib */; };
 		252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDCD25CFFC96000F452F /* SpeedView.swift */; };
 		252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */; };
@@ -42,7 +42,7 @@
 /* Begin PBXFileReference section */
 		2526401025D3B60A0066D442 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
 		2526401325D3B61E0066D442 /* EffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EffectView.xib; sourceTree = "<group>"; };
-		2526401625D3CE300066D442 /* EffectVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectVideo.swift; sourceTree = "<group>"; };
+		2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectAndRotateVideo.swift; sourceTree = "<group>"; };
 		252AFDC525CFFC4B000F452F /* SpeedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeedView.xib; sourceTree = "<group>"; };
 		252AFDCD25CFFC96000F452F /* SpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedView.swift; sourceTree = "<group>"; };
 		252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineSpeedView.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */,
 				2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */,
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
-				2526401625D3CE300066D442 /* EffectVideo.swift */,
+				2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 				25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */,
 				2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */,
 				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
-				2526401725D3CE300066D442 /* EffectVideo.swift in Sources */,
+				2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

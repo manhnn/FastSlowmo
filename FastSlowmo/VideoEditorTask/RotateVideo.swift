@@ -11,8 +11,9 @@ import AVFoundation
 class RotateVideo: Command {
     
     var rotateType: Int!
+    var hueValue: Int!
     
-    init(rotateType: Int) {
+    init(rotateType: Int, hueValue: Int) {
         self.rotateType = rotateType
     }
     

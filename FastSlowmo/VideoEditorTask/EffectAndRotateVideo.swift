@@ -8,16 +8,16 @@
 import UIKit
 import AVFoundation
 
-class EffectVideo: Command {
+class EffectAndRotateVideo: Command {
     
     var originAssetVideo: AVAsset!
     var rotateType: Int!
-    var hue: Int!
+    var hueType: Int!
     
-    init(originAssetVideo: AVAsset, rotateType: Int, hue: Int) {
+    init(originAssetVideo: AVAsset, rotateType: Int, hueType: Int) {
         self.originAssetVideo = originAssetVideo
         self.rotateType = rotateType
-        self.hue = hue
+        self.hueType = hueType
     }
     
     func setCGAffineTransform(_ width: CGFloat, _ height: CGFloat) -> CGAffineTransform {
@@ -41,7 +41,17 @@ class EffectVideo: Command {
     }
     
     func setFilterComposition(_ width: CGFloat, _ height: CGFloat) -> AVMutableVideoComposition {
-        if hue == 1 {
+        if hueType == 0 {
+            let videoComposition = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { request in
+                        
+                let source = request.sourceImage
+                
+                let output = source.transformed(by: self.setCGAffineTransform(width, height))
+                request.finish(with: output, context: nil)
+            })
+            return videoComposition
+        }
+        else if hueType == 1 {
             let filter = CIFilter(name: "CIPhotoEffectMono") // mau den trang
             let videoComposition = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { [self] request in
                 
@@ -53,7 +63,7 @@ class EffectVideo: Command {
             })
             return videoComposition
         }
-        else if hue == 2 {
+        else if hueType == 2 {
             let filter = CIFilter(name: "CIColorControls") // do sang
             let videoComposition = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { request in
                 
@@ -74,7 +84,7 @@ class EffectVideo: Command {
             })
             return videoComposition
         }
-        else if hue == 3 {
+        else if hueType == 3 {
             let filter = CIFilter(name: "CIGaussianBlur")! // blur
             let videoComposion = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { request in
                 
@@ -113,7 +123,7 @@ class EffectVideo: Command {
         if rotateType == 1 || rotateType == 3  || rotateType == -1 || rotateType == -3 {
             videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.height, height: newAllComposition.mutableComposition.naturalSize.width)
         }
-        else { // rotateType == 2 || rotateType == 4
+        else { // 0 2 4
             videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.width, height: newAllComposition.mutableComposition.naturalSize.height)
         }
     }

@@ -383,7 +383,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateLeft(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex - 1 <= -4) ? 0 : rotationDirectionIndex - 1
         
-        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -395,7 +395,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateRight(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex + 1) % 4
         
-        let cmd = RotateVideo(rotateType: rotationDirectionIndex)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -417,10 +417,10 @@ extension HomeViewController: RotateViewDelegate {
         navigationView.isHidden = false
         rotationDirectionIndex = 0
         updateConstraintOfFunctionViewUpDown(constant: 0)
-        
+
         editor.undoCommand(countClick: rotateViewXib.countClickRotate)
         if editor.listCommand.count == 0 {
-            let cmd = RotateVideo(rotateType: 0)
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
@@ -439,8 +439,8 @@ extension HomeViewController: RotateViewDelegate {
 
 // MARK: - Extension EffectViewDelegate
 extension HomeViewController: EffectViewDelegate {
-    fileprivate func setFilterByHue(hue: Int) {
-        let cmd = EffectVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hue: hue)
+    fileprivate func setFilterByHue(hueType: Int) {
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: hueType)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -450,30 +450,40 @@ extension HomeViewController: EffectViewDelegate {
     }
     
     func effectViewDidTapOriginal(_ view: EffectView) {
-        print("back")
+        setFilterByHue(hueType: effectViewXib.hueType)
     }
     
     func effectViewDidTapHue1(_ view: EffectView) {
-        setFilterByHue(hue: 1)
+        setFilterByHue(hueType: effectViewXib.hueType)
     }
     
     func effectViewDidTapHue2(_ view: EffectView) {
-        setFilterByHue(hue: 2)
+        setFilterByHue(hueType: effectViewXib.hueType)
     }
     
     func effectViewDidTapHue3(_ view: EffectView) {
-        setFilterByHue(hue: 3)
+        setFilterByHue(hueType: effectViewXib.hueType)
     }
     
     func effectViewDidTapHue4(_ view: EffectView) {
-        setFilterByHue(hue: 4)
+        setFilterByHue(hueType: effectViewXib.hueType)
     }
     
     func effectViewDidTapCancel(_ view: EffectView) {
         effectViewXib.isHidden = true
         navigationView.isHidden = false
         updateConstraintOfFunctionViewUpDown(constant: 0)
-        print("back")
+        
+        editor.undoCommand(countClick: effectViewXib.countClickEffect)
+        if editor.listCommand.count == 0 {
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0)
+            editor.pushCommand(task: cmd)
+        }
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func effectViewDidTapAccepted(_ view: EffectView) {

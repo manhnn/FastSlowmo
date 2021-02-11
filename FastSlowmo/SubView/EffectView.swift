@@ -27,6 +27,7 @@ class EffectView: UIView {
     
     var delegate: EffectViewDelegate?
     var countClickEffect: Int = 0
+    var hueType: Int = 0
     
     func changeColorImage() {
         original.backgroundColor = .clear
@@ -40,6 +41,7 @@ class EffectView: UIView {
         changeColorImage()
         original.backgroundColor = .systemPink
         countClickEffect += 1
+        hueType = 0
         delegate?.effectViewDidTapOriginal(self)
     }
     
@@ -47,6 +49,7 @@ class EffectView: UIView {
         changeColorImage()
         hue1.backgroundColor = .systemPink
         countClickEffect += 1
+        hueType = 1
         delegate?.effectViewDidTapHue1(self)
     }
     
@@ -54,6 +57,7 @@ class EffectView: UIView {
         changeColorImage()
         hue2.backgroundColor = .systemPink
         countClickEffect += 1
+        hueType = 2
         delegate?.effectViewDidTapHue2(self)
     }
     
@@ -61,6 +65,7 @@ class EffectView: UIView {
         changeColorImage()
         hue3.backgroundColor = .systemPink
         countClickEffect += 1
+        hueType = 3
         delegate?.effectViewDidTapHue3(self)
     }
     
@@ -68,6 +73,7 @@ class EffectView: UIView {
         changeColorImage()
         hue4.backgroundColor = .systemPink
         countClickEffect += 1
+        hueType = 4
         delegate?.effectViewDidTapHue4(self)
     }
     
