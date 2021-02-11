@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol SpeedViewDelegate {
+protocol SpeedViewDelegate: class {
     func speedViewDidTapCloseButton(_ view: SpeedView)
     func speedViewDidTapAddButton(_ view: SpeedView, rate: Double)
     func speedViewDidTapRemoveButton(_ view: SpeedView)
@@ -23,7 +23,7 @@ class SpeedView: UIView {
     @IBOutlet weak var outlet3X: UIButton!
     @IBOutlet weak var outlet4X: UIButton!
     
-    var delegate: SpeedViewDelegate?
+    weak var delegate: SpeedViewDelegate?
     var rate: Double = 1
     
     func setupColorSpeedButton() {

@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol RotateViewDelegate {
+protocol RotateViewDelegate: class {
     func rotateViewDidTapRotateLeft(_ view: RotateView)
     func rotateViewDidTapRotateRight(_ view: RotateView)
     func rotateViewDidTapFlipHorizontally(_ view: RotateView)
@@ -18,7 +18,7 @@ protocol RotateViewDelegate {
 
 class RotateView: UIView {
 
-    var delegate: RotateViewDelegate?
+    weak var delegate: RotateViewDelegate?
     var countClickRotate: Int = 0
     
     @IBAction func rotateLeft(_ sender: Any) {

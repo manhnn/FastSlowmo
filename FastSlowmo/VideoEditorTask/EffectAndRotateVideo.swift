@@ -53,12 +53,12 @@ class EffectAndRotateVideo: Command {
         }
         else if hueType == 1 {
             let filter = CIFilter(name: "CIPhotoEffectMono") // mau den trang
-            let videoComposition = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { [self] request in
+            let videoComposition = AVMutableVideoComposition(asset: originAssetVideo, applyingCIFiltersWithHandler: { request in
                 
                 let source = request.sourceImage
                 filter?.setValue(source, forKey: kCIInputImageKey)
                 
-                let output = filter?.outputImage?.transformed(by: setCGAffineTransform(width, height))
+                let output = filter?.outputImage?.transformed(by: self.setCGAffineTransform(width, height))
                 request.finish(with: output!, context: nil)
             })
             return videoComposition
@@ -106,7 +106,7 @@ class EffectAndRotateVideo: Command {
             let source = request.sourceImage
             filter?.setValue(source, forKey: kCIInputImageKey)
             
-            let inputMinComponents = CIVector(x: 0.55, y: 0.45, z: 0.1, w: 1)
+            let inputMinComponents = CIVector(x: 0.75, y: 0.45, z: 0.1, w: 1)
             filter?.setValue(inputMinComponents, forKey: "inputMinComponents")
             
             let inputMaxComponents = CIVector(x: 1, y: 1, z: 1, w: 1)

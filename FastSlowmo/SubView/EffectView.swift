@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol EffectViewDelegate {
+protocol EffectViewDelegate: class {
     func effectViewDidTapOriginal(_ view: EffectView)
     func effectViewDidTapHue1(_ view: EffectView)
     func effectViewDidTapHue2(_ view: EffectView)
@@ -25,7 +25,7 @@ class EffectView: UIView {
     @IBOutlet weak var hue3: UILabel!
     @IBOutlet weak var hue4: UILabel!
     
-    var delegate: EffectViewDelegate?
+    weak var delegate: EffectViewDelegate?
     var countClickEffect: Int = 0
     var hueType: Int = 0
     

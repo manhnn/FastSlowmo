@@ -41,6 +41,8 @@ class HomeViewController: UIViewController {
     var isPlayingVideo = false
     var isSelectTypeOfCutVideo = CutType.empty.rawValue
     var rotationDirectionIndex: Int = 0
+    var isFlipHorizontally = false
+    var isFlipVertically = false
     
     let editor = VideoEditor()
     
@@ -80,6 +82,9 @@ class HomeViewController: UIViewController {
     }
     
     func setupAllCompositionBeforeEdit() {
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
+        editor.pushCommand(task: cmd)
+        
         let mutableComposition1 = AVMutableComposition()
         let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
@@ -288,13 +293,9 @@ extension HomeViewController: CutVideoDelegate {
         }
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        if editor.listCommand.count > 1 { // dieu kien chua dung lam phai co it nhat 1 thang type Rotate trong do
-            playerItem.videoComposition = nowAllComposition.videoComposition
-        }
+        playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
-        
-        timeLabel.text = "00:00/\(getTimeString(from: playerItem.duration))"
     }
     
     func cutVideoDidTrimPressed(_ view: CutView) {
@@ -365,9 +366,7 @@ extension HomeViewController: SpeedViewDelegate {
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        if editor.listCommand.count > 1 { // dieu kien chua dung lam phai co it nhat 1 thang type Rotate trong do
-            playerItem.videoComposition = nowAllComposition.videoComposition
-        }
+        playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -405,11 +404,13 @@ extension HomeViewController: RotateViewDelegate {
     }
     
     func rotateViewDidTapFlipHorizontally(_ view: RotateView) {
-        print("horizontally")
+        isFlipHorizontally = !isFlipHorizontally
+        videoView.layer.transform = isFlipHorizontally ? CATransform3DMakeRotation(.pi, 0, 1, 0) : CATransform3DMakeRotation(.pi, 0, 0, 0)
     }
     
     func rotateViewDidTapFlipVertically(_ view: RotateView) {
-        print("vertically")
+        isFlipVertically = !isFlipVertically
+        videoView.layer.transform = isFlipVertically ? CATransform3DMakeRotation(.pi, 1, 0, 0) : CATransform3DMakeRotation(.pi, 0, 0, 0)
     }
     
     func rotateViewDidTapCancelPressed(_ view: RotateView) {

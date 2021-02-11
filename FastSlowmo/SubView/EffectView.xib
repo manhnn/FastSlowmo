@@ -93,7 +93,7 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xga-Wk-46J">
                                     <rect key="frame" x="5" y="0.0" width="71" height="112.5"/>
-                                    <state key="normal" backgroundImage="image 8-3"/>
+                                    <state key="normal" backgroundImage="image 8-1"/>
                                     <connections>
                                         <action selector="hue1Pressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="rRx-1m-5zs"/>
                                     </connections>
@@ -255,6 +255,7 @@
     <resources>
         <image name="check" width="512" height="512"/>
         <image name="image 8" width="70" height="86"/>
+        <image name="image 8-1" width="35" height="86"/>
         <image name="image 8-2" width="70" height="86"/>
         <image name="image 8-3" width="70" height="86"/>
         <image name="image 8-4" width="70" height="86"/>
