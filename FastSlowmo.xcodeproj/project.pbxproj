@@ -13,12 +13,23 @@
 		252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252AFDC525CFFC4B000F452F /* SpeedView.xib */; };
 		252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDCD25CFFC96000F452F /* SpeedView.swift */; };
 		252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */; };
+		253938FB25D6B35E0011A397 /* MusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253938FA25D6B35E0011A397 /* MusicView.swift */; };
+		253938FE25D6B37B0011A397 /* MusicView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253938FD25D6B37B0011A397 /* MusicView.xib */; };
+		2539390125D6CEF70011A397 /* MusicVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2539390025D6CEF70011A397 /* MusicVideo.swift */; };
+		2539390525D6D5EA0011A397 /* SampleAudio1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390425D6D5EA0011A397 /* SampleAudio1.mp3 */; };
+		2539390C25D6DA920011A397 /* Andy-Cohen-Gazing.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390725D6DA910011A397 /* Andy-Cohen-Gazing.mp3 */; };
+		2539390D25D6DA920011A397 /* Crowander-Crime-Story.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390825D6DA910011A397 /* Crowander-Crime-Story.mp3 */; };
+		2539390E25D6DA920011A397 /* Shaolib-Dub-Disruptor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390925D6DA910011A397 /* Shaolib-Dub-Disruptor.mp3 */; };
+		2539390F25D6DA920011A397 /* Derek-Clegg-Golden-Rule.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390A25D6DA910011A397 /* Derek-Clegg-Golden-Rule.mp3 */; };
+		2539391025D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390B25D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 */; };
 		254507A425D173D000DEB796 /* RotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A325D173D000DEB796 /* RotateView.swift */; };
 		254507A725D173DE00DEB796 /* RotateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254507A625D173DE00DEB796 /* RotateView.xib */; };
 		254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A925D18D2900DEB796 /* RotateVideo.swift */; };
 		2568DBAA25CEE25200A9D072 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */; };
 		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
 		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
+		2571CE5325D63BAB00641D12 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571CE5125D63BAB00641D12 /* MusicViewController.swift */; };
+		2571CE5425D63BAB00641D12 /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2571CE5225D63BAB00641D12 /* MusicViewController.xib */; };
 		2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */; };
 		2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399B25CD005A007F9623 /* TimeLineTrimView.swift */; };
 		2599AE9325CBA60000485CD4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2599AE9225CBA60000485CD4 /* AppDelegate.swift */; };
@@ -46,12 +57,23 @@
 		252AFDC525CFFC4B000F452F /* SpeedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeedView.xib; sourceTree = "<group>"; };
 		252AFDCD25CFFC96000F452F /* SpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedView.swift; sourceTree = "<group>"; };
 		252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineSpeedView.swift; sourceTree = "<group>"; };
+		253938FA25D6B35E0011A397 /* MusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicView.swift; sourceTree = "<group>"; };
+		253938FD25D6B37B0011A397 /* MusicView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicView.xib; sourceTree = "<group>"; };
+		2539390025D6CEF70011A397 /* MusicVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicVideo.swift; sourceTree = "<group>"; };
+		2539390425D6D5EA0011A397 /* SampleAudio1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = SampleAudio1.mp3; sourceTree = "<group>"; };
+		2539390725D6DA910011A397 /* Andy-Cohen-Gazing.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Andy-Cohen-Gazing.mp3"; sourceTree = "<group>"; };
+		2539390825D6DA910011A397 /* Crowander-Crime-Story.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Crowander-Crime-Story.mp3"; sourceTree = "<group>"; };
+		2539390925D6DA910011A397 /* Shaolib-Dub-Disruptor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Shaolib-Dub-Disruptor.mp3"; sourceTree = "<group>"; };
+		2539390A25D6DA910011A397 /* Derek-Clegg-Golden-Rule.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Derek-Clegg-Golden-Rule.mp3"; sourceTree = "<group>"; };
+		2539390B25D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ketsa-Light-Through-The-Window.mp3"; sourceTree = "<group>"; };
 		254507A325D173D000DEB796 /* RotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateView.swift; sourceTree = "<group>"; };
 		254507A625D173DE00DEB796 /* RotateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RotateView.xib; sourceTree = "<group>"; };
 		254507A925D18D2900DEB796 /* RotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateVideo.swift; sourceTree = "<group>"; };
 		2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
 		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
+		2571CE5125D63BAB00641D12 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
+		2571CE5225D63BAB00641D12 /* MusicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
 		2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCoreGraphic.swift; sourceTree = "<group>"; };
 		2586399B25CD005A007F9623 /* TimeLineTrimView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineTrimView.swift; sourceTree = "<group>"; };
 		2599AE8F25CBA60000485CD4 /* FastSlowmo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FastSlowmo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,6 +107,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2539390325D6D58E0011A397 /* SourceAudio */ = {
+			isa = PBXGroup;
+			children = (
+				2539390425D6D5EA0011A397 /* SampleAudio1.mp3 */,
+				2539390725D6DA910011A397 /* Andy-Cohen-Gazing.mp3 */,
+				2539390825D6DA910011A397 /* Crowander-Crime-Story.mp3 */,
+				2539390A25D6DA910011A397 /* Derek-Clegg-Golden-Rule.mp3 */,
+				2539390B25D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 */,
+				2539390925D6DA910011A397 /* Shaolib-Dub-Disruptor.mp3 */,
+			);
+			path = SourceAudio;
+			sourceTree = "<group>";
+		};
 		256C3E2825CD9DD600C0ACA4 /* SubView */ = {
 			isa = PBXGroup;
 			children = (
@@ -96,6 +131,8 @@
 				254507A625D173DE00DEB796 /* RotateView.xib */,
 				2526401025D3B60A0066D442 /* EffectView.swift */,
 				2526401325D3B61E0066D442 /* EffectView.xib */,
+				253938FA25D6B35E0011A397 /* MusicView.swift */,
+				253938FD25D6B37B0011A397 /* MusicView.xib */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -130,6 +167,7 @@
 		2599AE9125CBA60000485CD4 /* FastSlowmo */ = {
 			isa = PBXGroup;
 			children = (
+				2539390325D6D58E0011A397 /* SourceAudio */,
 				2599AEC125CBDCDA00485CD4 /* SourceVideo */,
 				2586399625CCFFE5007F9623 /* TimeLineEditVideo */,
 				2599AEB625CBA84200485CD4 /* VideoEditor */,
@@ -153,6 +191,8 @@
 				2599AEAC25CBA78D00485CD4 /* HomeViewController.xib */,
 				25C7DA7725CC587100692929 /* HelloApplicationViewController.swift */,
 				25C7DA7825CC587100692929 /* HelloApplicationViewController.xib */,
+				2571CE5125D63BAB00641D12 /* MusicViewController.swift */,
+				2571CE5225D63BAB00641D12 /* MusicViewController.xib */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -166,6 +206,7 @@
 				2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */,
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
 				2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */,
+				2539390025D6CEF70011A397 /* MusicVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -262,13 +303,21 @@
 			files = (
 				2568DBAA25CEE25200A9D072 /* VideoExample1.mp4 in Resources */,
 				254507A725D173DE00DEB796 /* RotateView.xib in Resources */,
+				2571CE5425D63BAB00641D12 /* MusicViewController.xib in Resources */,
+				2539390525D6D5EA0011A397 /* SampleAudio1.mp3 in Resources */,
+				2539391025D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 in Resources */,
 				2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */,
+				253938FE25D6B37B0011A397 /* MusicView.xib in Resources */,
 				2599AE9C25CBA60100485CD4 /* Assets.xcassets in Resources */,
 				256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */,
 				2526401425D3B61E0066D442 /* EffectView.xib in Resources */,
 				2599AEAE25CBA78D00485CD4 /* HomeViewController.xib in Resources */,
 				252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */,
+				2539390D25D6DA920011A397 /* Crowander-Crime-Story.mp3 in Resources */,
 				25C7DA7A25CC587100692929 /* HelloApplicationViewController.xib in Resources */,
+				2539390E25D6DA920011A397 /* Shaolib-Dub-Disruptor.mp3 in Resources */,
+				2539390F25D6DA920011A397 /* Derek-Clegg-Golden-Rule.mp3 in Resources */,
+				2539390C25D6DA920011A397 /* Andy-Cohen-Gazing.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,6 +331,7 @@
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* SpeedVideo.swift in Sources */,
 				25F4F49725D2405800548A76 /* AllComposition.swift in Sources */,
+				2539390125D6CEF70011A397 /* MusicVideo.swift in Sources */,
 				254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */,
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
@@ -295,11 +345,13 @@
 				254507A425D173D000DEB796 /* RotateView.swift in Sources */,
 				256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */,
 				2599AEAD25CBA78D00485CD4 /* HomeViewController.swift in Sources */,
+				2571CE5325D63BAB00641D12 /* MusicViewController.swift in Sources */,
 				2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */,
 				25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */,
 				2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */,
 				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
 				2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */,
+				253938FB25D6B35E0011A397 /* MusicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

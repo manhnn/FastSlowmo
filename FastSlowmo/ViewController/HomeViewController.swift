@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     var speedViewXib: SpeedView!
     var rotateViewXib: RotateView!
     var effectViewXib: EffectView!
+    var musicViewXib: MusicView!
     
     var trimTimeLineView: TimeLineTrimView!
     var cutoutTimeLineView: TimeLineCutOutView!
@@ -205,7 +206,19 @@ class HomeViewController: UIViewController {
     
     // MARK: - Music Video
     @IBAction func musicVideoPressed(_ sender: Any) {
+        navigationView.isHidden = true
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
+        let nib = UINib(nibName: "MusicView", bundle: nil)
+        musicViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? MusicView
+        musicViewXib.frame = self.view.frame
+        self.view.addSubview(musicViewXib)
+        musicViewXib.translatesAutoresizingMaskIntoConstraints = false
+        musicViewXib.heightAnchor.constraint(equalToConstant: 100).isActive = true
+        musicViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        musicViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        musicViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        musicViewXib.delegate = self
     }
     
     // MARK: - EffectVideo
@@ -405,12 +418,12 @@ extension HomeViewController: RotateViewDelegate {
     
     func rotateViewDidTapFlipHorizontally(_ view: RotateView) {
         isFlipHorizontally = !isFlipHorizontally
-        videoView.layer.transform = isFlipHorizontally ? CATransform3DMakeRotation(.pi, 0, 1, 0) : CATransform3DMakeRotation(.pi, 0, 0, 0)
+        videoView.layer.transform = CATransform3DRotate(videoView.layer.transform, .pi, 0, 1, 0)
     }
     
     func rotateViewDidTapFlipVertically(_ view: RotateView) {
         isFlipVertically = !isFlipVertically
-        videoView.layer.transform = isFlipVertically ? CATransform3DMakeRotation(.pi, 1, 0, 0) : CATransform3DMakeRotation(.pi, 0, 0, 0)
+        videoView.layer.transform = CATransform3DRotate(videoView.layer.transform, .pi, 1, 0, 0)
     }
     
     func rotateViewDidTapCancelPressed(_ view: RotateView) {
@@ -491,5 +504,22 @@ extension HomeViewController: EffectViewDelegate {
         effectViewXib.isHidden = true
         navigationView.isHidden = false
         updateConstraintOfFunctionViewUpDown(constant: 0)
+    }
+}
+
+// MARK: - Extension MusicViewDelegate
+extension HomeViewController: MusicViewDelegate {
+    func musicViewDidTapDelete(_ view: MusicView) {
+        musicViewXib.isHidden = true
+        navigationView.isHidden = false
+        updateConstraintOfFunctionViewUpDown(constant: 0)
+    }
+    
+    func musicViewDidTapVolumeAudio(_ view: MusicView) {
+        player.volume = musicViewXib.playerVolume
+    }
+    
+    func musicViewDidTapChangeMusic(_ view: MusicView) {
+        print("load view controller")
     }
 }
