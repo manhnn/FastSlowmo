@@ -11,6 +11,7 @@ protocol MusicViewDelegate: class {
     func musicViewDidTapDelete(_ view: MusicView)
     func musicViewDidTapVolumeAudio(_ view: MusicView)
     func musicViewDidTapChangeMusic(_ view: MusicView)
+    func musicViewDidTapAcceptedMusic(_ view: MusicView)
 }
 
 class MusicView: UIView {
@@ -27,6 +28,10 @@ class MusicView: UIView {
     
     @IBAction func changeMusicPressed(_ sender: Any) {
         delegate?.musicViewDidTapChangeMusic(self)
+    }
+    
+    @IBAction func acceptedPressed(_ sender: Any) {
+        delegate?.musicViewDidTapAcceptedMusic(self)
     }
     
     @IBAction func volumeAudioPressed(_ sender: UIButton) {

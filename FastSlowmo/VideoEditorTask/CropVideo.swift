@@ -1,14 +1,14 @@
 //
-//  MusicVideo.swift
+//  CropVideo.swift
 //  FastSlowmo
 //
-//  Created by Manh Nguyen Ngoc on 12/02/2021.
+//  Created by Manh Nguyen Ngoc on 13/02/2021.
 //
 
 import UIKit
 import AVFoundation
 
-class MusicVideo: Command {
+class CropVideo: Command {
     
     var originAssetMusic: AVAsset!
     var timeRange: CMTimeRange!
@@ -22,12 +22,7 @@ class MusicVideo: Command {
         
         let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
         
-        originAssetMusic.tracks.forEach { track in
-            if track.mediaType == .audio {
-                let trackComposition = newAllComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
-                try? trackComposition?.insertTimeRange(timeRange, of: track, at: .zero)
-            }
-        }
+        
         return newAllComposition
     }
 }

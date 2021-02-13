@@ -26,11 +26,14 @@ class HomeViewController: UIViewController {
     var rotateViewXib: RotateView!
     var effectViewXib: EffectView!
     var musicViewXib: MusicView!
+    var cropViewXib: CropView!
     
     var trimTimeLineView: TimeLineTrimView!
     var cutoutTimeLineView: TimeLineCutOutView!
     var speedTimeLineView: TimeLineSpeedView!
+    var musicTimeLineView: TimeLineMusicView!
     var originAssetVideo: AVAsset!
+    var originAssetMusic: AVAsset!
     var player: AVPlayer!
     var playerItem: AVPlayerItem!
     var playerLayer: AVPlayerLayer!
@@ -44,6 +47,7 @@ class HomeViewController: UIViewController {
     var rotationDirectionIndex: Int = 0
     var isFlipHorizontally = false
     var isFlipVertically = false
+    var countedClickMusic: Int = 0
     
     let editor = VideoEditor()
     
@@ -219,6 +223,17 @@ class HomeViewController: UIViewController {
         musicViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
         musicViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
         musicViewXib.delegate = self
+        
+        // Add Timeline Music View Because it same to Speed Change
+        musicTimeLineView = TimeLineMusicView(frame: CGRect(x: 40, y: 10, width: self.view.frame.width - 80, height: 52), images: getThumbnailFromComposition(mutableComposition: nowAllComposition.mutableComposition))
+        musicTimeLineView.backgroundColor = .clear
+        musicTimeLineView.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(musicTimeLineView)
+
+        musicTimeLineView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: 20).isActive = true
+        musicTimeLineView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -20).isActive = true
+        musicTimeLineView.bottomAnchor.constraint(equalTo: self.musicViewXib.topAnchor, constant: -102).isActive = true
+        musicTimeLineView.heightAnchor.constraint(equalToConstant: 52).isActive = true
     }
     
     // MARK: - EffectVideo
@@ -257,7 +272,19 @@ class HomeViewController: UIViewController {
     
     // MARK: - Crop Video
     @IBAction func cropVideo(_ sender: Any) {
+        navigationView.isHidden = true
+        updateConstraintOfFunctionViewUpDown(constant: self.functionView.frame.height * 2)
         
+        let nib = UINib(nibName: "CropView", bundle: nil)
+        cropViewXib = nib.instantiate(withOwner: self, options: nil)[0] as? CropView
+        cropViewXib.frame = self.view.frame
+        self.view.addSubview(cropViewXib)
+        cropViewXib.translatesAutoresizingMaskIntoConstraints = false
+        cropViewXib.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        cropViewXib.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true
+        cropViewXib.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        cropViewXib.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+        cropViewXib.delegate = self
     }
 }
 
@@ -508,18 +535,75 @@ extension HomeViewController: EffectViewDelegate {
 }
 
 // MARK: - Extension MusicViewDelegate
-extension HomeViewController: MusicViewDelegate {
+extension HomeViewController: MusicViewDelegate, MusicViewControllerDelegate {
     func musicViewDidTapDelete(_ view: MusicView) {
         musicViewXib.isHidden = true
         navigationView.isHidden = false
+        musicTimeLineView.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
+        
+        editor.undoCommand(countClick: countedClickMusic)
+        if editor.listCommand.count == 0 {
+            let cmd = TrimVideo(timeRange: CMTimeRange(start: .zero, duration: nowAllComposition.mutableComposition.duration))
+            editor.pushCommand(task: cmd)
+        }
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func musicViewDidTapVolumeAudio(_ view: MusicView) {
         player.volume = musicViewXib.playerVolume
     }
     
+    func musicViewDidTapAcceptedMusic(_ view: MusicView) {
+        musicViewXib.isHidden = true
+        navigationView.isHidden = false
+        musicTimeLineView.isHidden = true
+        updateConstraintOfFunctionViewUpDown(constant: 0)
+    }
+    
     func musicViewDidTapChangeMusic(_ view: MusicView) {
-        print("load view controller")
+        let musicViewController = MusicViewController()
+        musicViewController.delegate = self
+        navigationController?.pushViewController(musicViewController, animated: true)
+    }
+    
+    func musicViewController(_ view: MusicViewController, didSelectNameMusic music: String, countedClickMusic: Int) {
+        self.countedClickMusic = countedClickMusic
+        
+        originAssetMusic = AVAsset(url: URL(fileURLWithPath: Bundle.main.path(forResource: music, ofType: "mp3")!))
+        
+        let startTime = CGFloat(musicTimeLineView.leftStartTime)
+        let endTime = CGFloat(musicTimeLineView.rightEndTime)
+        let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
+        let timeRange = CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000))
+        
+        let cmd = MusicVideo(originAssetMusic: originAssetMusic, timeRange: timeRange)
+        editor.pushCommand(task: cmd)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
+    }
+}
+
+// MARK: - Extension CropViewDelegate
+extension HomeViewController: cropViewDelegate {
+    func cropViewDidTapCancel(_ view: CropView) {
+        cropViewXib.isHidden = true
+        navigationView.isHidden = false
+        updateConstraintOfFunctionViewUpDown(constant: 0)
+    }
+    
+    func cropViewDidTapAccepted(_ view: CropView) {
+        cropViewXib.isHidden = true
+        navigationView.isHidden = false
+        updateConstraintOfFunctionViewUpDown(constant: 0)
     }
 }

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CropView" customModule="FastSlowmo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1Z-9G-Eqh">
+                    <rect key="frame" x="364" y="10" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Z1Z-9G-Eqh" secondAttribute="height" multiplier="1:1" id="SoH-p8-KnT"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="check"/>
+                    <connections>
+                        <action selector="acceptedPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="m87-7E-oNt"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crop Video" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OkM-Us-NQO">
+                    <rect key="frame" x="156" y="13" width="102.5" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HOV-Uh-s9r">
+                    <rect key="frame" x="20" y="12.5" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="HOV-Uh-s9r" secondAttribute="height" multiplier="1:1" id="R5o-9S-7qc"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="x"/>
+                    <connections>
+                        <action selector="cancelPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="8s7-VQ-LZd"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="OkM-Us-NQO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="0oA-2Z-AAO"/>
+                <constraint firstItem="OkM-Us-NQO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="A3S-dq-1NG"/>
+                <constraint firstItem="HOV-Uh-s9r" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="C2A-xq-ui8"/>
+                <constraint firstItem="HOV-Uh-s9r" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="H0N-mI-ka7"/>
+                <constraint firstItem="Z1Z-9G-Eqh" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.6" id="bSR-6B-1dq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Z1Z-9G-Eqh" secondAttribute="trailing" constant="20" id="ljr-fR-goV"/>
+                <constraint firstItem="Z1Z-9G-Eqh" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="rfT-Y4-3l8"/>
+                <constraint firstItem="HOV-Uh-s9r" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="saT-tt-2uK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="139" y="104"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="check" width="512" height="512"/>
+        <image name="x" width="19" height="19"/>
+    </resources>
+</document>

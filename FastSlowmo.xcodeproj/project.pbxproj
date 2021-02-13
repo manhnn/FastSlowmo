@@ -22,12 +22,17 @@
 		2539390E25D6DA920011A397 /* Shaolib-Dub-Disruptor.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390925D6DA910011A397 /* Shaolib-Dub-Disruptor.mp3 */; };
 		2539390F25D6DA920011A397 /* Derek-Clegg-Golden-Rule.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390A25D6DA910011A397 /* Derek-Clegg-Golden-Rule.mp3 */; };
 		2539391025D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2539390B25D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 */; };
+		253C607525D8252500F058CB /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607425D8252500F058CB /* CropView.swift */; };
+		253C607825D8253600F058CB /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253C607725D8253600F058CB /* CropView.xib */; };
+		253C607B25D82B1100F058CB /* CropViewEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607A25D82B1100F058CB /* CropViewEdit.swift */; };
+		253C607E25D82D4300F058CB /* CropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607D25D82D4300F058CB /* CropVideo.swift */; };
 		254507A425D173D000DEB796 /* RotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A325D173D000DEB796 /* RotateView.swift */; };
 		254507A725D173DE00DEB796 /* RotateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254507A625D173DE00DEB796 /* RotateView.xib */; };
 		254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A925D18D2900DEB796 /* RotateVideo.swift */; };
 		2568DBAA25CEE25200A9D072 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */; };
 		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
 		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
+		256F148F25D7CB4E004BCC1C /* TimeLineMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */; };
 		2571CE5325D63BAB00641D12 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571CE5125D63BAB00641D12 /* MusicViewController.swift */; };
 		2571CE5425D63BAB00641D12 /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2571CE5225D63BAB00641D12 /* MusicViewController.xib */; };
 		2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */; };
@@ -66,12 +71,17 @@
 		2539390925D6DA910011A397 /* Shaolib-Dub-Disruptor.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Shaolib-Dub-Disruptor.mp3"; sourceTree = "<group>"; };
 		2539390A25D6DA910011A397 /* Derek-Clegg-Golden-Rule.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Derek-Clegg-Golden-Rule.mp3"; sourceTree = "<group>"; };
 		2539390B25D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Ketsa-Light-Through-The-Window.mp3"; sourceTree = "<group>"; };
+		253C607425D8252500F058CB /* CropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
+		253C607725D8253600F058CB /* CropView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CropView.xib; sourceTree = "<group>"; };
+		253C607A25D82B1100F058CB /* CropViewEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewEdit.swift; sourceTree = "<group>"; };
+		253C607D25D82D4300F058CB /* CropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVideo.swift; sourceTree = "<group>"; };
 		254507A325D173D000DEB796 /* RotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateView.swift; sourceTree = "<group>"; };
 		254507A625D173DE00DEB796 /* RotateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RotateView.xib; sourceTree = "<group>"; };
 		254507A925D18D2900DEB796 /* RotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateVideo.swift; sourceTree = "<group>"; };
 		2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
 		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
+		256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineMusicView.swift; sourceTree = "<group>"; };
 		2571CE5125D63BAB00641D12 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		2571CE5225D63BAB00641D12 /* MusicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
 		2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCoreGraphic.swift; sourceTree = "<group>"; };
@@ -133,6 +143,8 @@
 				2526401325D3B61E0066D442 /* EffectView.xib */,
 				253938FA25D6B35E0011A397 /* MusicView.swift */,
 				253938FD25D6B37B0011A397 /* MusicView.xib */,
+				253C607425D8252500F058CB /* CropView.swift */,
+				253C607725D8253600F058CB /* CropView.xib */,
 			);
 			path = SubView;
 			sourceTree = "<group>";
@@ -144,6 +156,8 @@
 				2586399B25CD005A007F9623 /* TimeLineTrimView.swift */,
 				25DBD8E325CE454100FB219F /* TimeLineCutOutView.swift */,
 				252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */,
+				256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */,
+				253C607A25D82B1100F058CB /* CropViewEdit.swift */,
 			);
 			path = TimeLineEditVideo;
 			sourceTree = "<group>";
@@ -207,6 +221,7 @@
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
 				2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */,
 				2539390025D6CEF70011A397 /* MusicVideo.swift */,
+				253C607D25D82D4300F058CB /* CropVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -305,6 +320,7 @@
 				254507A725D173DE00DEB796 /* RotateView.xib in Resources */,
 				2571CE5425D63BAB00641D12 /* MusicViewController.xib in Resources */,
 				2539390525D6D5EA0011A397 /* SampleAudio1.mp3 in Resources */,
+				253C607825D8253600F058CB /* CropView.xib in Resources */,
 				2539391025D6DA920011A397 /* Ketsa-Light-Through-The-Window.mp3 in Resources */,
 				2599AE9F25CBA60100485CD4 /* LaunchScreen.storyboard in Resources */,
 				253938FE25D6B37B0011A397 /* MusicView.xib in Resources */,
@@ -336,6 +352,8 @@
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,
+				253C607B25D82B1100F058CB /* CropViewEdit.swift in Sources */,
+				253C607E25D82D4300F058CB /* CropVideo.swift in Sources */,
 				2526401125D3B60A0066D442 /* EffectView.swift in Sources */,
 				25DBD8E825CE48E700FB219F /* Enum.swift in Sources */,
 				2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */,
@@ -352,6 +370,8 @@
 				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
 				2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */,
 				253938FB25D6B35E0011A397 /* MusicView.swift in Sources */,
+				253C607525D8252500F058CB /* CropView.swift in Sources */,
+				256F148F25D7CB4E004BCC1C /* TimeLineMusicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
