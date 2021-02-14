@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol cropViewDelegate: class {
+protocol CropViewDelegate: class {
     func cropViewDidTapCancel(_ view: CropView)
     func cropViewDidTapAccepted(_ view: CropView)
 }
@@ -15,7 +15,7 @@ protocol cropViewDelegate: class {
 class CropView: UIView {
     
     
-    weak var delegate: cropViewDelegate?
+    weak var delegate: CropViewDelegate?
 
     @IBAction func cancelPressed(_ sender: Any) {
         delegate?.cropViewDidTapCancel(self)

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2516C5A225D8FF9B008BE196 /* GridCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C5A125D8FF9B008BE196 /* GridCrop.swift */; };
 		2526401125D3B60A0066D442 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401025D3B60A0066D442 /* EffectView.swift */; };
 		2526401425D3B61E0066D442 /* EffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2526401325D3B61E0066D442 /* EffectView.xib */; };
 		2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */; };
@@ -32,7 +33,6 @@
 		2568DBAA25CEE25200A9D072 /* VideoExample1.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */; };
 		256C3E2A25CD9E6400C0ACA4 /* CutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C3E2925CD9E6400C0ACA4 /* CutView.swift */; };
 		256C3E2E25CD9E6F00C0ACA4 /* CutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */; };
-		256F148F25D7CB4E004BCC1C /* TimeLineMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */; };
 		2571CE5325D63BAB00641D12 /* MusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2571CE5125D63BAB00641D12 /* MusicViewController.swift */; };
 		2571CE5425D63BAB00641D12 /* MusicViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2571CE5225D63BAB00641D12 /* MusicViewController.xib */; };
 		2586399825CCFFF7007F9623 /* TimeLineCoreGraphic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */; };
@@ -56,6 +56,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2516C5A125D8FF9B008BE196 /* GridCrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCrop.swift; sourceTree = "<group>"; };
 		2526401025D3B60A0066D442 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
 		2526401325D3B61E0066D442 /* EffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EffectView.xib; sourceTree = "<group>"; };
 		2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectAndRotateVideo.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		2568DBA925CEE25200A9D072 /* VideoExample1.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = VideoExample1.mp4; sourceTree = "<group>"; };
 		256C3E2925CD9E6400C0ACA4 /* CutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CutView.swift; sourceTree = "<group>"; };
 		256C3E2D25CD9E6F00C0ACA4 /* CutView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CutView.xib; sourceTree = "<group>"; };
-		256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineMusicView.swift; sourceTree = "<group>"; };
 		2571CE5125D63BAB00641D12 /* MusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicViewController.swift; sourceTree = "<group>"; };
 		2571CE5225D63BAB00641D12 /* MusicViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MusicViewController.xib; sourceTree = "<group>"; };
 		2586399725CCFFF7007F9623 /* TimeLineCoreGraphic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineCoreGraphic.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 				2586399B25CD005A007F9623 /* TimeLineTrimView.swift */,
 				25DBD8E325CE454100FB219F /* TimeLineCutOutView.swift */,
 				252AFDD125D00DA3000F452F /* TimeLineSpeedView.swift */,
-				256F148E25D7CB4E004BCC1C /* TimeLineMusicView.swift */,
+				2516C5A125D8FF9B008BE196 /* GridCrop.swift */,
 				253C607A25D82B1100F058CB /* CropViewEdit.swift */,
 			);
 			path = TimeLineEditVideo;
@@ -347,6 +347,7 @@
 				2599AEB325CBA7EF00485CD4 /* Command.swift in Sources */,
 				2599AEBC25CBA87100485CD4 /* SpeedVideo.swift in Sources */,
 				25F4F49725D2405800548A76 /* AllComposition.swift in Sources */,
+				2516C5A225D8FF9B008BE196 /* GridCrop.swift in Sources */,
 				2539390125D6CEF70011A397 /* MusicVideo.swift in Sources */,
 				254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */,
 				252AFDD225D00DA3000F452F /* TimeLineSpeedView.swift in Sources */,
@@ -371,7 +372,6 @@
 				2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */,
 				253938FB25D6B35E0011A397 /* MusicView.swift in Sources */,
 				253C607525D8252500F058CB /* CropView.swift in Sources */,
-				256F148F25D7CB4E004BCC1C /* TimeLineMusicView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
