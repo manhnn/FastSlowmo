@@ -598,5 +598,7 @@ extension HomeViewController: CropViewDelegate {
         navigationView.isHidden = false
         gridCrop.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
+        
+        
     }
 }

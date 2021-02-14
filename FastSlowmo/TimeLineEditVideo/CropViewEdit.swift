@@ -22,8 +22,8 @@ class CropViewEdit: UIView {
 //    public var rightLabel: UILabel!
     public var gridCrop: GridCrop!
     
-    public var leftStartTime: Float!
-    public var rightEndTime: Float!
+    public var cropPointLeftBottom = CGPoint(x: 0, y: 0)
+    public var cropPointRightTop = CGPoint(x: 0, y: 0)
     
     init(frame: CGRect, point: CGPoint) {
         super.init(frame: frame)
@@ -98,25 +98,6 @@ class CropViewEdit: UIView {
         topControllView.addGestureRecognizer(topPan)
         let bottomPan = UIPanGestureRecognizer(target: self, action: #selector(self.bottomPanGesture(_:)))
         bottomControllView.addGestureRecognizer(bottomPan)
-        
-        // MARK: - add new left right label
-        //leftLabel = UILabel(frame: self.frame)
-        //rightLabel = UILabel(frame: self.frame)
-        
-        leftStartTime = Float(leftConstraint!.constant / frame.width)
-        //leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
-        rightEndTime = Float(1 - rightConstraint!.constant / frame.width)
-        //rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
-        //leftLabel.textColor = .white
-        //rightLabel.textColor = .white
-        //leftLabel.translatesAutoresizingMaskIntoConstraints = false
-        //rightLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        //leftControllView.addSubview(leftLabel)
-        //rightControllView.addSubview(rightLabel)
-        
-        //leftLabel.topAnchor.constraint(equalTo: leftControllView.bottomAnchor, constant: 10).isActive = true
-        //rightLabel.topAnchor.constraint(equalTo: rightControllView.bottomAnchor, constant: 10).isActive = true
     }
     
     
@@ -131,9 +112,8 @@ class CropViewEdit: UIView {
         else {
             leftConstraint?.constant = distance
         }
-        
-        leftStartTime = Float(leftConstraint!.constant / frame.width)
-        //leftLabel.text = String(format: "%.0f", leftStartTime * 100) + "%"
+        print("LEFT - \(leftConstraint?.constant)")
+        cropPointLeftBottom.x = leftConstraint!.constant
     }
     
     @objc func rightPanGesture(_ sender: Any?) {
@@ -147,8 +127,8 @@ class CropViewEdit: UIView {
         else {
             rightConstraint?.constant = distance
         }
-        rightEndTime = Float(1 - rightConstraint!.constant / frame.width)
-        //rightLabel.text = String(format: "%.0f", rightEndTime * 100) + "%"
+        print("RIGHT - \(point.x)")
+        cropPointRightTop.x = point.x
     }
     
     @objc func topPanGesture(_ sender: Any?) {
@@ -162,6 +142,8 @@ class CropViewEdit: UIView {
         else {
             topConstraint?.constant = distance
         }
+        print("TOP - \(self.frame.height - point.y)")
+        cropPointRightTop.y = self.frame.height - point.y
     }
     
     @objc func bottomPanGesture(_ sender: Any?) {
@@ -175,6 +157,8 @@ class CropViewEdit: UIView {
         else {
             bottomConstraint?.constant = distance
         }
+        print("BOTTOM - \(bottomConstraint?.constant)")
+        cropPointLeftBottom.y = bottomConstraint!.constant
     }
 }
 

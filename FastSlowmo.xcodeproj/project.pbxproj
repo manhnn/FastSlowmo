@@ -26,7 +26,6 @@
 		253C607525D8252500F058CB /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607425D8252500F058CB /* CropView.swift */; };
 		253C607825D8253600F058CB /* CropView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 253C607725D8253600F058CB /* CropView.xib */; };
 		253C607B25D82B1100F058CB /* CropViewEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607A25D82B1100F058CB /* CropViewEdit.swift */; };
-		253C607E25D82D4300F058CB /* CropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 253C607D25D82D4300F058CB /* CropVideo.swift */; };
 		254507A425D173D000DEB796 /* RotateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A325D173D000DEB796 /* RotateView.swift */; };
 		254507A725D173DE00DEB796 /* RotateView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 254507A625D173DE00DEB796 /* RotateView.xib */; };
 		254507AA25D18D2900DEB796 /* RotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 254507A925D18D2900DEB796 /* RotateVideo.swift */; };
@@ -75,7 +74,6 @@
 		253C607425D8252500F058CB /* CropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
 		253C607725D8253600F058CB /* CropView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CropView.xib; sourceTree = "<group>"; };
 		253C607A25D82B1100F058CB /* CropViewEdit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewEdit.swift; sourceTree = "<group>"; };
-		253C607D25D82D4300F058CB /* CropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropVideo.swift; sourceTree = "<group>"; };
 		254507A325D173D000DEB796 /* RotateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateView.swift; sourceTree = "<group>"; };
 		254507A625D173DE00DEB796 /* RotateView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RotateView.xib; sourceTree = "<group>"; };
 		254507A925D18D2900DEB796 /* RotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RotateVideo.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
 				2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */,
 				2539390025D6CEF70011A397 /* MusicVideo.swift */,
-				253C607D25D82D4300F058CB /* CropVideo.swift */,
 			);
 			path = VideoEditorTask;
 			sourceTree = "<group>";
@@ -354,7 +351,6 @@
 				2599AEB825CBA86100485CD4 /* TrimVideo.swift in Sources */,
 				25C7DA7225CC4F6B00692929 /* CutOutVideo.swift in Sources */,
 				253C607B25D82B1100F058CB /* CropViewEdit.swift in Sources */,
-				253C607E25D82D4300F058CB /* CropVideo.swift in Sources */,
 				2526401125D3B60A0066D442 /* EffectView.swift in Sources */,
 				25DBD8E825CE48E700FB219F /* Enum.swift in Sources */,
 				2599AEC625CBEB2F00485CD4 /* SoundChange.swift in Sources */,
