@@ -32,7 +32,8 @@ class EffectAndRotateVideo: Command {
             tranform = CGAffineTransform.init(translationX: -cropPointLeftBottom.x, y: -cropPointLeftBottom.y)
         }
         else if isCrop == 2 {
-            tranform = CGAffineTransform.init(translationX: width - cropPointRightTop.x, y: height - cropPointRightTop.y)
+            tranform = CGAffineTransform.init(translationX: 426 - cropPointRightTop.x, y: 320 - cropPointRightTop.y)
+            print("tranform - \(426 - cropPointRightTop.x),\(320 - cropPointRightTop.y)")
         }
         else {
             let ratio = height / width

@@ -280,11 +280,10 @@ class HomeViewController: UIViewController {
         gridCrop = CropViewEdit(frame: videoView.frame, point: CGPoint(x: 0, y: 0))
         gridCrop.backgroundColor = .clear
         self.view.addSubview(gridCrop)
-        gridCrop.topAnchor.constraint(equalTo: videoView.topAnchor).isActive = true
-        gridCrop.leadingAnchor.constraint(equalTo: videoView.leadingAnchor).isActive = true
-        gridCrop.trailingAnchor.constraint(equalTo: videoView.trailingAnchor).isActive = true
-        gridCrop.bottomAnchor.constraint(equalTo: videoView.bottomAnchor).isActive = true
-        
+        gridCrop.centerXAnchor.constraint(equalTo: videoView.centerXAnchor).isActive = true
+        gridCrop.centerYAnchor.constraint(equalTo: videoView.centerYAnchor).isActive = true
+        gridCrop.widthAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.width).isActive = true
+        gridCrop.heightAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.height).isActive = true
     }
 }
 
@@ -608,11 +607,11 @@ extension HomeViewController: CropViewDelegate {
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
-        cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
-        editor.pushCommand(task: cmd)
-        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+//        editor.popCommand()
+//        cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+//        editor.pushCommand(task: cmd)
+//        nowAllComposition = editor.executeTask(allComposition: nowAllComposition)
         
-        //playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
