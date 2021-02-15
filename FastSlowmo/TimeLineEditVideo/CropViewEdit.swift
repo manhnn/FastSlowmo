@@ -18,8 +18,6 @@ class CropViewEdit: UIView {
     public var rightControllView: UIView!
     public var bottomControllView: UIView!
     public var topControllView: UIView!
-//    public var leftLabel: UILabel!
-//    public var rightLabel: UILabel!
     public var gridCrop: GridCrop!
     
     public var cropPointLeftBottom = CGPoint(x: 0, y: 0)

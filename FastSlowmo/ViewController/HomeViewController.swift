@@ -48,6 +48,8 @@ class HomeViewController: UIViewController {
     var isFlipHorizontally = false
     var isFlipVertically = false
     var countedClickMusic: Int = 0
+    var cropPointLeftBottom = CGPoint(x: 0, y: 0)
+    var cropPointRightTop = CGPoint(x: 0, y: 0)
     
     let editor = VideoEditor()
     
@@ -87,7 +89,7 @@ class HomeViewController: UIViewController {
     }
     
     func setupAllCompositionBeforeEdit() {
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         
         let mutableComposition1 = AVMutableComposition()
@@ -201,7 +203,6 @@ class HomeViewController: UIViewController {
     // MARK: - Sound Video
     @IBAction func soundVideoPressed(_ sender: Any) {
         soundSlider.isHidden = !soundSlider.isHidden
-        navigationView.isHidden = !navigationView.isHidden
     }
     
     @IBAction func soundSliderChangeValue(_ sender: UISlider) {
@@ -283,6 +284,7 @@ class HomeViewController: UIViewController {
         gridCrop.leadingAnchor.constraint(equalTo: videoView.leadingAnchor).isActive = true
         gridCrop.trailingAnchor.constraint(equalTo: videoView.trailingAnchor).isActive = true
         gridCrop.bottomAnchor.constraint(equalTo: videoView.bottomAnchor).isActive = true
+        
     }
 }
 
@@ -420,7 +422,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateLeft(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex - 1 <= -4) ? 0 : rotationDirectionIndex - 1
         
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -432,7 +434,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateRight(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex + 1) % 4
         
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -459,7 +461,7 @@ extension HomeViewController: RotateViewDelegate {
 
         editor.undoCommand(countClick: rotateViewXib.countClickRotate)
         if editor.listCommand.count == 0 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0)
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
@@ -479,7 +481,7 @@ extension HomeViewController: RotateViewDelegate {
 // MARK: - Extension EffectViewDelegate
 extension HomeViewController: EffectViewDelegate {
     fileprivate func setFilterByHue(hueType: Int) {
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: hueType)
+        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: hueType, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -515,7 +517,7 @@ extension HomeViewController: EffectViewDelegate {
         
         editor.undoCommand(countClick: effectViewXib.countClickEffect)
         if editor.listCommand.count == 0 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0)
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
@@ -599,6 +601,20 @@ extension HomeViewController: CropViewDelegate {
         gridCrop.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
         
+        self.cropPointLeftBottom = gridCrop.cropPointLeftBottom
+        self.cropPointRightTop = gridCrop.cropPointRightTop
         
+        var cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        editor.pushCommand(task: cmd)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        
+        cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        editor.pushCommand(task: cmd)
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        
+        //playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
 }

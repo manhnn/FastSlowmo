@@ -13,29 +13,42 @@ class EffectAndRotateVideo: Command {
     var originAssetVideo: AVAsset!
     var rotateType: Int!
     var hueType: Int!
+    var isCrop: Int!
+    var cropPointLeftBottom: CGPoint!
+    var cropPointRightTop: CGPoint!
     
-    init(originAssetVideo: AVAsset, rotateType: Int, hueType: Int) {
+    init(originAssetVideo: AVAsset, rotateType: Int, hueType: Int, isCrop: Int, cropPointLeftBottom: CGPoint, cropPointRightTop: CGPoint) {
         self.originAssetVideo = originAssetVideo
         self.rotateType = rotateType
         self.hueType = hueType
+        self.isCrop = isCrop
+        self.cropPointLeftBottom = cropPointLeftBottom
+        self.cropPointRightTop = cropPointRightTop
     }
     
     func setCGAffineTransform(_ width: CGFloat, _ height: CGFloat) -> CGAffineTransform {
-        let ratio = height / width
-        
         var tranform = CGAffineTransform()
-        
-        if rotateType == -1 || rotateType == 3 {
-            tranform = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -width * ratio)
+        if isCrop == 1 {
+            tranform = CGAffineTransform.init(translationX: -cropPointLeftBottom.x, y: -cropPointLeftBottom.y)
         }
-        else if rotateType == -2 || rotateType == 2 {
-            tranform = CGAffineTransform(rotationAngle: .pi).translatedBy(x: -width, y: -height)
-        }
-        else if rotateType == -3 || rotateType == 1 {
-            tranform = CGAffineTransform(rotationAngle: .pi * 1.5).translatedBy(x: -height / ratio, y: 0)
+        else if isCrop == 2 {
+            tranform = CGAffineTransform.init(translationX: width - cropPointRightTop.x, y: height - cropPointRightTop.y)
         }
         else {
-            tranform = CGAffineTransform(translationX: 0, y: 0.001)
+            let ratio = height / width
+            
+            if rotateType == -1 || rotateType == 3 {
+                tranform = CGAffineTransform(rotationAngle: .pi / 2).translatedBy(x: 0, y: -width * ratio)
+            }
+            else if rotateType == -2 || rotateType == 2 {
+                tranform = CGAffineTransform(rotationAngle: .pi).translatedBy(x: -width, y: -height)
+            }
+            else if rotateType == -3 || rotateType == 1 {
+                tranform = CGAffineTransform(rotationAngle: .pi * 1.5).translatedBy(x: -height / ratio, y: 0)
+            }
+            else {
+                tranform = CGAffineTransform(translationX: 0, y: 0.001)
+            }
         }
         return tranform
     }
@@ -120,11 +133,20 @@ class EffectAndRotateVideo: Command {
     }
     
     fileprivate func setRenderSizeComposition(_ videoComposition: AVMutableVideoComposition, _ newAllComposition: AllComposition) {
-        if rotateType == 1 || rotateType == 3  || rotateType == -1 || rotateType == -3 {
-            videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.height, height: newAllComposition.mutableComposition.naturalSize.width)
+        if isCrop == 1 {
+            videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.width - cropPointLeftBottom.x, height: newAllComposition.mutableComposition.naturalSize.height - cropPointLeftBottom.y)
         }
-        else { // 0 2 4
-            videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.width, height: newAllComposition.mutableComposition.naturalSize.height)
+        else if isCrop == 2 {
+            videoComposition.renderSize = CGSize(width: cropPointRightTop.x - cropPointLeftBottom.x, height: cropPointRightTop.y - cropPointLeftBottom.y)
+            print(videoComposition.renderSize)
+        }
+        else {
+            if rotateType == 1 || rotateType == 3  || rotateType == -1 || rotateType == -3 {
+                videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.height, height: newAllComposition.mutableComposition.naturalSize.width)
+            }
+            else { // 0 2 4
+                videoComposition.renderSize = CGSize(width: newAllComposition.mutableComposition.naturalSize.width, height: newAllComposition.mutableComposition.naturalSize.height)
+            }
         }
     }
     
