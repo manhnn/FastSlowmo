@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ExportVideoViewController" customModule="FastSlowmo" customModuleProvider="target">
+            <connections>
+                <outlet property="videoView" destination="kqj-8q-DDr" id="Frg-ER-4Qr"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqj-8q-DDr">
+                    <rect key="frame" x="20.5" y="336" width="373" height="224"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="kqj-8q-DDr" secondAttribute="height" multiplier="5:3" id="57M-QB-Pp0"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cht-7t-MVe">
+                    <rect key="frame" x="59.5" y="660" width="295" height="40"/>
+                    <state key="normal" backgroundImage="Group 527"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video Successfully Exported" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNP-Hp-jKu">
+                    <rect key="frame" x="75.5" y="252" width="263" height="24"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zLb-D2-EGW">
+                    <rect key="frame" x="176" y="170" width="62" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="zLb-D2-EGW" secondAttribute="height" multiplier="1:1" id="7Qh-mc-bJ4"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="Group 434"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efe-X8-Fot">
+                    <rect key="frame" x="20" y="64" width="20.5" height="20.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Efe-X8-Fot" secondAttribute="height" multiplier="1:1" id="7j9-lD-UAH"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="x"/>
+                    <connections>
+                        <action selector="backPressed:" destination="-1" eventType="touchUpInside" id="Gsb-E3-y1L"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6iz-fc-E5m">
+                    <rect key="frame" x="192.5" y="433.5" width="29" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="6iz-fc-E5m" secondAttribute="height" multiplier="1:1" id="az6-bP-vFn"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="pause"/>
+                    <connections>
+                        <action selector="playVideoPressed:" destination="-1" eventType="touchUpInside" id="oK0-vI-TNf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="6iz-fc-E5m" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.07" id="1eQ-VP-5wN"/>
+                <constraint firstItem="cht-7t-MVe" firstAttribute="top" secondItem="kqj-8q-DDr" secondAttribute="bottom" constant="100" id="3xc-Tn-1f6"/>
+                <constraint firstItem="6iz-fc-E5m" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="6wp-bt-bdc"/>
+                <constraint firstItem="kqj-8q-DDr" firstAttribute="top" secondItem="vNP-Hp-jKu" secondAttribute="bottom" constant="60" id="J0J-DY-1io"/>
+                <constraint firstItem="Efe-X8-Fot" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="JqW-VV-JEQ"/>
+                <constraint firstItem="vNP-Hp-jKu" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="N1O-ro-4JV"/>
+                <constraint firstItem="kqj-8q-DDr" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="RBk-cx-6f5"/>
+                <constraint firstItem="kqj-8q-DDr" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="TD3-4f-k0V"/>
+                <constraint firstItem="cht-7t-MVe" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Tuq-st-Lpd"/>
+                <constraint firstItem="kqj-8q-DDr" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.9" id="Uhr-UV-caI"/>
+                <constraint firstItem="Efe-X8-Fot" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.05" id="dB0-O6-MVz"/>
+                <constraint firstItem="zLb-D2-EGW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fVU-Tp-VY7"/>
+                <constraint firstItem="6iz-fc-E5m" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="hfm-8x-sUo"/>
+                <constraint firstItem="Efe-X8-Fot" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="jEP-aT-3cA"/>
+                <constraint firstItem="vNP-Hp-jKu" firstAttribute="top" secondItem="zLb-D2-EGW" secondAttribute="bottom" constant="20" id="pWM-qp-aFD"/>
+                <constraint firstItem="zLb-D2-EGW" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.15" id="xl6-zP-vvQ"/>
+            </constraints>
+            <point key="canvasLocation" x="139" y="83"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Group 434" width="50" height="50"/>
+        <image name="Group 527" width="295" height="40"/>
+        <image name="pause" width="15" height="17"/>
+        <image name="x" width="19" height="19"/>
+    </resources>
+</document>

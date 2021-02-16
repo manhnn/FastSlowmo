@@ -32,6 +32,9 @@
                                 <constraint firstAttribute="width" secondItem="TOz-73-UUG" secondAttribute="height" multiplier="1:1" id="pxk-v6-0Ra"/>
                             </constraints>
                             <state key="normal" backgroundImage="x"/>
+                            <connections>
+                                <action selector="exitPressed:" destination="-1" eventType="touchUpInside" id="ZS8-eD-VYG"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M3u-YK-tVJ">
                             <rect key="frame" x="329" y="9.9999999999999982" width="79" height="26.333333333333329"/>
@@ -39,6 +42,9 @@
                                 <constraint firstAttribute="width" secondItem="M3u-YK-tVJ" secondAttribute="height" multiplier="3:1" id="sHX-Sh-tmG"/>
                             </constraints>
                             <state key="normal" backgroundImage="export"/>
+                            <connections>
+                                <action selector="exportPressed:" destination="-1" eventType="touchUpInside" id="s7g-Jh-ccI"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

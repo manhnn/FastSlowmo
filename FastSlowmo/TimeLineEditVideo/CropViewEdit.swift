@@ -25,7 +25,7 @@ class CropViewEdit: UIView {
     public var gridCrop: GridCrop!
     
     public var cropPointLeftBottom = CGPoint(x: 0, y: 0)
-    public var cropPointRightTop = CGPoint(x: 0, y: 0)
+    public var cropPointRightTop = CGPoint(x: 426, y: 320)
     
     init(frame: CGRect, point: CGPoint) {
         super.init(frame: frame)

@@ -16,6 +16,7 @@ class EffectAndRotateVideo: Command {
     var isCrop: Int!
     var cropPointLeftBottom: CGPoint!
     var cropPointRightTop: CGPoint!
+    var natureSize = CGPoint(x: 426, y: 320)
     
     init(originAssetVideo: AVAsset, rotateType: Int, hueType: Int, isCrop: Int, cropPointLeftBottom: CGPoint, cropPointRightTop: CGPoint) {
         self.originAssetVideo = originAssetVideo
@@ -32,8 +33,7 @@ class EffectAndRotateVideo: Command {
             tranform = CGAffineTransform.init(translationX: -cropPointLeftBottom.x, y: -cropPointLeftBottom.y)
         }
         else if isCrop == 2 {
-            tranform = CGAffineTransform.init(translationX: 426 - cropPointRightTop.x, y: 320 - cropPointRightTop.y)
-            print("tranform - \(426 - cropPointRightTop.x),\(320 - cropPointRightTop.y)")
+            tranform = CGAffineTransform.init(translationX: -(natureSize.x - cropPointRightTop.x), y: -(natureSize.y - cropPointRightTop.y))
         }
         else {
             let ratio = height / width
@@ -152,6 +152,8 @@ class EffectAndRotateVideo: Command {
     }
     
     func execute(allComposition: AllComposition) -> AllComposition {
+        natureSize.x = allComposition.mutableComposition.naturalSize.width
+        natureSize.y = allComposition.mutableComposition.naturalSize.height
         
         let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
         

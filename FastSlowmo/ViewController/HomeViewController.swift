@@ -49,7 +49,7 @@ class HomeViewController: UIViewController {
     var isFlipVertically = false
     var countedClickMusic: Int = 0
     var cropPointLeftBottom = CGPoint(x: 0, y: 0)
-    var cropPointRightTop = CGPoint(x: 0, y: 0)
+    var cropPointRightTop = CGPoint(x: 426, y: 320)
     
     let editor = VideoEditor()
     
@@ -154,6 +154,34 @@ class HomeViewController: UIViewController {
         }
     }
     
+    @IBAction func exitPressed(_ sender: Any) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    // MARK: - Export Video
+    @IBAction func exportPressed(_ sender: Any) {
+        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let url = documentDirectory.appendingPathComponent("export.mp4")
+
+        guard let exporter = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
+        exporter.outputURL = url
+        exporter.outputFileType = AVFileType.mp4
+        exporter.shouldOptimizeForNetworkUse = true
+        exporter.videoComposition = nowAllComposition.videoComposition
+        exporter.exportAsynchronously(completionHandler: {
+                print("sometimes never calls")
+        })
+        print(exporter.outputURL)
+        player = AVPlayer(url: exporter.outputURL!)
+        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
+        playerLayer = AVPlayerLayer(player: player)
+        playerLayer.videoGravity = .resizeAspectFill
+        videoView.layer.addSublayer(playerLayer)
+        updateTimeForSeconds()
+//        let exportViewController = ExportVideoViewController()
+//        exportViewController.url = exporter.outputURL
+//        navigationController?.pushViewController(exportViewController, animated: true)
+    }
     
     // MARK: - Cut Video
     @IBAction func cutVideoPressed(_ sender: Any) {
@@ -278,6 +306,7 @@ class HomeViewController: UIViewController {
         
         
         gridCrop = CropViewEdit(frame: videoView.frame, point: CGPoint(x: 0, y: 0))
+        gridCrop.translatesAutoresizingMaskIntoConstraints = false
         gridCrop.backgroundColor = .clear
         self.view.addSubview(gridCrop)
         gridCrop.centerXAnchor.constraint(equalTo: videoView.centerXAnchor).isActive = true
@@ -603,14 +632,18 @@ extension HomeViewController: CropViewDelegate {
         self.cropPointLeftBottom = gridCrop.cropPointLeftBottom
         self.cropPointRightTop = gridCrop.cropPointRightTop
         
-        var cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
-        editor.pushCommand(task: cmd)
-        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
-        
-//        editor.popCommand()
-//        cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
-//        editor.pushCommand(task: cmd)
-//        nowAllComposition = editor.executeTask(allComposition: nowAllComposition)
+        if cropPointLeftBottom.x != 0 || cropPointLeftBottom.y != 0 {
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            editor.pushCommand(task: cmd)
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+            editor.popCommand()
+        }
+        if cropPointRightTop.x != 426 || cropPointRightTop.y != 320 {
+            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            editor.pushCommand(task: cmd)
+            nowAllComposition = editor.executeTask(allComposition: nowAllComposition)
+            editor.popCommand()
+        }
         
         playerItem.videoComposition = nowAllComposition.videoComposition
         playerItem.audioTimePitchAlgorithm = .spectral
