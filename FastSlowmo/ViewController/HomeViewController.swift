@@ -14,7 +14,6 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var videoView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var soundSlider: UISlider!
-    
     @IBOutlet weak var navigationView: UIView!
     @IBOutlet weak var constraintBottomFunctionView: NSLayoutConstraint!
     @IBOutlet weak var functionView: UIView!
@@ -70,6 +69,7 @@ class HomeViewController: UIViewController {
     func setupVideoBeforePlay() {
         originAssetVideo = AVAsset(url: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))
         player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))
+        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
         playerItem = player.currentItem
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspect
@@ -88,8 +88,14 @@ class HomeViewController: UIViewController {
         })
     }
     
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+//        if keyPath == "duration", let durationTime = player.currentItem?.duration.seconds, durationTime > 0.0 {
+//            durationTimeLabel.text = getTimeString(from: player.currentItem!.duration)
+//        }
+    }
+    
     func setupAllCompositionBeforeEdit() {
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         
         let mutableComposition1 = AVMutableComposition()
@@ -161,26 +167,25 @@ class HomeViewController: UIViewController {
     // MARK: - Export Video
     @IBAction func exportPressed(_ sender: Any) {
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let url = documentDirectory.appendingPathComponent("export.mp4")
+        let url = documentDirectory.appendingPathComponent("mergeVideo123.mp4")
 
         guard let exporter = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
         exporter.outputURL = url
         exporter.outputFileType = AVFileType.mp4
         exporter.shouldOptimizeForNetworkUse = true
         exporter.videoComposition = nowAllComposition.videoComposition
-        exporter.exportAsynchronously(completionHandler: {
-                print("sometimes never calls")
-        })
-        print(exporter.outputURL)
-        player = AVPlayer(url: exporter.outputURL!)
-        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
-        playerLayer = AVPlayerLayer(player: player)
-        playerLayer.videoGravity = .resizeAspectFill
-        videoView.layer.addSublayer(playerLayer)
-        updateTimeForSeconds()
-//        let exportViewController = ExportVideoViewController()
-//        exportViewController.url = exporter.outputURL
-//        navigationController?.pushViewController(exportViewController, animated: true)
+        
+//        print(exporter.outputURL)
+//        player = AVPlayer(url: exporter.outputURL!)
+//        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
+//        playerLayer = AVPlayerLayer(player: player)
+//        playerLayer.videoGravity = .resizeAspect
+//        videoView.layer.addSublayer(playerLayer)
+//        updateTimeForSeconds()
+        
+        let exportViewController = ExportVideoViewController()
+        exportViewController.url = url
+        navigationController?.pushViewController(exportViewController, animated: true)
     }
     
     // MARK: - Cut Video
@@ -450,7 +455,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateLeft(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex - 1 <= -4) ? 0 : rotationDirectionIndex - 1
         
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -462,7 +467,7 @@ extension HomeViewController: RotateViewDelegate {
     func rotateViewDidTapRotateRight(_ view: RotateView) {
         rotationDirectionIndex = (rotationDirectionIndex + 1) % 4
         
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -489,7 +494,7 @@ extension HomeViewController: RotateViewDelegate {
 
         editor.undoCommand(countClick: rotateViewXib.countClickRotate)
         if editor.listCommand.count == 0 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
@@ -509,7 +514,7 @@ extension HomeViewController: RotateViewDelegate {
 // MARK: - Extension EffectViewDelegate
 extension HomeViewController: EffectViewDelegate {
     fileprivate func setFilterByHue(hueType: Int) {
-        let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: hueType, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+        let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: hueType, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
@@ -545,7 +550,7 @@ extension HomeViewController: EffectViewDelegate {
         
         editor.undoCommand(countClick: effectViewXib.countClickEffect)
         if editor.listCommand.count == 0 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: 0, hueType: 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
         }
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
@@ -633,16 +638,16 @@ extension HomeViewController: CropViewDelegate {
         self.cropPointRightTop = gridCrop.cropPointRightTop
         
         if cropPointLeftBottom.x != 0 || cropPointLeftBottom.y != 0 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
             nowAllComposition = editor.executeTask(allComposition: headAllComposition)
             editor.popCommand()
         }
         if cropPointRightTop.x != 426 || cropPointRightTop.y != 320 {
-            let cmd = EffectAndRotateVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
+            let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
             nowAllComposition = editor.executeTask(allComposition: nowAllComposition)
-            editor.popCommand()
+            //editor.popCommand()
         }
         
         playerItem.videoComposition = nowAllComposition.videoComposition

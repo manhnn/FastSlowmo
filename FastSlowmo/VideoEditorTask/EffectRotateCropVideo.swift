@@ -8,7 +8,7 @@
 import UIKit
 import AVFoundation
 
-class EffectAndRotateVideo: Command {
+class EffectRotateCropVideo: Command {
     
     var originAssetVideo: AVAsset!
     var rotateType: Int!

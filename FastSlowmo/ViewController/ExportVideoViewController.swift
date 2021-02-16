@@ -22,7 +22,6 @@ class ExportVideoViewController: UIViewController {
         super.viewDidLoad()
 
         player = AVPlayer(url: url!)
-        playerItem = player.currentItem
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspect
         videoView.layer.addSublayer(playerLayer)

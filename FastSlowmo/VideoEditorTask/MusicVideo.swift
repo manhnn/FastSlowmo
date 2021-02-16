@@ -22,6 +22,15 @@ class MusicVideo: Command {
         
         let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
         
+        newAllComposition.mutableComposition = AVMutableComposition()
+        
+        allComposition.mutableComposition.tracks.forEach { track in
+            if track.mediaType == .video {
+                let trackComposition = newAllComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)
+                try? trackComposition?.insertTimeRange(timeRange, of: track, at: .zero)
+            }
+        }
+        
         originAssetMusic.tracks.forEach { track in
             if track.mediaType == .audio {
                 let trackComposition = newAllComposition.mutableComposition.addMutableTrack(withMediaType: track.mediaType, preferredTrackID: track.trackID)

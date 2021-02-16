@@ -10,7 +10,7 @@
 		2516C5A225D8FF9B008BE196 /* GridCrop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516C5A125D8FF9B008BE196 /* GridCrop.swift */; };
 		2526401125D3B60A0066D442 /* EffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401025D3B60A0066D442 /* EffectView.swift */; };
 		2526401425D3B61E0066D442 /* EffectView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2526401325D3B61E0066D442 /* EffectView.xib */; };
-		2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */; };
+		2526401725D3CE300066D442 /* EffectRotateCropVideo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2526401625D3CE300066D442 /* EffectRotateCropVideo.swift */; };
 		252960C725DBB7A800AE8BFB /* ExportVideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 252960C525DBB7A800AE8BFB /* ExportVideoViewController.swift */; };
 		252960C825DBB7A800AE8BFB /* ExportVideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252960C625DBB7A800AE8BFB /* ExportVideoViewController.xib */; };
 		252AFDC625CFFC4B000F452F /* SpeedView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 252AFDC525CFFC4B000F452F /* SpeedView.xib */; };
@@ -60,7 +60,7 @@
 		2516C5A125D8FF9B008BE196 /* GridCrop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCrop.swift; sourceTree = "<group>"; };
 		2526401025D3B60A0066D442 /* EffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectView.swift; sourceTree = "<group>"; };
 		2526401325D3B61E0066D442 /* EffectView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EffectView.xib; sourceTree = "<group>"; };
-		2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectAndRotateVideo.swift; sourceTree = "<group>"; };
+		2526401625D3CE300066D442 /* EffectRotateCropVideo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectRotateCropVideo.swift; sourceTree = "<group>"; };
 		252960C525DBB7A800AE8BFB /* ExportVideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportVideoViewController.swift; sourceTree = "<group>"; };
 		252960C625DBB7A800AE8BFB /* ExportVideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExportVideoViewController.xib; sourceTree = "<group>"; };
 		252AFDC525CFFC4B000F452F /* SpeedView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpeedView.xib; sourceTree = "<group>"; };
@@ -223,7 +223,7 @@
 				25C7DA7125CC4F6B00692929 /* CutOutVideo.swift */,
 				2599AEBB25CBA87100485CD4 /* SpeedVideo.swift */,
 				254507A925D18D2900DEB796 /* RotateVideo.swift */,
-				2526401625D3CE300066D442 /* EffectAndRotateVideo.swift */,
+				2526401625D3CE300066D442 /* EffectRotateCropVideo.swift */,
 				2539390025D6CEF70011A397 /* MusicVideo.swift */,
 			);
 			path = VideoEditorTask;
@@ -372,7 +372,7 @@
 				25DBD8E425CE454100FB219F /* TimeLineCutOutView.swift in Sources */,
 				2586399C25CD005A007F9623 /* TimeLineTrimView.swift in Sources */,
 				252AFDCE25CFFC96000F452F /* SpeedView.swift in Sources */,
-				2526401725D3CE300066D442 /* EffectAndRotateVideo.swift in Sources */,
+				2526401725D3CE300066D442 /* EffectRotateCropVideo.swift in Sources */,
 				253938FB25D6B35E0011A397 /* MusicView.swift in Sources */,
 				252960C725DBB7A800AE8BFB /* ExportVideoViewController.swift in Sources */,
 				253C607525D8252500F058CB /* CropView.swift in Sources */,
