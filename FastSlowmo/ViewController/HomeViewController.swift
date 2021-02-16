@@ -167,7 +167,7 @@ class HomeViewController: UIViewController {
     // MARK: - Export Video
     @IBAction func exportPressed(_ sender: Any) {
         guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let url = documentDirectory.appendingPathComponent("mergeVideo123.mp4")
+        let url = documentDirectory.appendingPathComponent("exportVideo123.mp4")
 
         guard let exporter = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
         exporter.outputURL = url
@@ -316,8 +316,14 @@ class HomeViewController: UIViewController {
         self.view.addSubview(gridCrop)
         gridCrop.centerXAnchor.constraint(equalTo: videoView.centerXAnchor).isActive = true
         gridCrop.centerYAnchor.constraint(equalTo: videoView.centerYAnchor).isActive = true
-        gridCrop.widthAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.width).isActive = true
-        gridCrop.heightAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.height).isActive = true
+        if rotationDirectionIndex == -2 || rotationDirectionIndex == 0 || rotationDirectionIndex == 2 {
+            gridCrop.widthAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.width).isActive = true
+            gridCrop.heightAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.height).isActive = true
+        }
+        else {
+            gridCrop.widthAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.height).isActive = true
+            gridCrop.heightAnchor.constraint(equalToConstant: nowAllComposition.mutableComposition.naturalSize.width).isActive = true
+        }
     }
 }
 
