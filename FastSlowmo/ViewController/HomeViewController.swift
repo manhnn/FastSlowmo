@@ -95,8 +95,8 @@ class HomeViewController: UIViewController {
         let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
         videoComposition = AVMutableVideoComposition()
-        headAllComposition = AllComposition(mutableComposition: mutableComposition1, videoComposition: videoComposition1)
-        nowAllComposition = AllComposition(mutableComposition: mutableComposition, videoComposition: videoComposition)
+        headAllComposition = AllComposition(mutableComposition: mutableComposition1.mutableCopy() as! AVMutableComposition, videoComposition: videoComposition1.mutableCopy() as! AVMutableVideoComposition)
+        nowAllComposition = AllComposition(mutableComposition: mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: videoComposition.mutableCopy() as! AVMutableVideoComposition)
         
         if nowAllComposition.mutableComposition.duration.seconds == 0 {
             originAssetVideo.tracks.forEach { track in
@@ -171,18 +171,28 @@ class HomeViewController: UIViewController {
         catch _ {
             print("catch")
         }
-        let test = AllComposition(mutableComposition: nowAllComposition.mutableComposition.mutableCopy() as! AVMutableComposition , videoComposition: nowAllComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        let test = AllComposition(mutableComposition: nowAllComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: nowAllComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
         let exporter = AVAssetExportSession(asset: test.mutableComposition, presetName: AVAssetExportPresetMediumQuality)
-        exporter!.videoComposition = test.videoComposition
+        if test.videoComposition != nil {
+            exporter!.videoComposition = test.videoComposition
+        }
         exporter!.outputURL = URL(string: exportPath)
         exporter!.outputFileType = AVFileType.mp4
         exporter!.timeRange = .init(start: .zero, duration: test.mutableComposition.duration)
         
         exporter!.exportAsynchronously(completionHandler: {() -> Void in
-            self.exportDidFinish(exporter!)
+            //self.exportDidFinish(exporter!)
             print(exporter!.status," ",exporter!.error)
             print("export ok")
         })
+        
+//        playerItem = AVPlayerItem(asset: test.mutableComposition)
+//        if test.videoComposition != nil {
+//            playerItem.videoComposition = test.videoComposition
+//        }
+//        playerItem.audioTimePitchAlgorithm = .spectral
+//        player.replaceCurrentItem(with: playerItem)
+        
         let exportViewController = ExportVideoViewController()
         exportViewController.url = exportUrl
         navigationController?.pushViewController(exportViewController, animated: true)
@@ -376,7 +386,9 @@ extension HomeViewController: CutVideoDelegate {
         }
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        playerItem.videoComposition = nowAllComposition.videoComposition
+        if nowAllComposition.videoComposition != nil {
+            playerItem.videoComposition = nowAllComposition.videoComposition
+        }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -432,7 +444,7 @@ extension HomeViewController: SpeedViewDelegate {
         speedTimeLineView.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
         
-        if editor.listCommand.count > 1 {
+        if editor.listCommand.count > 0 {
             editor.popCommand()
             nowAllComposition = editor.executeTask(allComposition: headAllComposition)
             playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)

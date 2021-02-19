@@ -103,7 +103,6 @@ class SpeedView: UIView {
     @IBAction func removeSpeed(_ sender: UIButton) {
         setupColorSpeedButton()
         delegate?.speedViewDidTapRemoveButton(self)
-        countClickSpeed = 0
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
