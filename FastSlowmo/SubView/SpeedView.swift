@@ -9,7 +9,8 @@ import UIKit
 
 protocol SpeedViewDelegate: class {
     func speedViewDidTapCloseButton(_ view: SpeedView)
-    func speedViewDidTapAddButton(_ view: SpeedView, rate: Double)
+    func speedViewDidTapAddButton(_ view: SpeedView)
+    func speedViewDidTapSpeedRateButton(_ view: SpeedView, rate: Double)
     func speedViewDidTapRemoveButton(_ view: SpeedView)
 }
 
@@ -25,6 +26,7 @@ class SpeedView: UIView {
     
     weak var delegate: SpeedViewDelegate?
     var rate: Double = 1
+    var countClickSpeed: Int = 0
     
     func setupColorSpeedButton() {
         outlet025X.backgroundColor = .darkGray
@@ -37,58 +39,75 @@ class SpeedView: UIView {
     }
     
     @IBAction func speed025X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 0.25
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed05X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 0.5
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed075X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 0.75
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed1X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 1
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed2X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 2
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed3X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 3
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func speed4X(_ sender: UIButton) {
+        countClickSpeed += 1
         setupColorSpeedButton()
         sender.backgroundColor = .systemPink
         rate = 4
+        delegate?.speedViewDidTapSpeedRateButton(self, rate: rate)
     }
     
     @IBAction func closeSpeed(_ sender: UIButton) {
         setupColorSpeedButton()
         delegate?.speedViewDidTapCloseButton(self)
+        countClickSpeed = 0
     }
     
     @IBAction func removeSpeed(_ sender: UIButton) {
         setupColorSpeedButton()
         delegate?.speedViewDidTapRemoveButton(self)
+        countClickSpeed = 0
     }
     
     @IBAction func addPressed(_ sender: UIButton) {
-        delegate?.speedViewDidTapAddButton(self, rate: rate)
+        delegate?.speedViewDidTapAddButton(self)
+        countClickSpeed = 0
     }
 }

@@ -69,7 +69,6 @@ class HomeViewController: UIViewController {
     func setupVideoBeforePlay() {
         originAssetVideo = AVAsset(url: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))
         player = AVPlayer(url: URL(fileURLWithPath: Bundle.main.path(forResource: "VideoExample1", ofType: "mp4")!))
-        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
         playerItem = player.currentItem
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspect
@@ -86,12 +85,6 @@ class HomeViewController: UIViewController {
             self?.soundSlider.value = Float(self!.player.volume)
             self!.timeLabel.text = "\(self!.getTimeString(from: currentItem.currentTime()))/\(self!.getTimeString(from: self!.player.currentItem!.duration))"
         })
-    }
-    
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-//        if keyPath == "duration", let durationTime = player.currentItem?.duration.seconds, durationTime > 0.0 {
-//            durationTimeLabel.text = getTimeString(from: player.currentItem!.duration)
-//        }
     }
     
     func setupAllCompositionBeforeEdit() {
@@ -166,26 +159,37 @@ class HomeViewController: UIViewController {
     
     // MARK: - Export Video
     @IBAction func exportPressed(_ sender: Any) {
-        guard let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
-        let url = documentDirectory.appendingPathComponent("exportVideo123.mp4")
+        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
+        let doc = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let exportPath = doc.appendingFormat("/EditVideomm.mp4")
+        let exportUrl = URL(fileURLWithPath: exportPath)
+        print("export url  = \(exportUrl.absoluteString)")
 
-        guard let exporter = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetHighestQuality) else { return }
-        exporter.outputURL = url
-        exporter.outputFileType = AVFileType.mp4
-        exporter.shouldOptimizeForNetworkUse = true
-        exporter.videoComposition = nowAllComposition.videoComposition
+        do {
+            try FileManager.default.removeItem(at: exportUrl)
+        }
+        catch _ {
+            print("catch")
+        }
+        let test = AllComposition(mutableComposition: nowAllComposition.mutableComposition.mutableCopy() as! AVMutableComposition , videoComposition: nowAllComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        let exporter = AVAssetExportSession(asset: test.mutableComposition, presetName: AVAssetExportPresetMediumQuality)
+        exporter!.videoComposition = test.videoComposition
+        exporter!.outputURL = URL(string: exportPath)
+        exporter!.outputFileType = AVFileType.mp4
+        exporter!.timeRange = .init(start: .zero, duration: test.mutableComposition.duration)
         
-//        print(exporter.outputURL)
-//        player = AVPlayer(url: exporter.outputURL!)
-//        player.currentItem?.addObserver(self, forKeyPath: "duration", options: [.new, .initial], context: nil)
-//        playerLayer = AVPlayerLayer(player: player)
-//        playerLayer.videoGravity = .resizeAspect
-//        videoView.layer.addSublayer(playerLayer)
-//        updateTimeForSeconds()
-        
+        exporter!.exportAsynchronously(completionHandler: {() -> Void in
+            self.exportDidFinish(exporter!)
+            print(exporter!.status," ",exporter!.error)
+            print("export ok")
+        })
         let exportViewController = ExportVideoViewController()
-        exportViewController.url = url
+        exportViewController.url = exportUrl
         navigationController?.pushViewController(exportViewController, animated: true)
+    }
+    func exportDidFinish(_ session: AVAssetExportSession) {
+        let outputURL = session.outputURL
+        print("outputurl  = \(String(describing: outputURL))")
     }
     
     // MARK: - Cut Video
@@ -427,25 +431,44 @@ extension HomeViewController: SpeedViewDelegate {
         navigationView.isHidden = false
         speedTimeLineView.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
+        
+        if editor.listCommand.count > 1 {
+            editor.popCommand()
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+            playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+            if nowAllComposition.videoComposition != nil {
+                playerItem.videoComposition = nowAllComposition.videoComposition
+            }
+            playerItem.audioTimePitchAlgorithm = .spectral
+            player.replaceCurrentItem(with: playerItem)
+        }
     }
     
-    func speedViewDidTapAddButton(_ view: SpeedView, rate: Double) {
+    func speedViewDidTapAddButton(_ view: SpeedView) {
         speedViewXib.isHidden = true
         navigationView.isHidden = false
         speedTimeLineView.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
-        
+    }
+    
+    func speedViewDidTapSpeedRateButton(_ view: SpeedView, rate: Double) {
         let startTime = CGFloat(speedTimeLineView.leftStartTime)
         let endTime = CGFloat(speedTimeLineView.rightEndTime)
         let duration = CGFloat((player.currentItem?.duration.seconds)!) * 1000
         let timeRange = CMTimeRange(start: CMTime(value: CMTimeValue(startTime * duration), timescale: 1000), end: CMTime(value: CMTimeValue(endTime * duration), timescale: 1000))
         
+        if speedViewXib.countClickSpeed > 1 {
+            editor.popCommand()
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        }
         let cmd = SpeedVideo(rate: rate, timeRange: timeRange)
         editor.pushCommand(task: cmd)
         nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-        playerItem.videoComposition = nowAllComposition.videoComposition
+        if nowAllComposition.videoComposition != nil {
+            playerItem.videoComposition = nowAllComposition.videoComposition
+        }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -580,17 +603,17 @@ extension HomeViewController: MusicViewDelegate, MusicViewControllerDelegate {
         navigationView.isHidden = false
         updateConstraintOfFunctionViewUpDown(constant: 0)
         
-//        editor.undoCommand(countClick: countedClickMusic)
-//        if editor.listCommand.count == 0 {
-//            let cmd = TrimVideo(timeRange: CMTimeRange(start: .zero, duration: nowAllComposition.mutableComposition.duration))
-//            editor.pushCommand(task: cmd)
-//        }
-//        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
+        editor.undoCommand(countClick: countedClickMusic)
+        if editor.listCommand.count == 0 {
+            let cmd = TrimVideo(timeRange: CMTimeRange(start: .zero, duration: nowAllComposition.mutableComposition.duration))
+            editor.pushCommand(task: cmd)
+        }
+        nowAllComposition = editor.executeTask(allComposition: headAllComposition)
         
-//        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
-//        playerItem.videoComposition = nowAllComposition.videoComposition
-//        playerItem.audioTimePitchAlgorithm = .spectral
-//        player.replaceCurrentItem(with: playerItem)
+        playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
+        playerItem.videoComposition = nowAllComposition.videoComposition
+        playerItem.audioTimePitchAlgorithm = .spectral
+        player.replaceCurrentItem(with: playerItem)
     }
     
     func musicViewDidTapVolumeAudio(_ view: MusicView) {

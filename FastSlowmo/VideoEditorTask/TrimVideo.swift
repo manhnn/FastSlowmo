@@ -17,7 +17,8 @@ class TrimVideo: Command {
     
     func execute(allComposition: AllComposition) -> AllComposition {
         
-        let newMutableComposition = AllComposition(mutableComposition: allComposition.mutableComposition, videoComposition: allComposition.videoComposition)
+        let newMutableComposition = AllComposition(mutableComposition: allComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: allComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        
         newMutableComposition.mutableComposition = AVMutableComposition()
         
         allComposition.mutableComposition.tracks.forEach { track in
