@@ -20,9 +20,14 @@ class MusicVideo: Command {
     
     func execute(allComposition: AllComposition) -> AllComposition {
         
-        let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: allComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
-        
+        let newAllComposition = AllComposition()
         newAllComposition.mutableComposition = AVMutableComposition()
+        if allComposition.videoComposition != nil {
+            newAllComposition.videoComposition = allComposition.videoComposition!.mutableCopy() as? AVMutableVideoComposition
+        }
+        if allComposition.audioMix != nil {
+            newAllComposition.audioMix = allComposition.audioMix!.mutableCopy() as? AVAudioMix
+        }
         
         allComposition.mutableComposition.tracks.forEach { track in
             if track.mediaType == .video {

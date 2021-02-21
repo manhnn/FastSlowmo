@@ -12,10 +12,18 @@ class AllComposition {
     
     var mutableComposition: AVMutableComposition!
     var videoComposition: AVMutableVideoComposition!
+    var audioMix: AVAudioMix!
     
-    init(mutableComposition: AVMutableComposition, videoComposition: AVMutableVideoComposition) {
+    convenience init(mutableComposition: AVMutableComposition, videoComposition: AVMutableVideoComposition, audioMix: AVAudioMix) {
+        self.init()
         self.mutableComposition = mutableComposition
         self.videoComposition = videoComposition
+        self.audioMix = audioMix
     }
     
+    init() {
+        self.mutableComposition = AVMutableComposition()
+        self.videoComposition = nil
+        self.audioMix = nil
+    }
 }

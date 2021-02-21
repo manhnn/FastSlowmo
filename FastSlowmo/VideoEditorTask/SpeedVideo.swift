@@ -19,7 +19,14 @@ class SpeedVideo: Command {
     }
     
     func execute(allComposition: AllComposition) -> AllComposition {
-        let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: allComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        let newAllComposition = AllComposition()
+        newAllComposition.mutableComposition = allComposition.mutableComposition.mutableCopy() as? AVMutableComposition
+        if allComposition.videoComposition != nil {
+            newAllComposition.videoComposition = allComposition.videoComposition!.mutableCopy() as? AVMutableVideoComposition
+        }
+        if allComposition.audioMix != nil {
+            newAllComposition.audioMix = allComposition.audioMix!.mutableCopy() as? AVAudioMix
+        }
         
         newAllComposition.mutableComposition.tracks.forEach { track in
             track.scaleTimeRange(timeRange, toDuration: CMTime(value: CMTimeValue(timeRange.duration.seconds / rate), timescale: 1))

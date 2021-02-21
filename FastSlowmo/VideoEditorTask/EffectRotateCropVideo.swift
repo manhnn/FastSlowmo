@@ -155,7 +155,14 @@ class EffectRotateCropVideo: Command {
         natureSize.x = allComposition.mutableComposition.naturalSize.width
         natureSize.y = allComposition.mutableComposition.naturalSize.height
         
-        let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: allComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        let newAllComposition = AllComposition()
+        newAllComposition.mutableComposition = allComposition.mutableComposition.mutableCopy() as? AVMutableComposition
+        if allComposition.videoComposition != nil {
+            newAllComposition.videoComposition = allComposition.videoComposition!.mutableCopy() as? AVMutableVideoComposition
+        }
+        if allComposition.audioMix != nil {
+            newAllComposition.audioMix = allComposition.audioMix!.mutableCopy() as? AVAudioMix
+        }
         
         let videoComposition = setFilterComposition(newAllComposition.mutableComposition.naturalSize.width, newAllComposition.mutableComposition.naturalSize.height)
         

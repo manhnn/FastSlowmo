@@ -91,12 +91,12 @@ class HomeViewController: UIViewController {
         let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 0, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
         editor.pushCommand(task: cmd)
         
-        let mutableComposition1 = AVMutableComposition()
-        let videoComposition1 = AVMutableVideoComposition()
         mutableComposition = AVMutableComposition()
         videoComposition = AVMutableVideoComposition()
-        headAllComposition = AllComposition(mutableComposition: mutableComposition1.mutableCopy() as! AVMutableComposition, videoComposition: videoComposition1.mutableCopy() as! AVMutableVideoComposition)
-        nowAllComposition = AllComposition(mutableComposition: mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        headAllComposition = AllComposition()
+        headAllComposition.mutableComposition = mutableComposition.mutableCopy() as? AVMutableComposition
+        nowAllComposition = AllComposition()
+        nowAllComposition.mutableComposition = mutableComposition.mutableCopy() as? AVMutableComposition
         
         if nowAllComposition.mutableComposition.duration.seconds == 0 {
             originAssetVideo.tracks.forEach { track in
@@ -157,34 +157,47 @@ class HomeViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    func onError(_ error: Error) {
+        self.showAlert(title: "Error", message: "An error occurred when save. Please try again")
+    }
+    
+    func showAlert(title: String = "", message: String = "", titleButtons: [String] = ["OK"], destructiveIndexs: [Int] = [], action: ((Int) -> Void)? = nil) {
+        let alert = UIAlertController.init(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+
+        titleButtons.forEach { (titleButton) in
+            let index = titleButtons.firstIndex(of: titleButton)!
+            let style = destructiveIndexs.contains(index) ? UIAlertAction.Style.destructive : UIAlertAction.Style.default
+            let alertAction = UIAlertAction.init(title: titleButton, style: style, handler: { (_) in
+                action?(index)
+            })
+
+            alert.addAction(alertAction)
+        }
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: - Export Video
     @IBAction func exportPressed(_ sender: Any) {
-        let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0]
-        let doc = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let exportPath = doc.appendingFormat("/EditVideomm.mp4")
-        let exportUrl = URL(fileURLWithPath: exportPath)
-        print("export url  = \(exportUrl.absoluteString)")
-
-        do {
-            try FileManager.default.removeItem(at: exportUrl)
+        let exportURL = URL.init(fileURLWithPath: "\(NSTemporaryDirectory())\(UUID().uuidString).mp4")
+        let exportSession = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetPassthrough)
+        //exportSession!.videoComposition = nowAllComposition.videoComposition
+        exportSession?.outputURL = exportURL
+        exportSession?.outputFileType = .mp4
+        exportSession?.exportAsynchronously {[weak self] in
+            
+            
+            if let error = exportSession?.error {
+                DispatchQueue.main.async {
+                    self!.onError(error)
+                }
+                return
+            }
+            
+//            DispatchQueue.main.async {
+//                self!.onError(NSError.init(domain: "EditVideo", code: 1, userInfo: [NSLocalizedDescriptionKey: "Save video error unknow"]))
+//            }
         }
-        catch _ {
-            print("catch")
-        }
-        let test = AllComposition(mutableComposition: nowAllComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: nowAllComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
-        let exporter = AVAssetExportSession(asset: test.mutableComposition, presetName: AVAssetExportPresetMediumQuality)
-        if test.videoComposition != nil {
-            exporter!.videoComposition = test.videoComposition
-        }
-        exporter!.outputURL = URL(string: exportPath)
-        exporter!.outputFileType = AVFileType.mp4
-        exporter!.timeRange = .init(start: .zero, duration: test.mutableComposition.duration)
-        
-        exporter!.exportAsynchronously(completionHandler: {() -> Void in
-            //self.exportDidFinish(exporter!)
-            print(exporter!.status," ",exporter!.error)
-            print("export ok")
-        })
         
 //        playerItem = AVPlayerItem(asset: test.mutableComposition)
 //        if test.videoComposition != nil {
@@ -194,12 +207,9 @@ class HomeViewController: UIViewController {
 //        player.replaceCurrentItem(with: playerItem)
         
         let exportViewController = ExportVideoViewController()
-        exportViewController.url = exportUrl
+        print(exportURL)
+        exportViewController.url = exportSession?.outputURL
         navigationController?.pushViewController(exportViewController, animated: true)
-    }
-    func exportDidFinish(_ session: AVAssetExportSession) {
-        let outputURL = session.outputURL
-        print("outputurl  = \(String(describing: outputURL))")
     }
     
     // MARK: - Cut Video

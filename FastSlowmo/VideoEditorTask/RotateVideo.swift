@@ -18,7 +18,14 @@ class RotateVideo: Command {
     }
     
     func execute(allComposition: AllComposition) -> AllComposition {
-        let newAllComposition = AllComposition(mutableComposition: allComposition.mutableComposition.mutableCopy() as! AVMutableComposition, videoComposition: allComposition.videoComposition.mutableCopy() as! AVMutableVideoComposition)
+        let newAllComposition = AllComposition()
+        newAllComposition.mutableComposition = allComposition.mutableComposition.mutableCopy() as? AVMutableComposition
+        if allComposition.videoComposition != nil {
+            newAllComposition.videoComposition = allComposition.videoComposition!.mutableCopy() as? AVMutableVideoComposition
+        }
+        if allComposition.audioMix != nil {
+            newAllComposition.audioMix = allComposition.audioMix!.mutableCopy() as? AVAudioMix
+        }
         
         let ratio = newAllComposition.mutableComposition.naturalSize.height / newAllComposition.mutableComposition.naturalSize.width
         
