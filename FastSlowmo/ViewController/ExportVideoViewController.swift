@@ -16,12 +16,12 @@ class ExportVideoViewController: UIViewController {
     var playerItem: AVPlayerItem!
     var playerLayer: AVPlayerLayer!
     
-    var url: URL?
+    var url: URL!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        player = AVPlayer(url: url!)
+        guard let url2 = url else {return}
+        player = AVPlayer(url: url2)
         playerLayer = AVPlayerLayer(player: player)
         playerLayer.videoGravity = .resizeAspect
         videoView.layer.addSublayer(playerLayer)

@@ -157,6 +157,9 @@ class HomeViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    
+    
+    // MARK: - Export Video
     func onError(_ error: Error) {
         self.showAlert(title: "Error", message: "An error occurred when save. Please try again")
     }
@@ -177,39 +180,39 @@ class HomeViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    // MARK: - Export Video
     @IBAction func exportPressed(_ sender: Any) {
+        let exportViewController = ExportVideoViewController()
+        
         let exportURL = URL.init(fileURLWithPath: "\(NSTemporaryDirectory())\(UUID().uuidString).mp4")
         let exportSession = AVAssetExportSession(asset: nowAllComposition.mutableComposition, presetName: AVAssetExportPresetPassthrough)
-        //exportSession!.videoComposition = nowAllComposition.videoComposition
+        if nowAllComposition.videoComposition != nil {
+            exportSession?.videoComposition = nowAllComposition.videoComposition
+        }
+        if nowAllComposition.audioMix != nil {
+            exportSession?.audioMix = nowAllComposition.audioMix
+        }
         exportSession?.outputURL = exportURL
         exportSession?.outputFileType = .mp4
+        print(exportSession?.progress as Any)
+        
+        // Export Done
         exportSession?.exportAsynchronously {[weak self] in
+            print(exportSession?.progress as Any)
             
-            
-            if let error = exportSession?.error {
+            if (exportSession?.error) != nil {
+                
                 DispatchQueue.main.async {
-                    self!.onError(error)
+                    self!.onError(NSError.init(domain: "EditVideo", code: 1, userInfo: [NSLocalizedDescriptionKey: "Save video error unknow"]))
                 }
                 return
             }
-            
-//            DispatchQueue.main.async {
-//                self!.onError(NSError.init(domain: "EditVideo", code: 1, userInfo: [NSLocalizedDescriptionKey: "Save video error unknow"]))
-//            }
+
+            print("url = \(exportURL)")
+            exportViewController.url = exportURL
+            DispatchQueue.main.async {
+                self?.navigationController?.pushViewController(exportViewController, animated: true)
+            }
         }
-        
-//        playerItem = AVPlayerItem(asset: test.mutableComposition)
-//        if test.videoComposition != nil {
-//            playerItem.videoComposition = test.videoComposition
-//        }
-//        playerItem.audioTimePitchAlgorithm = .spectral
-//        player.replaceCurrentItem(with: playerItem)
-        
-        let exportViewController = ExportVideoViewController()
-        print(exportURL)
-        exportViewController.url = exportSession?.outputURL
-        navigationController?.pushViewController(exportViewController, animated: true)
     }
     
     // MARK: - Cut Video
@@ -399,6 +402,9 @@ extension HomeViewController: CutVideoDelegate {
         if nowAllComposition.videoComposition != nil {
             playerItem.videoComposition = nowAllComposition.videoComposition
         }
+        if nowAllComposition.audioMix != nil {
+            playerItem.audioMix = nowAllComposition.audioMix
+        }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
     }
@@ -454,12 +460,15 @@ extension HomeViewController: SpeedViewDelegate {
         speedTimeLineView.isHidden = true
         updateConstraintOfFunctionViewUpDown(constant: 0)
         
-        if editor.listCommand.count > 0 {
+        if speedViewXib.countClickSpeed > 0 {
             editor.popCommand()
             nowAllComposition = editor.executeTask(allComposition: headAllComposition)
             playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
             if nowAllComposition.videoComposition != nil {
                 playerItem.videoComposition = nowAllComposition.videoComposition
+            }
+            if nowAllComposition.audioMix != nil {
+                playerItem.audioMix = nowAllComposition.audioMix
             }
             playerItem.audioTimePitchAlgorithm = .spectral
             player.replaceCurrentItem(with: playerItem)
@@ -490,6 +499,9 @@ extension HomeViewController: SpeedViewDelegate {
         playerItem = AVPlayerItem(asset: nowAllComposition.mutableComposition)
         if nowAllComposition.videoComposition != nil {
             playerItem.videoComposition = nowAllComposition.videoComposition
+        }
+        if nowAllComposition.audioMix != nil {
+            playerItem.audioMix = nowAllComposition.audioMix
         }
         playerItem.audioTimePitchAlgorithm = .spectral
         player.replaceCurrentItem(with: playerItem)
@@ -692,12 +704,12 @@ extension HomeViewController: CropViewDelegate {
             let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 1, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
             nowAllComposition = editor.executeTask(allComposition: headAllComposition)
-            editor.popCommand()
+            //editor.popCommand()
         }
         if cropPointRightTop.x != 426 || cropPointRightTop.y != 320 {
             let cmd = EffectRotateCropVideo(originAssetVideo: originAssetVideo, rotateType: rotationDirectionIndex, hueType: effectViewXib != nil ? effectViewXib.hueType : 0, isCrop: 2, cropPointLeftBottom: cropPointLeftBottom, cropPointRightTop: cropPointRightTop)
             editor.pushCommand(task: cmd)
-            nowAllComposition = editor.executeTask(allComposition: nowAllComposition)
+            nowAllComposition = editor.executeTask(allComposition: headAllComposition)
             //editor.popCommand()
         }
         
